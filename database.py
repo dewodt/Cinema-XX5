@@ -1,3 +1,4 @@
+# Data User
 list_user = [
     {
         "nama": ...,
@@ -13,9 +14,13 @@ list_user = [
     },
 ]
 
+# Data Lokasi
+location =  ["XX5 Aeon Mall BSD", "XX5 Ciwalk Bandung", "Plaza Indonesia"]
+
+# Data Daftar Film
 list_movie = [
     {
-        "file": "C:/Users/Dewo/Desktop/22BADM.png",
+        "img": "C:/Users/Dewo/Desktop/22BADM.png",
         "title": "Black Adam",
         "age": "R13",
         "genre": "Action, Fantasy, Sci-Fi",
@@ -24,7 +29,7 @@ list_movie = [
         "producer": "Beau Flynn, Dany Garcia, Hiram Garcia",
         "director": "Jaume Collet-serra",
         "writer": "Adam Sztykiel, Rory Haines, Sohrab Noshirvani",
-        "Cast:": "Dwayne Johnson, Viola Davis, Sarah Shahi, Pierce Brosnan, Noah Centineo, Aldis Hodge, Angel Rosario Jr., Joseph Gatt, Mohammed Amer, Quintessa Swindell",
+        "cast": "Dwayne Johnson, Viola Davis, Sarah Shahi, Pierce Brosnan, Noah Centineo, Aldis Hodge, Angel Rosario Jr., Joseph Gatt, Mohammed Amer, Quintessa Swindell",
         "price": 45000,
         "sold_seat": {
             "bsd": {
@@ -72,7 +77,7 @@ list_movie = [
         },
     },
     {
-        "file": "C:/Users/Dewo/Desktop/22AMSM.png",
+        "img": "C:/Users/Dewo/Desktop/22AMSM.png",
         "title": "AMSTERDAM",
         "age": "R13",
         "genre": "Drama, History",
@@ -129,7 +134,7 @@ list_movie = [
         },
     },
     {
-        "file": "C:/Users/Dewo/Desktop/22DOCG.png",
+        "img": "C:/Users/Dewo/Desktop/22DOCG.png",
         "title": "DOCTOR G",
         "age": "R17+",
         "genre": "Comedy",
@@ -186,7 +191,7 @@ list_movie = [
         },
     },
     {
-        "file": "C:/Users/Dewo/Desktop/22OPFR.png",
+        "img": "C:/Users/Dewo/Desktop/22OPFR.png",
         "title": "ONE PIECE FILM: RED",
         "age": "R13",
         "genre": "Animation, Adventure, Fantasy",
