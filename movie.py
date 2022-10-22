@@ -1,4 +1,3 @@
-from textwrap import fill
 import tkinter as tk
 from tkinter import ttk
 import datetime
@@ -9,7 +8,6 @@ tomorrow =  (datetime.date.today() + datetime.timedelta(days=1)).strftime("%d-%m
 
 # Root Window
 root = tk.Tk()
-root.geometry("1280x720")
 root.title("Tubes Pengkom K16 Kelompok 5")
 root.state('zoomed')
 
