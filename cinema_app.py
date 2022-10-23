@@ -33,12 +33,14 @@ center_x = (screen_width - 800) * 0.5
 
 # Array Image Movie
 img = [tk.PhotoImage(file=list_movie[i]["img"]) for i in range(4)]
-back_img = tk.PhotoImage(file="C:/Users/Dewo/Desktop/back.png")
+
+# Image Back Button
+back_img = tk.PhotoImage(file="images/back.png")
 
 # Image Kursi
-seat_free = tk.PhotoImage(file="C:/Users/Dewo/Desktop/seat_free.png")
-seat_own = tk.PhotoImage(file="C:/Users/Dewo/Desktop/seat_own.png")
-seat_sold = tk.PhotoImage(file="C:/Users/Dewo/Desktop/seat_sold.png")
+seat_free = tk.PhotoImage(file="images/seat_free.png")
+seat_own = tk.PhotoImage(file="images/seat_own.png")
+seat_sold = tk.PhotoImage(file="images/seat_sold.png")
 
 # FRAME LIST MOVIE
 def MovieListFrame():

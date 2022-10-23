@@ -20,7 +20,7 @@ location =  ["XX5 Aeon Mall BSD", "XX5 Ciwalk Bandung", "Plaza Indonesia"]
 # Data Daftar Film
 list_movie = [
     {
-        "img": "C:/Users/Dewo/Desktop/22BADM.png",
+        "img": "images/blackadam.png",
         "title": "Black Adam",
         "age": "R13",
         "genre": "Action, Fantasy, Sci-Fi",
@@ -77,7 +77,7 @@ list_movie = [
         },
     },
     {
-        "img": "C:/Users/Dewo/Desktop/22AMSM.png",
+        "img": "images/amsterdam.png",
         "title": "AMSTERDAM",
         "age": "R13",
         "genre": "Drama, History",
@@ -134,7 +134,7 @@ list_movie = [
         },
     },
     {
-        "img": "C:/Users/Dewo/Desktop/22DOCG.png",
+        "img": "images/doctorg.png",
         "title": "DOCTOR G",
         "age": "R17+",
         "genre": "Comedy",
@@ -191,7 +191,7 @@ list_movie = [
         },
     },
     {
-        "img": "C:/Users/Dewo/Desktop/22OPFR.png",
+        "img": "images/onepiece.png",
         "title": "ONE PIECE FILM: RED",
         "age": "R13",
         "genre": "Animation, Adventure, Fantasy",
