@@ -25,44 +25,46 @@ screen_height = root.winfo_screenheight()
 root.title("Tubes Pengkom K16 Kelompok 5")
 root.state('zoomed')
 
+# Mencari Posisi Center sb x
+center_x = (screen_width - 800) * 0.5
+
 # Array Image
 img = [tk.PhotoImage(file=list_movie[i]["img"]) for i in range(4)]
 back_img = tk.PhotoImage(file="C:/Users/Dewo/Desktop/back.png")
 
-# FRAME LIST MOVIE MINGGU INI
-movielist_frame = tk.Frame(root, highlightbackground="blue", highlightthickness=2)
-movielist_frame.rowconfigure(3, weight=1)
-movielist_frame.columnconfigure(4, weight=1)
+# FRAME LIST MOVIE
+def MovieListFrame():
+    # Frame Utama
+    global movielist_frame
+    movielist_frame = tk.Frame(root, highlightbackground="blue", highlightthickness=2)
+    movielist_frame.rowconfigure(3, weight=1)
+    movielist_frame.columnconfigure(4, weight=1)
 
-# Title Movie List
-movielist_title = tk.Label(movielist_frame, text="Film Sedang Tayang di XX5", background="green", font=("Arial, 30"))
-movielist_title.grid(row=0, column=0, columnspan=5)
+    # Title Movie List
+    movielist_title = tk.Label(movielist_frame, text="Film Sedang Tayang di XX5", background="green", font=("Arial, 30"))
+    movielist_title.grid(row=0, column=0, columnspan=5)
 
-# Mencetak 4 Movie
-for i in range(len(list_movie)):
-    movie_frame = tk.Frame(movielist_frame, highlightbackground="blue", highlightthickness=2)
-    movie_img = tk.Button(movie_frame, image=img[i], cursor="hand2", relief="flat", command=lambda i=i: ListToInfo(i)).pack()
-    movie_title = tk.Label(movie_frame, text=list_movie[i]["title"], background="red", font=("Arial, 18")).pack(fill="x")
-    movie_age = tk.Label(movie_frame, text=list_movie[i]["age"], background="red", font=("Arial, 15")).pack(fill="x")
-    movie_frame.grid(row=1, column=i, padx=10, pady=10)
+    # Mencetak 4 Movie
+    for i in range(len(list_movie)):
+        movie_frame = tk.Frame(movielist_frame, highlightbackground="blue", highlightthickness=2)
+        movie_img = tk.Button(movie_frame, image=img[i], cursor="hand2", relief="flat", command=lambda i=i: ListToInfo(i)).pack()
+        movie_title = tk.Label(movie_frame, text=list_movie[i]["title"], background="red", font=("Arial, 18")).pack(fill="x")
+        movie_age = tk.Label(movie_frame, text=list_movie[i]["age"], background="red", font=("Arial, 15")).pack(fill="x")
+        movie_frame.grid(row=1, column=i, padx=10, pady=10)
 
-movielist_frame.pack()
+    movielist_frame.pack()
 
 # FRAME INFORMASI MOVIE
 def MovieInformationFrame(k):
-    # Mencari Posisi Center x
-    root_width = root.winfo_screenwidth()
-    pos_x = (root_width - 800) * 0.5
-
     # Membuat Scrollbar
-    global main_frame
-    main_frame = tk.Frame(root)
-    main_frame.pack(fill="both", expand=1)
+    global movieinfo_frame
+    movieinfo_frame = tk.Frame(root)
+    movieinfo_frame.pack(fill="both", expand=1)
 
-    my_canvas = tk.Canvas(main_frame)
+    my_canvas = tk.Canvas(movieinfo_frame)
     my_canvas.pack(side="left", fill="both", expand=1)
 
-    scroll_bar = ttk.Scrollbar(main_frame, orient="vertical", command=my_canvas.yview)
+    scroll_bar = ttk.Scrollbar(movieinfo_frame, orient="vertical", command=my_canvas.yview)
     scroll_bar.pack(side="right", fill="y")
 
     my_canvas.configure(yscrollcommand=scroll_bar.set)
@@ -73,7 +75,7 @@ def MovieInformationFrame(k):
     moviedesc_frame.rowconfigure(9, weight=1)
     moviedesc_frame.columnconfigure(2, weight=1)
 
-    my_canvas.create_window((pos_x, 0), window=moviedesc_frame, anchor="nw")
+    my_canvas.create_window((center_x, 0), window=moviedesc_frame, anchor="nw")
 
     # Back Button
     back_button = tk.Button(moviedesc_frame, image=back_img, command=InfoToList).grid(row=0, column=0, columnspan=2, sticky="nw")
@@ -89,25 +91,25 @@ def MovieInformationFrame(k):
     img_and_buy_frame = tk.Frame(moviedesc_frame, highlightbackground="blue", highlightthickness=2)
     movie_img = tk.Label(img_and_buy_frame, image=img[k], relief="flat", highlightbackground="blue", highlightthickness=2).pack(side="left")
 
-    # Buy Button
+    # Buy Frame
     buy_frame = tk.Frame(img_and_buy_frame, highlightbackground="blue", highlightthickness=2)
     buy_frame.rowconfigure(10, weight=1)
     buy_frame.columnconfigure(5, weight=1)
-
+    
     buy_title = tk.Label(buy_frame, text="Buy Ticket", font="Helvetica 13 bold", background="red").grid(row=0, column=0, columnspan=5, sticky="w")
     for i in range(3):
-        loc1_title = tk.Label(buy_frame, text=location[i], font="Helvetica 11 bold", background="red").grid(row=1+3*i, column=0, columnspan=5, sticky="w", pady=(10, 0))
-        loc_1_date1 = tk.Label(buy_frame, text=today, font="Helvetica 10 bold").grid(row=2+3*i, column=0)
-        loc1_date1_time1 = tk.Button(buy_frame, text="13:30", cursor="hand2", font="Helvetica 11 bold").grid(row=2+3*i, column=1, ipadx=5, padx=5, pady= 2)
-        loc1_date1_time2 = tk.Button(buy_frame, text="16:00", cursor="hand2", font="Helvetica 11 bold").grid(row=2+3*i, column=2, ipadx=5, padx=5, pady= 2)
-        loc1_date1_time3 = tk.Button(buy_frame, text="18:30", cursor="hand2", font="Helvetica 11 bold").grid(row=2+3*i, column=3, ipadx=5, padx=5, pady= 2)
-        loc1_date1_time4 = tk.Button(buy_frame, text="21:00", cursor="hand2", font="Helvetica 11 bold").grid(row=2+3*i, column=4, ipadx=5)
+        loc_title = tk.Label(buy_frame, text=location[i], font="Helvetica 11 bold", background="red").grid(row=1+3*i, column=0, columnspan=5, sticky="w", pady=(10, 0))
+        loc__date1 = tk.Label(buy_frame, text=today, font="Helvetica 10 bold").grid(row=2+3*i, column=0)
+        loc_date1_time1 = tk.Button(buy_frame, text="13:30", cursor="hand2", font="Helvetica 11 bold").grid(row=2+3*i, column=1, ipadx=5, padx=5, pady= 2)
+        loc_date1_time2 = tk.Button(buy_frame, text="16:00", cursor="hand2", font="Helvetica 11 bold").grid(row=2+3*i, column=2, ipadx=5, padx=5, pady= 2)
+        loc_date1_time3 = tk.Button(buy_frame, text="18:30", cursor="hand2", font="Helvetica 11 bold").grid(row=2+3*i, column=3, ipadx=5, padx=5, pady= 2)
+        loc_date1_time4 = tk.Button(buy_frame, text="21:00", cursor="hand2", font="Helvetica 11 bold").grid(row=2+3*i, column=4, ipadx=5)
 
-        loc_1_date1 = tk.Label(buy_frame, text=tomorrow, font="Helvetica 10 bold").grid(row=3+3*i, column=0)
-        loc1_date2_time1 = tk.Button(buy_frame, text="13:30", cursor="hand2", font="Helvetica 11 bold").grid(row=3+3*i, column=1, ipadx=5, padx=5, pady= 2)
-        loc1_date2_time2 = tk.Button(buy_frame, text="16:00", cursor="hand2", font="Helvetica 11 bold").grid(row=3+3*i, column=2, ipadx=5, padx=5, pady= 2)
-        loc1_date2_time3 = tk.Button(buy_frame, text="18:30", cursor="hand2", font="Helvetica 11 bold").grid(row=3+3*i, column=3, ipadx=5, padx=5, pady= 2)
-        loc1_date2_time4 = tk.Button(buy_frame, text="21:00", cursor="hand2", font="Helvetica 11 bold").grid(row=3+3*i, column=4, ipadx=5)
+        loc__date1 = tk.Label(buy_frame, text=tomorrow, font="Helvetica 10 bold").grid(row=3+3*i, column=0)
+        loc_date2_time1 = tk.Button(buy_frame, text="13:30", cursor="hand2", font="Helvetica 11 bold").grid(row=3+3*i, column=1, ipadx=5, padx=5, pady= 2)
+        loc_date2_time2 = tk.Button(buy_frame, text="16:00", cursor="hand2", font="Helvetica 11 bold").grid(row=3+3*i, column=2, ipadx=5, padx=5, pady= 2)
+        loc_date2_time3 = tk.Button(buy_frame, text="18:30", cursor="hand2", font="Helvetica 11 bold").grid(row=3+3*i, column=3, ipadx=5, padx=5, pady= 2)
+        loc_date2_time4 = tk.Button(buy_frame, text="21:00", cursor="hand2", font="Helvetica 11 bold").grid(row=3+3*i, column=4, ipadx=5)
 
     buy_frame.pack(side="right", padx=15)
 
@@ -143,13 +145,16 @@ def MovieInformationFrame(k):
     movie_cast = tk.Label(movie_cast_frame, wraplength=800, justify="left",text=list_movie[k]["cast"]).pack(anchor=tk.W)
     movie_cast_frame.grid(row=7, column=0, sticky="we", padx=10, pady=10)
 
+# TRANSISI DARI LIST MOVIE KE INFORMASI MOVIE
 def ListToInfo(k):
     movielist_frame.forget()
     MovieInformationFrame(k)
 
+# TRANSISI DARI INFORMASI MOVIE KE LIST MOVIE
 def InfoToList():
-    main_frame.forget()
-    movielist_frame.pack()
+    movieinfo_frame.forget()
+    MovieListFrame()
 
+MovieListFrame()
 
 root.mainloop()
