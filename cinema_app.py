@@ -26,6 +26,7 @@ root = tk.Tk()
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 root.title("Tubes Pengkom K16 Kelompok 5")
+root.iconbitmap("images/xx5.ico")
 root.state('zoomed')
 
 # Mencari Posisi Center sb x
