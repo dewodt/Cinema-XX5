@@ -86,7 +86,7 @@ list_movie = [
         "producer": "Christian Bale, Matthew Budman, Anthony Katagas, Arnon Milchan, David O. Russell",
         "director": "David O. Russell",
         "writer": "David O. Russell",
-        "Cast:": "Christian Bale, Margot Robbie, John David Washington, Rami Malek, Mike Myers, Taylor Swift, Zoe Saldana, Robert De Niro, Anya Taylor-joy, Chris Rock, Michael Shannon.",
+        "cast": "Christian Bale, Margot Robbie, John David Washington, Rami Malek, Mike Myers, Taylor Swift, Zoe Saldana, Robert De Niro, Anya Taylor-joy, Chris Rock, Michael Shannon.",
         "price": 40000,
         "sold_seat": {
             "bsd": {
@@ -143,7 +143,7 @@ list_movie = [
         "producer": "Vineet Jain",
         "director": "Anubhuti Kashyap",
         "writer": "Saurabh Bharat",
-        "Cast:": "Ayushmann Khuranna, Rakul Preet Singh, Shefali Shah, Sheeba Chaddha, Abhinay Raj Singh, Paresh Pahuja, Jhumma Mitra, Azzy Bagria",
+        "cast": "Ayushmann Khuranna, Rakul Preet Singh, Shefali Shah, Sheeba Chaddha, Abhinay Raj Singh, Paresh Pahuja, Jhumma Mitra, Azzy Bagria",
         "price": 40000,
         "sold_seat": {
             "bsd": {
@@ -200,7 +200,7 @@ list_movie = [
         "producer": "Eiichiro Oda",
         "director": "Goro Taniguchi",
         "writer": "Tsutomu Kuroiwa",
-        "Cast:": "Kazuya Nakai, Kaori Nazuka, Akemi Okamura, Kappei Yamaguchi, Mayumi Tanaka, Yuriko Yamaguchi, Hiroaki Hirata, Shuichi Ikeda",
+        "cast": "Kazuya Nakai, Kaori Nazuka, Akemi Okamura, Kappei Yamaguchi, Mayumi Tanaka, Yuriko Yamaguchi, Hiroaki Hirata, Shuichi Ikeda",
         "price": 50000,
         "sold_seat": {
             "bsd": {
