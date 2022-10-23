@@ -11,9 +11,12 @@ import locale
 import datetime
 from database import *
 
-# Define Today and Tomorrow
+# Define Date
 today = datetime.date.today().strftime("%d-%m-%Y")
 tomorrow =  (datetime.date.today() + datetime.timedelta(days=1)).strftime("%d-%m-%Y")
+
+# Define Time (Now)
+time_now = datetime.datetime.now()
 
 # Set Locale (For Currency)
 locale.setlocale( locale.LC_ALL, 'id-ID')
@@ -97,19 +100,29 @@ def MovieInformationFrame(k):
     buy_frame.columnconfigure(5, weight=1)
     
     buy_title = tk.Label(buy_frame, text="Buy Ticket", font="Helvetica 13 bold", background="red").grid(row=0, column=0, columnspan=5, sticky="w")
+    
+    # Cek jika pemesanan tiket melebihi waktu tayang
+    def CekDisabled(hour, minute):
+        time = time_now.replace(hour=hour, minute=minute, second=0, microsecond=0)
+        if time_now >= time:
+            return "disabled"
+        else:
+            return "normal"        
+    
+    # Looping 3 Lokasi
     for i in range(3):
         loc_title = tk.Label(buy_frame, text=location[i], font="Helvetica 11 bold", background="red").grid(row=1+3*i, column=0, columnspan=5, sticky="w", pady=(10, 0))
-        loc__date1 = tk.Label(buy_frame, text=today, font="Helvetica 10 bold").grid(row=2+3*i, column=0)
-        loc_date1_time1 = tk.Button(buy_frame, text="13:30", cursor="hand2", font="Helvetica 11 bold").grid(row=2+3*i, column=1, ipadx=5, padx=5, pady= 2)
-        loc_date1_time2 = tk.Button(buy_frame, text="16:00", cursor="hand2", font="Helvetica 11 bold").grid(row=2+3*i, column=2, ipadx=5, padx=5, pady= 2)
-        loc_date1_time3 = tk.Button(buy_frame, text="18:30", cursor="hand2", font="Helvetica 11 bold").grid(row=2+3*i, column=3, ipadx=5, padx=5, pady= 2)
-        loc_date1_time4 = tk.Button(buy_frame, text="21:00", cursor="hand2", font="Helvetica 11 bold").grid(row=2+3*i, column=4, ipadx=5)
+        today_label = tk.Label(buy_frame, text=today, font="Helvetica 10 bold").grid(row=2+3*i, column=0)
+        today_time1 = tk.Button(buy_frame, text="13:30", cursor="hand2", font="Helvetica 11 bold", state=CekDisabled(12, 30)).grid(row=2+3*i, column=1, ipadx=5, padx=5, pady= 2)
+        today_time2 = tk.Button(buy_frame, text="16:00", cursor="hand2", font="Helvetica 11 bold", state=CekDisabled(16, 0)).grid(row=2+3*i, column=2, ipadx=5, padx=5, pady= 2)
+        today_time3 = tk.Button(buy_frame, text="18:30", cursor="hand2", font="Helvetica 11 bold", state=CekDisabled(18, 30)).grid(row=2+3*i, column=3, ipadx=5, padx=5, pady= 2)
+        today_time4 = tk.Button(buy_frame, text="21:00", cursor="hand2", font="Helvetica 11 bold", state=CekDisabled(21, 0)).grid(row=2+3*i, column=4, ipadx=5)
 
-        loc__date1 = tk.Label(buy_frame, text=tomorrow, font="Helvetica 10 bold").grid(row=3+3*i, column=0)
-        loc_date2_time1 = tk.Button(buy_frame, text="13:30", cursor="hand2", font="Helvetica 11 bold").grid(row=3+3*i, column=1, ipadx=5, padx=5, pady= 2)
-        loc_date2_time2 = tk.Button(buy_frame, text="16:00", cursor="hand2", font="Helvetica 11 bold").grid(row=3+3*i, column=2, ipadx=5, padx=5, pady= 2)
-        loc_date2_time3 = tk.Button(buy_frame, text="18:30", cursor="hand2", font="Helvetica 11 bold").grid(row=3+3*i, column=3, ipadx=5, padx=5, pady= 2)
-        loc_date2_time4 = tk.Button(buy_frame, text="21:00", cursor="hand2", font="Helvetica 11 bold").grid(row=3+3*i, column=4, ipadx=5)
+        tomorrow_label = tk.Label(buy_frame, text=tomorrow, font="Helvetica 10 bold").grid(row=3+3*i, column=0)
+        tomorrow_time1 = tk.Button(buy_frame, text="13:30", cursor="hand2", font="Helvetica 11 bold").grid(row=3+3*i, column=1, ipadx=5, padx=5, pady= 2)
+        tomorrow_time2 = tk.Button(buy_frame, text="16:00", cursor="hand2", font="Helvetica 11 bold").grid(row=3+3*i, column=2, ipadx=5, padx=5, pady= 2)
+        tomorrow_time3 = tk.Button(buy_frame, text="18:30", cursor="hand2", font="Helvetica 11 bold").grid(row=3+3*i, column=3, ipadx=5, padx=5, pady= 2)
+        tomorrow_time4 = tk.Button(buy_frame, text="21:00", cursor="hand2", font="Helvetica 11 bold").grid(row=3+3*i, column=4, ipadx=5)
 
     buy_frame.pack(side="right", padx=15)
 
