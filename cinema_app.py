@@ -47,6 +47,24 @@ seat_sold = tk.PhotoImage(file="images/seat_sold.png")
 # Image Screen
 screen_img = tk.PhotoImage(file="images/screen.png")
 
+# Buttons On Hover
+button1 = tk.PhotoImage(file="images/button1.png")
+button2 = tk.PhotoImage(file="images/button2.png")
+
+# Fungsi Mengganti Image Saat Ditunjuk Mouse
+def onHoverImage(event, img):
+    event.widget.config(image=img)
+
+def onLeaveImage(event, img):
+    event.widget.config(image=img)
+
+# Fungsi Mengganti Warna Border Saat Ditunjuk Mouse
+def onHoverBorder(event):
+        event.widget.config(background="#fc094c")
+
+def onLeaveBorder(event):
+        event.widget.config(background="#171a30")
+
 # FRAME LIST MOVIE
 def MovieListFrame():
     # Frame Utama
@@ -56,12 +74,15 @@ def MovieListFrame():
     movielist_frame.columnconfigure(4, weight=1)
 
     # Title Movie List
-    movielist_title = tk.Label(movielist_frame, text="Film Sedang Tayang di XX5", background="#171a30", font=("Helvatica", "30", "bold"), fg="#eaebf1").grid(row=0, column=0, columnspan=5, ipadx=10, ipady=10, pady=10)
+    movielist_title = tk.Label(movielist_frame, text="Film Sedang Tayang di XX5", background="#171a30", font=("Roboto", "30", "bold"), fg="#eaebf1").grid(row=0, column=0, columnspan=5, ipadx=10, ipady=10, pady=10)
 
     # Mencetak 4 Movie
     for i in range(len(list_movie)):
         movie_frame = tk.Frame(movielist_frame, background="#171a30")
-        movie_img = tk.Button(movie_frame, image=img[i], cursor="hand2", relief="flat", borderwidth=0, command=lambda i=i: ListToInfo(i), fg="#eaebf1", highlightthickness = 0, bd = 0).pack()
+        movie_img = tk.Button(movie_frame, image=img[i], cursor="hand2", background="#171a30", bd=0, command=lambda i=i: ListToInfo(i), fg="#eaebf1")
+        movie_img.bind("<Enter>", onHoverBorder)
+        movie_img.bind("<Leave>", onLeaveBorder)
+        movie_img.pack(ipadx=5, ipady=5)
         title_age_frame = tk.Frame(movie_frame, background="#fc094c")
         movie_title = tk.Label(title_age_frame, text=list_movie[i]["title"], background="#fc094c", font=("Helvatica", "18", "bold"), fg="#eaebf1").pack(pady=(5, 0))
         movie_age = tk.Label(title_age_frame, text=list_movie[i]["age"], background="#fc094c", font=("Helvatica", "15"), fg="#eaebf1").pack(pady=(0, 5))
@@ -95,7 +116,7 @@ def MovieInformationFrame(k):
     my_canvas.create_window((center_x, 0), window=moviedesc_frame, anchor="nw")
 
     # Back Button
-    back_button = tk.Button(moviedesc_frame, image=back_img, command=InfoToList, background="#171a30", relief="flat").grid(row=0, column=0, columnspan=2, sticky="nw")
+    back_button = tk.Button(moviedesc_frame, image=back_img, command=InfoToList, activebackground="#171a30", background="#171a30", relief="flat").grid(row=0, column=0, columnspan=2, sticky="nw")
 
     # Title, Genre, Duration
     titlegenre_frame = tk.Frame(moviedesc_frame, background="#171a30")
@@ -117,24 +138,27 @@ def MovieInformationFrame(k):
     def CekDisabled(hour, minute):
         time = time_now.replace(hour=hour, minute=minute, second=0, microsecond=0)
         if time_now >= time:
+            
             return "disabled"
         else:
-            return "normal"        
+            return "normal"
     
     # Looping 3 Lokasi
     for i in range(3):
         loc_title = tk.Label(buy_frame, text=location[i], background="#171a30", font=("Helvetica", "12", "bold"), fg="#b70e43").grid(row=0+3*i, column=0, columnspan=5, sticky="w", pady=(10, 0))
         today_label = tk.Label(buy_frame, text=today, background="#171a30", font=("Helvetica", "11", "bold"), fg="#eaebf1").grid(row=1+3*i, column=0, padx=(0, 5))
-        today_time1 = tk.Button(buy_frame, text="13:30", state=CekDisabled(13, 30), command=lambda i=i: InfoToBooking(k, location[i], "today", "13:30"), cursor="hand2", font=("Helvetica", "11", "bold"), background="#fc094c", fg="#eaebf1").grid(row=1+3*i, column=1, ipadx=5, padx=5, pady= 4)
-        today_time2 = tk.Button(buy_frame, text="16:00", state=CekDisabled(16, 0), command=lambda i=i: InfoToBooking(k, location[i], "today", "16:00"), cursor="hand2", font=("Helvetica", "11", "bold"), background="#fc094c", fg="#eaebf1").grid(row=1+3*i, column=2, ipadx=5, padx=5, pady= 4)
-        today_time3 = tk.Button(buy_frame, text="18:30", state=CekDisabled(18, 30), command=lambda i=i: InfoToBooking(k, location[i], "today", "18:30"), cursor="hand2", font=("Helvetica", "11", "bold"), background="#fc094c", fg="#eaebf1").grid(row=1+3*i, column=3, ipadx=5, padx=5, pady= 4)
-        today_time4 = tk.Button(buy_frame, text="21:00", state=CekDisabled(21, 0), command=lambda i=i: InfoToBooking(k, location[i], "today", "21:00"), cursor="hand2", font=("Helvetica", "11", "bold"), background="#fc094c", fg="#eaebf1").grid(row=1+3*i, column=4, ipadx=5, padx=5, pady= 4)
+        for j in range(4):
+            today_time = tk.Button(buy_frame, text=time_str[j], image=button2, state=CekDisabled(time_int[j]["hour"], time_int[j]["minute"]), command=lambda i=i, j=j: InfoToBooking(k, location[i], "today", time_str[j]), fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", font=("Helvetica", "11", "bold"), relief="flat", cursor="hand2", compound="center")
+            today_time.bind('<Enter>', lambda event, imgs=button1: onHoverImage(event, imgs))
+            today_time.bind('<Leave>', lambda event, imgs=button2: onLeaveImage(event, imgs))
+            today_time.grid(row=1+3*i, column=j+1, padx=5, pady= 4)
 
         tomorrow_label = tk.Label(buy_frame, text=tomorrow, background="#171a30", font=("Helvetica", "11", "bold"), fg="#eaebf1").grid(row=2+3*i, column=0, padx=(0, 5))
-        tomorrow_time1 = tk.Button(buy_frame, text="13:30", command=lambda i=i: InfoToBooking(k, location[i], "tomorrow", "13:30"), cursor="hand2", font="Gilmer 11 bold", background="#fc094c", fg="#eaebf1").grid(row=2+3*i, column=1, ipadx=5, padx=5, pady= 4)
-        tomorrow_time2 = tk.Button(buy_frame, text="16:00", command=lambda i=i: InfoToBooking(k, location[i], "tomorrow", "16:00"), cursor="hand2", font=("Helvetica", "11", "bold"), background="#fc094c", fg="#eaebf1").grid(row=2+3*i, column=2, ipadx=5, padx=5, pady= 4)
-        tomorrow_time3 = tk.Button(buy_frame, text="18:30", command=lambda i=i: InfoToBooking(k, location[i], "tomorrow", "18:30"), cursor="hand2", font=("Helvetica", "11", "bold"), background="#fc094c", fg="#eaebf1").grid(row=2+3*i, column=3, ipadx=5, padx=5, pady= 4)
-        tomorrow_time4 = tk.Button(buy_frame, text="21:00", command=lambda i=i: InfoToBooking(k, location[i], "tomorrow", "21:00"), cursor="hand2", font=("Helvetica", "11", "bold"), background="#fc094c", fg="#eaebf1").grid(row=2+3*i, column=4, ipadx=5, padx=5, pady= 4)
+        for j in range(4):
+            tomorrow_time = tk.Button(buy_frame, text=time_str[j], image=button2, command=lambda i=i, j=j: InfoToBooking(k, location[i], "tomorrow", time_str[j]), fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", font=("Helvetica", "11", "bold"), relief="flat", cursor="hand2", compound="center")
+            tomorrow_time.bind('<Enter>', lambda event, imgs=button1: onHoverImage(event, imgs))
+            tomorrow_time.bind('<Leave>', lambda event, imgs=button2: onLeaveImage(event, imgs))
+            tomorrow_time.grid(row=2+3*i, column=j+1, padx=5, pady= 4)
 
     buy_frame.pack(side="right", padx=15)
 
@@ -209,7 +233,7 @@ def SeatBookingFrame(k, place, day, time):
 
     # Datas Frame
     data_frame = tk.Frame(information_frame, background="#171a30")
-    book_title = tk.Label(data_frame, text=list_movie[k]["title"], background="#171a30", fg="#fc094c", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    book_title = tk.Label(data_frame, text=list_movie[k]["title"], background="#171a30", fg="#b70e43", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
     seat_list = tk.Label(data_frame, textvariable=text_var_seat, wraplength=510, justify="left", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
     num_ticket = tk.Label(data_frame, textvariable=text_var_ticket, background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
     location = tk.Label(data_frame, text=place, background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
@@ -269,11 +293,11 @@ def SeatBookingFrame(k, place, day, time):
         for j in range(15):
             if i == 0: # Cetak Angka
                 if j < 7:
-                    item = tk.Label(seat_frame, text=f"{j+1}", background="#171a30", fg="#eaebf1").grid(row=i, column=j)
+                    item = tk.Label(seat_frame, text=f"{j+1}", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).grid(row=i, column=j)
                 elif j > 7:
-                    item = tk.Label(seat_frame, text=f"{j}", background="#171a30", fg="#eaebf1").grid(row=i, column=j)
+                    item = tk.Label(seat_frame, text=f"{j}", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).grid(row=i, column=j)
             elif j == 7: # Cetak Huruf
-                item = tk.Label(seat_frame, text=f"{chr(ord('A')+i-1)}", background="#171a30", fg="#eaebf1").grid(row=i, column=j)
+                item = tk.Label(seat_frame, text=f"{chr(ord('A')+i-1)}", background="#171a30", fg="#eaebf1", font=("Helvetica", "13", "bold")).grid(row=i, column=j)
             else: # Cetak Kursi
                 if list_movie[k]["sold_seat"][place][day][time][i][j]: # Jika Sold
                     item = tk.Label(seat_frame, image=seat_sold, background="#171a30").grid(row=i, column=j)
@@ -287,15 +311,17 @@ def SeatBookingFrame(k, place, day, time):
                     seat_var = tk.IntVar()
                     
                     # Check Button Seat
-                    item = tk.Checkbutton(seat_frame, variable=seat_var, onvalue=1, offvalue=0, command=lambda num=seat_var, i=y_seat, j=x_seat: clicked_seat(num, i, j), indicatoron=False, image=seat_free, selectimage=seat_own, cursor="hand2", background="#171a30", selectcolor="#171a30")
+                    item = tk.Checkbutton(seat_frame, variable=seat_var, onvalue=1, offvalue=0, command=lambda num=seat_var, i=y_seat, j=x_seat: clicked_seat(num, i, j), indicatoron=False, image=seat_free, selectimage=seat_own, cursor="hand2", background="#171a30", selectcolor="#171a30", activebackground="#171a30")
+                    item.bind('<Enter>', lambda event, imgs=seat_own: onHoverImage(event, imgs))
+                    item.bind('<Leave>', lambda event, imgs=seat_free: onLeaveImage(event, imgs))
                     item.grid(row=i, column=j, padx=3, pady=3)
 
-    screen = tk.Label(seat_frame, image=screen_img, background="#171a30", font=("Helvetica", "15", "bold")).grid(row=11, column=0, columnspan=15, pady=(10,0))
+    screen = tk.Label(seat_frame, image=screen_img, background="#171a30").grid(row=11, column=0, columnspan=15)
 
     seat_frame.pack()
 
-    # Seperator
-    separator = ttk.Separator(booking_frame, orient='horizontal').pack(fill='x', pady=15)
+    # Separator
+    separator = ttk.Separator(booking_frame, orient='horizontal').pack(fill='x', pady=10)
 
     # Confirm and Cancel Button Frame
     button_frame = tk.Frame(booking_frame, background="#171a30")
