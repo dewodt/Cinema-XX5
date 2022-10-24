@@ -17,6 +17,15 @@ list_user = [
 # Data Lokasi
 location =  ["XX5 Aeon Mall BSD", "XX5 Ciwalk Bandung", "Plaza Indonesia"]
 
+# Data Waktu
+time_str = ["13:30", "16:00", "18:30", "21:00"]
+time_int = [
+            {"hour": 13, "minute": 30},
+            {"hour": 16, "minute": 00},
+            {"hour": 13, "minute": 30},
+            {"hour": 13, "minute": 30},
+        ]
+
 # Data Daftar Film
 list_movie = [
     {
@@ -188,11 +197,11 @@ list_movie = [
                     "21:00": [[False for j in range(15)] for i in range(9)],
                 },
             },
-        },
+        }, 
     },
     {
         "img": "images/onepiece.png",
-        "title": "ONE PIECE FILM: RED",
+        "title": "ONE PIECE: RED",
         "age": "R13",
         "genre": "Animation, Adventure, Fantasy",
         "duration": "115 Minutes",
