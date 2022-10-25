@@ -15,7 +15,7 @@ list_user = [
 ]
 
 # Data Lokasi
-location =  ["XX5 Aeon Mall BSD", "XX5 Ciwalk Bandung", "Plaza Indonesia"]
+location =  ["XX5 Aeon Mall BSD", "XX5 Ciwalk Bandung", "XX5 Plaza Indonesia"]
 
 # Data Waktu
 time_str = ["13:30", "16:00", "18:30", "21:00"]
@@ -69,7 +69,7 @@ list_movie = [
                     "21:00": [[False for j in range(15)] for i in range(9)],
                 },
             },
-            "Plaza Indonesia": {
+            "XX5 Plaza Indonesia": {
                 "today": {
                     "13:30": [[False for j in range(15)] for i in range(9)],
                     "16:00": [[False for j in range(15)] for i in range(9)],
@@ -126,7 +126,7 @@ list_movie = [
                     "21:00": [[False for j in range(15)] for i in range(9)],
                 },
             },
-            "Plaza Indonesia": {
+            "XX5 XX5 Plaza Indonesia": {
                 "today": {
                     "13:30": [[False for j in range(15)] for i in range(9)],
                     "16:00": [[False for j in range(15)] for i in range(9)],
@@ -183,7 +183,7 @@ list_movie = [
                     "21:00": [[False for j in range(15)] for i in range(9)],
                 },
             },
-            "Plaza Indonesia": {
+            "XX5 Plaza Indonesia": {
                 "today": {
                     "13:30": [[False for j in range(15)] for i in range(9)],
                     "16:00": [[False for j in range(15)] for i in range(9)],
@@ -240,7 +240,7 @@ list_movie = [
                     "21:00": [[False for j in range(15)] for i in range(9)],
                 },
             },
-            "Plaza Indonesia": {
+            "XX5 Plaza Indonesia": {
                 "today": {
                     "13:30": [[False for j in range(15)] for i in range(9)],
                     "16:00": [[False for j in range(15)] for i in range(9)],
