@@ -74,7 +74,7 @@ def mau_register():
     frame1=tk.Frame(window,width=400,height=430,bg="white")
     frame1.place(x=520,y=190)
 
-    image = Image.open("logo xx5.png")
+    image = Image.open("images/logo xx5.png")
     resize_image = image.resize((346,150))
     img = ImageTk.PhotoImage(resize_image)
     label_gambar=tk.Label(window,image=img,border=0).place(x=500,y=40)
@@ -158,7 +158,7 @@ def mau_register():
 #######################################
 
 
-image = Image.open("logo xx5.png")
+image = Image.open("images/xx5.png")
 resize_image = image.resize((346,150))
 img = ImageTk.PhotoImage(resize_image)
 label_gambar=tk.Label(root,image=img,border=0).place(x=500,y=40)

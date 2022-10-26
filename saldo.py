@@ -81,7 +81,7 @@ def isValid(price, method):
 frame1 = tk.Frame(window, bg="#171a30", width=1000, height=600)
 frame_saldo = tk.Frame(frame1)
 label_saldo = tk.Label(frame_saldo, text="Saldo Anda: ", font=("Roboto", 20, "bold"), fg="white", bg="#171a30").pack(side="left")
-label_sisa_saldo = tk.Label(frame_saldo, textvariable=sisa_saldo, font=("Roboto", 20, "bold"), fg="orange", bg="#171a30").pack(side="top")
+label_sisa_saldo = tk.Label(frame_saldo, textvariable=sisa_saldo, font=("Roboto", 20, "bold"), fg="orange", bg="#171a30").pack()
 frame_saldo.pack()
 frame1.pack(pady=5)
 
