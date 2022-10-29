@@ -137,8 +137,7 @@ def MovieInformationFrame(k):
     # Cek jika pemesanan tiket melebihi waktu tayang
     def CekDisabled(hour, minute):
         time = time_now.replace(hour=hour, minute=minute, second=0, microsecond=0)
-        if time_now >= time:
-            
+        if time_now >= time:       
             return "disabled"
         else:
             return "normal"

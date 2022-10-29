@@ -22,8 +22,8 @@ time_str = ["13:30", "16:00", "18:30", "21:00"]
 time_int = [
             {"hour": 13, "minute": 30},
             {"hour": 16, "minute": 00},
-            {"hour": 13, "minute": 30},
-            {"hour": 13, "minute": 30},
+            {"hour": 18, "minute": 30},
+            {"hour": 21, "minute": 00},
         ]
 
 # Data Daftar Film
