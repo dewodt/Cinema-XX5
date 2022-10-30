@@ -124,6 +124,9 @@ def LoginFrame():
         for i in range(len(list_user)):
             if akun_email == list_user[i]['nama'] and akun_password == list_user[i]['password']:
                 user_found = True
+                global user_ke
+                user_ke = i
+                break
         if user_found:
             showinfo("Berhasil login", f"Selamat datang, {akun_email}!")
             LoginToList()
@@ -224,14 +227,89 @@ def HeaderFrame(frame):
     left_frame.pack(side="left", padx=80)
     label_gambar = tk.Label(left_frame, image=img_xx5_heading, bg="#171a30").pack(side="left", padx=10)
     now_playing = tk.Button(left_frame, text="Now Playing", font=("arial", 16), command=lambda frame=frame: ToNowPlaying(frame)).pack(side="left", anchor="center", padx=10)
-    up_coming = tk.Button(left_frame, text="Up Coming", font=("arial", 16), command=lambda frame=frame: ToUpcoming(frame)).pack(side="right",anchor="center", padx=10)
+    up_coming = tk.Button(left_frame, text="Upcoming", font=("arial", 16), command=lambda frame=frame: ToUpcoming(frame)).pack(side="right",anchor="center", padx=10)
 
     # Right Frame (Saldo, Loglout, Name)
     right_frame = tk.Frame(header_frame, bg="#171a30")
     right_frame.pack(side="right", padx=80)
-    saldo = tk.Button(right_frame, text="Rp100.000,00", font=("arial", 16)).pack(side="left", padx=10)
+    saldo = tk.Button(right_frame, text="Top Up", command=lambda frame=frame: ToSaldo(frame), font=("arial", 16)).pack(side="left", padx=10)
     logout = tk.Button(right_frame, text="Log Out", font=("arial", 16), command=lambda frame=frame: ClickLogOut(frame)).pack(side="left", padx=10)
-    akun = tk.Label(right_frame, text="Erling Haaland", font=("arial", 16)).pack(side="right", padx=10)
+    akun = tk.Label(right_frame, text=f"{list_user[user_ke]['nama']}", font=("arial", 16)).pack(side="right", padx=10)
+
+
+# FRAME SALDO
+def SaldoFrame():   
+    # Fungsi Pengecek Validasi Pembayaran
+    def isValid(price, method):
+        if kode_valid.get() == list_validasi[price][method]:
+            read_file = open('database.py', 'r')
+            content = read_file.read()
+            old_dict_user = str(list_user[user_ke])
+            list_user[user_ke]['saldo'] += price
+            new_dict_user = str(list_user[user_ke])
+            content = content.replace(old_dict_user, new_dict_user)
+            read_file.close()
+
+            write_file = open('database.py', 'w')
+            write_file.write(content)
+            write_file.close()
+
+            sisa_saldo.set(list_user[user_ke]['saldo'])
+            showinfo("Top Up Berhasil!", f"Top up Anda sebesar {price} berhasil!")
+            kode_valid.set("")
+            selected_price.set(0)
+            selected_method.set("N/A")
+        else:
+            showerror("Top Up Gagal!", f"Top up Anda gagal! Coba masukkan kode yang benar!")
+
+    kode_valid = tk.StringVar()
+    sisa_saldo = tk.IntVar()
+    sisa_saldo.set(list_user[user_ke]['saldo'])
+
+    global saldo_frame
+    saldo_frame = tk.Frame(root)
+    saldo_frame.pack()
+
+    HeaderFrame(saldo_frame)
+
+    # Saldo dan Nominal
+    frame_nomimal = tk.Frame(saldo_frame, bg="#171a30", width=1000, height=600)
+    frame_nomimal.pack()
+    label_saldo = tk.Label(frame_nomimal, text="Saldo Anda: ", font=("Roboto", 20, "bold"), fg="white", bg="#171a30").pack(side="left")
+    label_sisa_saldo = tk.Label(frame_nomimal, textvariable=sisa_saldo, font=("Roboto", 20, "bold"), fg="orange", bg="#171a30").pack()
+
+    # Separator
+    separator = ttk.Separator(saldo_frame, orient='horizontal').pack(fill='x', pady=10)
+
+    # Tombol Memilih Nominal
+    frame_pilih_nominal = tk.Frame(saldo_frame, background="#171a30")
+    frame_pilih_nominal.pack(pady=15)
+    selected_price = tk.IntVar(value=0)
+    tombol_topup = tk.Label(frame_pilih_nominal, text="Top Up Saldo", font=("Roboto", 20, "bold"), bg="#fc094c").pack()
+    label_nominal_topup = tk.Label(frame_pilih_nominal, text="Pilih nominal top up", font=("Roboto", 16, "bold"), fg="white", bg="#171a30").pack()
+    tombol_50ribu = tk.Radiobutton(frame_pilih_nominal, value=50000, variable=selected_price, text="Rp50.000,00", font=("Roboto", 16)).pack(side="left", padx=20)
+    tombol_100ribu = tk.Radiobutton(frame_pilih_nominal, value=100000, variable=selected_price, text="Rp100.000,00", font=("Roboto", 16)).pack(side="left", padx=20)
+    tombol_150ribu = tk.Radiobutton(frame_pilih_nominal, value=150000, variable=selected_price, text="Rp150.000,00", font=("Roboto", 16)).pack(side="left", padx=20)
+    tombol_200ribu = tk.Radiobutton(frame_pilih_nominal, value=200000, variable=selected_price, text="Rp200.000,00", font=("Roboto", 16)).pack(padx=20)
+
+    # Pilih Metode Pembayaran
+    frame_pilih_pembayaran = tk.Frame(saldo_frame, background="#171a30")
+    frame_pilih_pembayaran.pack(pady=15)
+    selected_method = tk.StringVar(value="N/A")
+    label_metode_pembayaran = tk.Label(frame_pilih_pembayaran, text="Metode pembayaran", font=("Roboto", 16, "bold"), fg="white", bg="#171a30").pack()
+    tombol_gopay = tk.Radiobutton(frame_pilih_pembayaran, value="gopay", variable=selected_method, image=logo_gopay).pack(side="left", padx=15)
+    tombol_ovo = tk.Radiobutton(frame_pilih_pembayaran, value="ovo", variable=selected_method, image=logo_ovo).pack(side="left", padx=15)
+    tombol_bca = tk.Radiobutton(frame_pilih_pembayaran, value="bca", variable=selected_method, image=logo_bca).pack(side="left", padx=15)
+    tombol_mandiri = tk.Radiobutton(frame_pilih_pembayaran, value="mandiri", variable=selected_method, image=logo_mandiri).pack(side="left", padx=15)
+    tombol_bni = tk.Radiobutton(frame_pilih_pembayaran, value="bni", variable=selected_method, image=logo_bni).pack(side="left", padx=15)
+    tombol_bri = tk.Radiobutton(frame_pilih_pembayaran, value="bri", variable=selected_method, image=logo_bri).pack(padx=15)
+
+    # Masukkan Kode Validasi
+    frame_validasi = tk.Frame(saldo_frame, background="#171a30")
+    frame_validasi.pack(pady=15)
+    label_kode = tk.Label(frame_validasi, text="Masukkan kode validasi: ", font=("Roboto", 14, "bold"), fg="white", bg="#171a30").pack()
+    entry_kode = tk.Entry(frame_validasi, width=20, font=("Roboto", 14, "bold"), textvariable=kode_valid, show="*").pack()
+    tombol_bayar = tk.Button(frame_validasi, text="Bayar", font=("Roboto", 16, "bold"), bg="#fc094c", command=lambda: isValid(selected_price.get(), selected_method.get())).pack()
 
 
 # FRAME LIST MOVIE
@@ -581,11 +659,11 @@ def RegisterToLogin():
     register_frame.forget()
     LoginFrame()
 
-
 # TRANSISI LOGIN KE LIST MOVIE
 def LoginToList():
     login_frame.forget()
     MovieListFrame(list_movie, img, ListToNowMovieInfo, "Film Yang Sedang Tayang Di XX5")
+
 
 # HEADING NOW PLAYING
 def ToNowPlaying(frame):
@@ -600,6 +678,7 @@ def ToUpcoming(frame):
 # HEADING SALDO
 def ToSaldo(frame):
     frame.forget()
+    SaldoFrame()
 
 # HEADING LOGOUT
 def ClickLogOut(frame):

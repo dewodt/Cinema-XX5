@@ -1,5 +1,5 @@
 # Data User
-list_user = [{'nama': 'moi735', 'email': 'moi735@gmail.coom', 'password': '735', 'saldo': 500000}, {'nama': 's', 'email': 's', 'password': 's', 'saldo': 0}, {'nama': 'dewo', 'email': 'dewo', 'password': 'dewo', 'saldo': 0}]
+list_user = [{'nama': 'moi735', 'email': 'moi735@gmail.coom', 'password': '735', 'saldo': 500000}, {'nama': 's', 'email': 's', 'password': 's', 'saldo': 50000}, {'nama': 'dewo', 'email': 'dewo', 'password': 'dewo', 'saldo': 0}]
 
 # Data Lokasi
 location =  ['XX5 Aeon Mall BSD', 'XX5 Ciwalk Bandung', 'XX5 Plaza Indonesia']
