@@ -1,1 +1,0 @@
-{'email': 'password', 'randyverdian99@gmail.com': 'nontonfilm', 'tehbotol@gmail.com': 'sosro', 's': 's'}

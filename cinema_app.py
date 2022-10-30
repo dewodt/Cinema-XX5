@@ -7,7 +7,7 @@
 # Algoritma:
 import tkinter as tk
 from tkinter import ttk
-from tkinter import messagebox
+from tkinter.messagebox import showinfo, showerror, askyesno
 from PIL import Image, ImageTk
 import ast
 import locale
@@ -43,6 +43,14 @@ img_xx5_heading = tk.PhotoImage(file="images/xx5heading.png")
 # Array Image Movie
 img = [tk.PhotoImage(file=list_movie[i]["img"]) for i in range(4)]
 upcoming_img = [tk.PhotoImage(file=upcoming_movie[i]["img"]) for i in range(4)]
+
+# Image Beberapa Pembayaran
+logo_gopay = tk.PhotoImage(file="images/gopay.png")
+logo_ovo = tk.PhotoImage(file="images/ovo.png")
+logo_bca = tk.PhotoImage(file="images/bca.png")
+logo_mandiri = tk.PhotoImage(file="images/mandiri.png")
+logo_bni = tk.PhotoImage(file="images/bni.png")
+logo_bri = tk.PhotoImage(file="images/bri.png")
 
 # Image Kursi
 seat_free = tk.PhotoImage(file="images/seat_free.png")
@@ -112,17 +120,15 @@ def LoginFrame():
     def login():
         akun_email = email.get()
         akun_password = pasw.get()
-
-        file = open("database.txt", "r")
-        d = file.read()
-        r = ast.literal_eval(d)
-        file.close()
-
-        if akun_email in r.keys() and akun_password == r[akun_email]:
-            messagebox.showinfo("Berhasil login", f"Selamat datang, {akun_email}!")
+        user_found = False
+        for i in range(len(list_user)):
+            if akun_email == list_user[i]['nama'] and akun_password == list_user[i]['password']:
+                user_found = True
+        if user_found:
+            showinfo("Berhasil login", f"Selamat datang, {akun_email}!")
             LoginToList()
         else:
-            messagebox.showerror("Invalid", "Email atau password salah")
+            showerror("Invalid", "Email atau password salah")
     
     # Register & Login Button
     tombol_login = tk.Button(login_frame, width=32, pady=7, activebackground="#fc094c", activeforeground="#eaebf1", text="Login", fg="#eaebf1", bg="#fc094c", cursor="hand2", command=login, font=("Roboto", 12)).pack(pady=(0, 5))
@@ -139,34 +145,34 @@ def RegisterFrame():
     register_frame.pack()
 
     def klik_register():
+        nama_lengkap = nama.get()
         akun_email = email.get()
         akun_password = pasw.get()
         confirm = conf_pasw.get()
         if akun_password == confirm:
-            try:
-                file = open("database.txt", "r+")
-                d = file.read()
-                r = ast.literal_eval(d)
+            dict = {
+                "nama": nama_lengkap,
+                "email": akun_email,
+                "password": akun_password,
+                "saldo": 0,
+            }
+            read_file = open('database.py', 'r')
+            content = read_file.read()
+            old_list_user = str(list_user)
+            list_user.append(dict)
+            new_list_user = str(list_user)
 
-                dict2 = {akun_email:akun_password}
-                r.update(dict2)
-                file.truncate(0)
-                file.close()
+            content = content.replace(old_list_user, new_list_user)
+            read_file.close()
 
-                file = open("database.txt", "w")
-                w = file.write(str(r))
+            write_file = open('database.py', 'w')
+            write_file.write(content)
+            write_file.close()
 
-                messagebox.showinfo("Register", "Registrasi berhasil!")
-                RegisterToLogin()
-                # window.destroy()
-
-            except:
-                file = open("database.txt", "w")
-                pp = str({"email":"password"})
-                file.write(pp)
-                file.close()
+            showinfo("Register", "Registrasi berhasil!")
+            RegisterToLogin()
         else:
-            messagebox.showerror("Invalid", "Password tidak cocok")
+            showerror("Invalid", "Password tidak cocok")
 
     label_gambar = tk.Label(register_frame, image=xx5_img, border=0).pack()
     heading = tk.Label(register_frame, text="Register", fg="#eaebf1", bg="#171a30", font=("Roboto", 23, "bold")).pack(pady=10)
@@ -224,7 +230,7 @@ def HeaderFrame(frame):
     right_frame = tk.Frame(header_frame, bg="#171a30")
     right_frame.pack(side="right", padx=80)
     saldo = tk.Button(right_frame, text="Rp100.000,00", font=("arial", 16)).pack(side="left", padx=10)
-    logout = tk.Button(right_frame, text="Log Out", font=("arial", 16)).pack(side="left", padx=10)
+    logout = tk.Button(right_frame, text="Log Out", font=("arial", 16), command=lambda frame=frame: ClickLogOut(frame)).pack(side="left", padx=10)
     akun = tk.Label(right_frame, text="Erling Haaland", font=("arial", 16)).pack(side="right", padx=10)
 
 
@@ -565,12 +571,10 @@ def SeatBookingFrame(k, place, day, time):
     booking_frame.pack()
 
 
-
 # TRANSISI LOGIN KE REGISTER
 def LoginToRegister():
     login_frame.forget()
     RegisterFrame()
-
 
 # TRANSISI REGISTER KE LOGIN
 def RegisterToLogin():
@@ -599,7 +603,10 @@ def ToSaldo(frame):
 
 # HEADING LOGOUT
 def ClickLogOut(frame):
-    ...
+    confirmation = askyesno(title='Confirmation', message='Are you sure that you want to logout?')
+    if confirmation:
+        frame.forget()
+        LoginFrame()
 
 
 # TRANSISI DARI NOW LIST MOVIE KE INFORMASI MOVIE
@@ -621,6 +628,7 @@ def InfoToBooking(k, place, day, time):
 def BookingToInfo(k):
     booking_frame.forget()
     NowMovieInfoFrame(k)
+
 
 LoginFrame()
 
