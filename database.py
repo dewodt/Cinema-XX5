@@ -26,6 +26,58 @@ time_int = [
             {"hour": 21, "minute": 00},
         ]
 
+# Data Upcoming Movie
+upcoming_movie = [
+    {
+        "img": "images/blackpanther.png",
+        "title": "Black Panther: Wakanda Forever",
+        "age": "-",
+        "genre": "Action, Adventure, Drama",
+        "duration": "- Minutes",
+        "plot": "Rakyat Wakanda kali ini akan berjuang untuk melindungi negerinya dari campur tangan kekuatan dunia setelah kematian sang Raja T'Challa.",
+        "producer": "Kevin Feige, Nate Moore",
+        "director": "Ryan Coogler",
+        "writer": "Ryan Coogler, Joe Robert Cole",
+        "cast": "Letitia Wright, Lupita Nyong'o, Tenoch Huerta, Angela Bassett, Martin Freeman, Danai Gurira, Michaela Coel, Dominique Thorne, Winston Duke, Richard Schiff, Mabel Cadena",
+    },
+    {
+        "img": "images/bosslevel.png",
+        "title": "BOSS LEVEL",
+        "age": "17+",
+        "genre": "Action, Adventure, Comedy",
+        "duration": "101 Minutes",
+        "plot": "Terperangkap dalam lingkaran waktu yang terus-menerus mengulangi hari pembunuhannya, seorang mantan agen pasukan khusus harus membuka misteri di balik kematiannya sebelum dunia hancur.",
+        "producer": "Joe Carnahan, Frank Grillo",
+        "director": "Joe Carnahan",
+        "writer": "Chris Borey, Eddie Borey, Joe Carnahan",
+        "cast": "Frank Grillo, Mel Gibson, Naomi Watts, Will Sasso, Annabelle Walls, Sheaun Mckinney, Selina Lo, Michelle Yeoh, Ken Jeong, Meadow Williams, Mathilde Ollivier, Armida Lopez",
+    },
+    {
+        "img": "images/sriasih.png",
+        "title": "SRI ASIH",
+        "age": "-",
+        "genre": "Action, Sci-fi",
+        "duration": "- Minutes",
+        "plot": "Alana tidak mengerti mengapa dia selalu dikuasai oleh kemarahan. Tapi dia selalu berusaha untuk melawannya. Dia lahir saat letusan gunung berapi yang memisahkan dia dan orang tuanya. Dia kemudian diadopsi oleh seorang wanita kaya yang berusaha membantunya menjalani kehidupan normal. Tapi saat dewasa, Alana menemukan kebenaran tentang asalnya. Dia bukan manusia biasa. Dia bisa menjadi kebaikan untuk kehidupan. Atau menjadi kehancuran bila ia tidak dapat mengendalikan amarahnya.",
+        "producer": "Bismarka Kurniawan, Wicky V. Olindo, Joko Anwar",
+        "director": "Upi",
+        "writer": "Upi, Joko Anwar",
+        "cast": "Pevita Pearce, Reza Rahadian, Christine Hakim, Jefri Nichol, Dimas Anggara, Surya Saputra, Jenny Zhang, Randy Pangalila",
+    },
+    {
+        "img": "images/tegar.png",
+        "title": "TEGAR",
+        "age": "SU",
+        "genre": "Drama",
+        "duration": "92 Minutes",
+        "plot": "Tegar (10), seorang anak berkebutuhan khusus yang menginginkan bisa seperti anak pada umumnya, berteman dan bersekolah. Di hari ulang tahunnya yang ke-10, Tegar mengutarakan impiannya kepada sang Kakek. Namun, keputusan Kakek untuk mewujudkan impian Tegar justru membuat Kakek dan Ibu berselisih. Akhirnya, Tegar memutuskan untuk pergi dari rumah demi mengejar mimpinya.",
+        "producer": "Chandra Sembiring, Surajuddin Datau",
+        "director": "Anggi Frisca",
+        "writer": "Alim Sudio, Anggi Frisca",
+        "cast": "Aldifi Tegarajasa, Deddy Mizwar, Sha Ine Febriyanti, Joanita Chatarina, M. Adhiyat, Prihartono Mirsaputra, Jamaluddin Latief",
+    },
+]
+
 # Data Daftar Film
 list_movie = [
     {

@@ -8,6 +8,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
+from PIL import Image, ImageTk
 import ast
 import locale
 import datetime
@@ -33,16 +34,15 @@ root.state('zoomed')
 root.configure(background="#171a30")
 
 # Mencari Posisi Center sb x
-center_x = (screen_width - 800) * 0.5
+center_x = (screen_width - 980) * 0.5
 
 # Logo XX5
 xx5_img = tk.PhotoImage(file="images/xx5.png")
+img_xx5_heading = tk.PhotoImage(file="images/xx5heading.png")
 
 # Array Image Movie
 img = [tk.PhotoImage(file=list_movie[i]["img"]) for i in range(4)]
-
-# Image Back Button
-back_img = tk.PhotoImage(file="images/back.png")
+upcoming_img = [tk.PhotoImage(file=upcoming_movie[i]["img"]) for i in range(4)]
 
 # Image Kursi
 seat_free = tk.PhotoImage(file="images/seat_free.png")
@@ -208,39 +208,65 @@ def RegisterFrame():
     sudah_akun.pack()
 
 
+# FRAME HEADER
+def HeaderFrame(frame):
+    header_frame = tk.Frame(frame, bg="#171a30")
+    header_frame.pack()
+
+    # Left Frame (Logo, Now Playing, Upcoming)
+    left_frame = tk.Frame(header_frame, bg="#171a30")
+    left_frame.pack(side="left", padx=80)
+    label_gambar = tk.Label(left_frame, image=img_xx5_heading, bg="#171a30").pack(side="left", padx=10)
+    now_playing = tk.Button(left_frame, text="Now Playing", font=("arial", 16), command=lambda frame=frame: ToNowPlaying(frame)).pack(side="left", anchor="center", padx=10)
+    up_coming = tk.Button(left_frame, text="Up Coming", font=("arial", 16), command=lambda frame=frame: ToUpcoming(frame)).pack(side="right",anchor="center", padx=10)
+
+    # Right Frame (Saldo, Loglout, Name)
+    right_frame = tk.Frame(header_frame, bg="#171a30")
+    right_frame.pack(side="right", padx=80)
+    saldo = tk.Button(right_frame, text="Rp100.000,00", font=("arial", 16)).pack(side="left", padx=10)
+    logout = tk.Button(right_frame, text="Log Out", font=("arial", 16)).pack(side="left", padx=10)
+    akun = tk.Label(right_frame, text="Erling Haaland", font=("arial", 16)).pack(side="right", padx=10)
+
+
 # FRAME LIST MOVIE
-def MovieListFrame():
+def MovieListFrame(list, image, func, title):
     # Frame Utama
     global movielist_frame
     movielist_frame = tk.Frame(root, background="#171a30", highlightbackground="red", highlightthickness=2)
-    movielist_frame.rowconfigure(3, weight=1)
-    movielist_frame.columnconfigure(4, weight=1)
+    movielist_frame.pack()
+
+    # Header
+    HeaderFrame(movielist_frame)
 
     # Title Movie List
-    movielist_title = tk.Label(movielist_frame, text="Film Sedang Tayang di XX5", background="#171a30", font=("Roboto", "30", "bold"), fg="#eaebf1").grid(row=0, column=0, columnspan=5, ipadx=10, ipady=10, pady=10)
+    movielist_title = tk.Label(movielist_frame, text=title, background="#171a30", font=("Roboto", "30", "bold"), fg="#eaebf1").pack(ipadx=10, ipady=10, pady=10)
 
     # Mencetak 4 Movie
-    for i in range(len(list_movie)):
-        movie_frame = tk.Frame(movielist_frame, background="#171a30")
-        movie_img = tk.Button(movie_frame, image=img[i], cursor="hand2", background="#171a30", bd=0, command=lambda i=i: ListToInfo(i), fg="#eaebf1")
+    fourmovie_frame = tk.Frame(movielist_frame, bg="#171a30")
+    fourmovie_frame.pack()
+    
+    for i in range(len(list)):
+        movie_frame = tk.Frame(fourmovie_frame, background="#171a30")
+        movie_img = tk.Button(movie_frame, image=image[i], cursor="hand2", background="#171a30", bd=0, command=lambda i=i: func(i), fg="#eaebf1")
         movie_img.bind("<Enter>", onHoverBorder)
         movie_img.bind("<Leave>", onLeaveBorder)
         movie_img.pack(ipadx=5, ipady=5)
         title_age_frame = tk.Frame(movie_frame, background="#fc094c")
-        movie_title = tk.Label(title_age_frame, text=list_movie[i]["title"], background="#fc094c", font=("Helvatica", "18", "bold"), fg="#eaebf1").pack(pady=(5, 0))
-        movie_age = tk.Label(title_age_frame, text=list_movie[i]["age"], background="#fc094c", font=("Helvatica", "15"), fg="#eaebf1").pack(pady=(0, 5))
+        movie_title = tk.Label(title_age_frame, text=list[i]["title"], background="#fc094c", wraplength=190, font=("Helvatica", "18", "bold"), fg="#eaebf1").pack(pady=(5, 0))
+        movie_age = tk.Label(title_age_frame, text=list[i]["age"], background="#fc094c", font=("Helvatica", "15"), fg="#eaebf1").pack(pady=(0, 5))
         title_age_frame.pack(pady=15, fill="x", ipadx=10)
-        movie_frame.grid(row=1, column=i, padx=20, pady=10)
-
-    movielist_frame.pack()
+        movie_frame.pack(padx=20, pady=10, side="left")
 
 
 # FRAME INFORMASI MOVIE
-def MovieInformationFrame(k):
+def NowMovieInfoFrame(k):
     # Membuat Scrollbar
     global movieinfo_frame
-    movieinfo_frame = tk.Frame(root)
+    movieinfo_frame = tk.Frame(root, background="#171a30")
     movieinfo_frame.pack(fill="both", expand=1)
+
+    # Header
+    HeaderFrame(movieinfo_frame)
 
     my_canvas = tk.Canvas(movieinfo_frame, background="#171a30")
     my_canvas.pack(side="left", fill="both", expand=1)
@@ -253,27 +279,24 @@ def MovieInformationFrame(k):
 
     # Membuat Frame
     moviedesc_frame = tk.Frame(my_canvas, background="#171a30", highlightbackground="red", highlightthickness=2)
-    moviedesc_frame.rowconfigure(9, weight=1)
-    moviedesc_frame.columnconfigure(2, weight=1)
 
     my_canvas.create_window((center_x, 0), window=moviedesc_frame, anchor="nw")
 
-    # Back Button
-    back_button = tk.Button(moviedesc_frame, image=back_img, command=InfoToList, activebackground="#171a30", background="#171a30", relief="flat").grid(row=0, column=0, columnspan=2, sticky="nw")
-
     # Title, Genre, Duration
     titlegenre_frame = tk.Frame(moviedesc_frame, background="#171a30")
+    titlegenre_frame.pack()
     moviedesc_title = tk.Label(titlegenre_frame, font=("Helvetica 18 bold"), text=list_movie[k]["title"], background="#171a30", fg="#eaebf1").pack()
     moviedesc_genre = tk.Label(titlegenre_frame, font=("Helvetica 14 bold"), text=list_movie[k]["genre"], background="#171a30", fg="#b70e43").pack()
     moviedesc_duration = tk.Label(titlegenre_frame, font=("Helvetica 14 bold"), text=list_movie[k]["duration"], background="#171a30", fg="#b70e43").pack()
-    titlegenre_frame.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
 
     # Image
     img_and_buy_frame = tk.Frame(moviedesc_frame, background="#171a30")
+    img_and_buy_frame.pack(anchor="w", padx=10, pady=10)
     movie_img = tk.Label(img_and_buy_frame, image=img[k], relief="flat", highlightthickness = 0, bd = 0).pack(side="left")
 
     # Buy Frame
     buy_frame = tk.Frame(img_and_buy_frame, background="#171a30")
+    buy_frame.pack(side="right", padx=15)
     buy_frame.rowconfigure(9, weight=1)
     buy_frame.columnconfigure(5, weight=1)
     
@@ -302,39 +325,101 @@ def MovieInformationFrame(k):
             tomorrow_time.bind('<Leave>', lambda event, imgs=button2: onLeaveImage(event, imgs))
             tomorrow_time.grid(row=2+3*i, column=j+1, padx=5, pady= 4)
 
-    buy_frame.pack(side="right", padx=15)
-
-    img_and_buy_frame.grid(row=2, column=0, sticky="w", padx=10)
 
     # Movie Plot
     movie_plot_frame = tk.Frame(moviedesc_frame, background="#171a30")
     movie_plot_title = tk.Label(movie_plot_frame, text="Plot", font=("Helvetica 12 bold"), background="#171a30", fg="#b70e43").pack(anchor=tk.W)
-    movie_plot = tk.Label(movie_plot_frame, wraplength=800, justify="left", text=list_movie[k]["plot"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
-    movie_plot_frame.grid(row=3, column=0, sticky="we", padx=10, pady=10)
+    movie_plot = tk.Label(movie_plot_frame, wraplength=980, justify="left", text=list_movie[k]["plot"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    movie_plot_frame.pack(anchor="w", padx=10, pady=10)
 
     # Movie Producer
     movie_prod_frame = tk.Frame(moviedesc_frame, background="#171a30")
     movie_prod_title = tk.Label(movie_prod_frame, text="Producer", font=("Helvetica 12 bold"), background="#171a30", fg="#b70e43").pack(anchor=tk.W)
     movie_prod = tk.Label(movie_prod_frame, text=list_movie[k]["producer"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
-    movie_prod_frame.grid(row=4, column=0, sticky="we", padx=10, pady=10)
+    movie_prod_frame.pack(anchor="w", padx=10, pady=10)
 
     # Movie Director
     movie_director_frame = tk.Frame(moviedesc_frame, background="#171a30")
     movie_director_title = tk.Label(movie_director_frame, text="Director", font=("Helvetica 12 bold"), background="#171a30", fg="#b70e43").pack(anchor=tk.W)
     movie_director = tk.Label(movie_director_frame, text=list_movie[k]["director"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
-    movie_director_frame.grid(row=5, column=0, sticky="we", padx=10, pady=10)
+    movie_director_frame.pack(anchor="w", padx=10, pady=10)
 
     # Movie Writer
     movie_writer_frame = tk.Frame(moviedesc_frame, background="#171a30")
     movie_writer_title = tk.Label(movie_writer_frame, text="Writer", font=("Helvetica 12 bold"), background="#171a30", fg="#b70e43").pack(anchor=tk.W)
     movie_writer = tk.Label(movie_writer_frame, text=list_movie[k]["writer"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
-    movie_writer_frame.grid(row=6, column=0, sticky="we", padx=10, pady=10)
-
+    movie_writer_frame.pack(anchor="w", padx=10, pady=10)
     # Movie Cast
     movie_cast_frame = tk.Frame(moviedesc_frame, background="#171a30")
     movie_cast_title = tk.Label(movie_cast_frame, text="Cast", font=("Helvetica 13 bold"), background="#171a30", fg="#b70e43").pack(anchor=tk.W)
-    movie_cast = tk.Label(movie_cast_frame, wraplength=800, justify="left",text=list_movie[k]["cast"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
-    movie_cast_frame.grid(row=7, column=0, sticky="we", padx=10, pady=10)
+    movie_cast = tk.Label(movie_cast_frame, wraplength=980, justify="left",text=list_movie[k]["cast"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    movie_cast_frame.pack(anchor="w", padx=10, pady=10)
+
+
+# FRAME UPCOMING MOVIE
+def UpcomingMovieInfoFrame(k):
+    # Membuat Scrollbar
+    global upcoming_movie_frame
+    upcoming_movie_frame = tk.Frame(root, background="#171a30")
+    upcoming_movie_frame.pack(fill="both", expand=1)
+
+    # Header
+    HeaderFrame(upcoming_movie_frame)
+
+    my_canvas = tk.Canvas(upcoming_movie_frame, background="#171a30")
+    my_canvas.pack(side="left", fill="both", expand=1)
+
+    scroll_bar = ttk.Scrollbar(upcoming_movie_frame, orient="vertical", command=my_canvas.yview)
+    scroll_bar.pack(side="right", fill="y")
+
+    my_canvas.configure(yscrollcommand=scroll_bar.set)
+    my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all")))
+
+    # Membuat Frame
+    moviedesc_frame = tk.Frame(my_canvas, background="#171a30", highlightbackground="red", highlightthickness=2)
+
+    my_canvas.create_window((center_x, 0), window=moviedesc_frame, anchor="nw")
+
+    # Title, Genre, Duration
+    titlegenre_frame = tk.Frame(moviedesc_frame, background="#171a30")
+    titlegenre_frame.pack()
+    moviedesc_title = tk.Label(titlegenre_frame, font=("Helvetica 18 bold"), text=upcoming_movie[k]["title"], background="#171a30", fg="#eaebf1").pack()
+    moviedesc_genre = tk.Label(titlegenre_frame, font=("Helvetica 14 bold"), text=upcoming_movie[k]["genre"], background="#171a30", fg="#b70e43").pack()
+    moviedesc_duration = tk.Label(titlegenre_frame, font=("Helvetica 14 bold"), text=upcoming_movie[k]["duration"], background="#171a30", fg="#b70e43").pack()
+
+    # Image
+    img_and_buy_frame = tk.Frame(moviedesc_frame, background="#171a30")
+    img_and_buy_frame.pack(anchor="w", padx=10, pady=10)
+    movie_img = tk.Label(img_and_buy_frame, image=upcoming_img[k], relief="flat", highlightthickness = 0, bd = 0).pack(side="left")
+
+    # Movie Plot
+    movie_plot_frame = tk.Frame(moviedesc_frame, background="#171a30")
+    movie_plot_title = tk.Label(movie_plot_frame, text="Plot", font=("Helvetica 12 bold"), background="#171a30", fg="#b70e43").pack(anchor=tk.W)
+    movie_plot = tk.Label(movie_plot_frame, wraplength=980, justify="left", text=upcoming_movie[k]["plot"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    movie_plot_frame.pack(anchor="w", padx=10, pady=10)
+
+    # Movie Producer
+    movie_prod_frame = tk.Frame(moviedesc_frame, background="#171a30")
+    movie_prod_title = tk.Label(movie_prod_frame, text="Producer", font=("Helvetica 12 bold"), background="#171a30", fg="#b70e43").pack(anchor=tk.W)
+    movie_prod = tk.Label(movie_prod_frame, text=upcoming_movie[k]["producer"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    movie_prod_frame.pack(anchor="w", padx=10, pady=10)
+
+    # Movie Director
+    movie_director_frame = tk.Frame(moviedesc_frame, background="#171a30")
+    movie_director_title = tk.Label(movie_director_frame, text="Director", font=("Helvetica 12 bold"), background="#171a30", fg="#b70e43").pack(anchor=tk.W)
+    movie_director = tk.Label(movie_director_frame, text=upcoming_movie[k]["director"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    movie_director_frame.pack(anchor="w", padx=10, pady=10)
+
+    # Movie Writer
+    movie_writer_frame = tk.Frame(moviedesc_frame, background="#171a30")
+    movie_writer_title = tk.Label(movie_writer_frame, text="Writer", font=("Helvetica 12 bold"), background="#171a30", fg="#b70e43").pack(anchor=tk.W)
+    movie_writer = tk.Label(movie_writer_frame, text=upcoming_movie[k]["writer"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    movie_writer_frame.pack(anchor="w", padx=10, pady=10)
+    # Movie Cast
+    movie_cast_frame = tk.Frame(moviedesc_frame, background="#171a30")
+    movie_cast_title = tk.Label(movie_cast_frame, text="Cast", font=("Helvetica 13 bold"), background="#171a30", fg="#b70e43").pack(anchor=tk.W)
+    movie_cast = tk.Label(movie_cast_frame, wraplength=980, justify="left",text=upcoming_movie[k]["cast"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    movie_cast_frame.pack(anchor="w", padx=10, pady=10)
 
 
 # FRAME SEAT BOOKING
@@ -342,6 +427,9 @@ def SeatBookingFrame(k, place, day, time):
     global count_seat, list_seat, str_seat, booking_frame
     # Main Frame
     booking_frame = tk.Frame(root, background="#171a30",highlightbackground="red", highlightthickness=2)
+
+    # Header
+    HeaderFrame(booking_frame)    
 
     # Information Frame
     information_frame = tk.Frame(booking_frame, background="#171a30")
@@ -477,30 +565,52 @@ def SeatBookingFrame(k, place, day, time):
     booking_frame.pack()
 
 
+
 # TRANSISI LOGIN KE REGISTER
 def LoginToRegister():
     login_frame.forget()
     RegisterFrame()
+
 
 # TRANSISI REGISTER KE LOGIN
 def RegisterToLogin():
     register_frame.forget()
     LoginFrame()
 
+
 # TRANSISI LOGIN KE LIST MOVIE
 def LoginToList():
     login_frame.forget()
-    MovieListFrame()
+    MovieListFrame(list_movie, img, ListToNowMovieInfo, "Film Yang Sedang Tayang Di XX5")
 
-# TRANSISI DARI LIST MOVIE KE INFORMASI MOVIE
-def ListToInfo(k):
+# HEADING NOW PLAYING
+def ToNowPlaying(frame):
+    frame.forget()
+    MovieListFrame(list_movie, img, ListToNowMovieInfo, "Film Yang Sedang Tayang Di XX5")
+
+# HEADING UPCOMING
+def ToUpcoming(frame):
+    frame.forget()
+    MovieListFrame(upcoming_movie, upcoming_img, ListToUpcomingMovieInfo, "Film Akan Tayang Di XX5")
+
+# HEADING SALDO
+def ToSaldo(frame):
+    frame.forget()
+
+# HEADING LOGOUT
+def ClickLogOut(frame):
+    ...
+
+
+# TRANSISI DARI NOW LIST MOVIE KE INFORMASI MOVIE
+def ListToNowMovieInfo(k):
     movielist_frame.forget()
-    MovieInformationFrame(k)
+    NowMovieInfoFrame(k)
 
-# TRANSISI DARI INFORMASI MOVIE KE LIST MOVIE
-def InfoToList():
-    movieinfo_frame.forget()
-    MovieListFrame()
+# TRANSISI DARI LIST MOVIE UPCOMING KE INFORMASI MOVE
+def ListToUpcomingMovieInfo(k):
+    movielist_frame.forget()
+    UpcomingMovieInfoFrame(k)
 
 # TRANSISI DARI INFORMASI MOVIE KE BOOKING MOVIE
 def InfoToBooking(k, place, day, time):
@@ -510,7 +620,7 @@ def InfoToBooking(k, place, day, time):
 # TRANSISI DARI BOOKING MOVIE KE INFORMASI MOVIE
 def BookingToInfo(k):
     booking_frame.forget()
-    MovieInformationFrame(k)
+    NowMovieInfoFrame(k)
 
 LoginFrame()
 
