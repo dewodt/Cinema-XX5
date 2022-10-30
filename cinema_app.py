@@ -254,7 +254,7 @@ def SaldoFrame():
             write_file.write(content)
             write_file.close()
 
-            sisa_saldo.set(list_user[user_ke]['saldo'])
+            sisa_saldo.set(locale.currency(list_user[user_ke]['saldo'], grouping=True))
             showinfo("Top Up Berhasil!", f"Top up Anda sebesar {price} berhasil!")
             kode_valid.set("")
             selected_price.set(0)
@@ -263,11 +263,11 @@ def SaldoFrame():
             showerror("Top Up Gagal!", f"Top up Anda gagal! Coba masukkan kode yang benar!")
 
     kode_valid = tk.StringVar()
-    sisa_saldo = tk.IntVar()
-    sisa_saldo.set(list_user[user_ke]['saldo'])
+    sisa_saldo = tk.StringVar()
+    sisa_saldo.set(locale.currency(list_user[user_ke]['saldo'], grouping=True))
 
     global saldo_frame
-    saldo_frame = tk.Frame(root)
+    saldo_frame = tk.Frame(root, bg="#171a30")
     saldo_frame.pack()
 
     HeaderFrame(saldo_frame)
@@ -285,7 +285,6 @@ def SaldoFrame():
     frame_pilih_nominal = tk.Frame(saldo_frame, background="#171a30")
     frame_pilih_nominal.pack(pady=15)
     selected_price = tk.IntVar(value=0)
-    tombol_topup = tk.Label(frame_pilih_nominal, text="Top Up Saldo", font=("Roboto", 20, "bold"), bg="#fc094c").pack()
     label_nominal_topup = tk.Label(frame_pilih_nominal, text="Pilih nominal top up", font=("Roboto", 16, "bold"), fg="white", bg="#171a30").pack()
     tombol_50ribu = tk.Radiobutton(frame_pilih_nominal, value=50000, variable=selected_price, text="Rp50.000,00", font=("Roboto", 16)).pack(side="left", padx=20)
     tombol_100ribu = tk.Radiobutton(frame_pilih_nominal, value=100000, variable=selected_price, text="Rp100.000,00", font=("Roboto", 16)).pack(side="left", padx=20)
