@@ -119,13 +119,13 @@ for i in range(9):
                 item = tk.Label(seat_frame, image=seat_sold).grid(row=i, column=j)
             else: # Jika Available
                 # Penentu Kode Seat
+                x_seat = ""
                 if j < 7:
                     x_seat = str(j+1)
                 elif j > 7:
                     x_seat = str(j)
                 y_seat = f"{chr(ord('A')+i-1)}"
                 seat_var = tk.IntVar()
-                
                 # Check Button Seat
                 item = tk.Checkbutton(seat_frame, variable=seat_var, onvalue=1, offvalue=0, command=lambda num=seat_var, i=y_seat, j=x_seat: clicked_seat(num, i, j), indicatoron=False, image=seat_free, selectimage=seat_own, cursor="hand2").grid(row=i, column=j, padx=3, pady=3)
 

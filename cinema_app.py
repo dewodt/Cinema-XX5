@@ -5,6 +5,7 @@
 # 4. Berto Togatorop/ 19622192
 
 # Algoritma:
+from itertools import count
 import tkinter as tk
 from tkinter import ttk
 from tkinter.messagebox import showinfo, showerror, askyesno
@@ -20,6 +21,7 @@ tomorrow =  (datetime.date.today() + datetime.timedelta(days=1)).strftime("%d-%m
 
 # Define Time (Now)
 time_now = datetime.datetime.now()
+hour_minute_now = time_now.strftime("%H:%M")
 
 # Set Locale (For Currency)
 locale.setlocale( locale.LC_ALL, 'id-ID')
@@ -224,43 +226,47 @@ def HeaderFrame(frame):
 
     # Left Frame (Logo, Now Playing, Upcoming)
     left_frame = tk.Frame(header_frame, bg="#171a30")
-    left_frame.pack(side="left", padx=80)
+    left_frame.pack(side="left", padx=(0, 80))
     label_gambar = tk.Label(left_frame, image=img_xx5_heading, bg="#171a30").pack(side="left", padx=10)
-    now_playing = tk.Button(left_frame, text="Now Playing", font=("arial", 16), command=lambda frame=frame: ToNowPlaying(frame)).pack(side="left", anchor="center", padx=10)
-    up_coming = tk.Button(left_frame, text="Upcoming", font=("arial", 16), command=lambda frame=frame: ToUpcoming(frame)).pack(side="right",anchor="center", padx=10)
+    now_playing = tk.Button(left_frame, text="Now Playing", font=("arial", 14), command=lambda frame=frame: ToNowPlaying(frame)).pack(side="left", anchor="center", padx=10)
+    up_coming = tk.Button(left_frame, text="Upcoming", font=("arial", 14), command=lambda frame=frame: ToUpcoming(frame)).pack(side="right",anchor="center", padx=10)
 
     # Right Frame (Saldo, Loglout, Name)
     right_frame = tk.Frame(header_frame, bg="#171a30")
-    right_frame.pack(side="right", padx=80)
-    saldo = tk.Button(right_frame, text="Top Up", command=lambda frame=frame: ToSaldo(frame), font=("arial", 16)).pack(side="left", padx=10)
-    logout = tk.Button(right_frame, text="Log Out", font=("arial", 16), command=lambda frame=frame: ClickLogOut(frame)).pack(side="left", padx=10)
-    akun = tk.Label(right_frame, text=f"{list_user[user_ke]['nama']}", font=("arial", 16)).pack(side="right", padx=10)
+    right_frame.pack(side="right", padx=(80, 0))
+    topup = tk.Button(right_frame, text="Top Up", command=lambda frame=frame: ToSaldo(frame), font=("arial", 14)).pack(side="left", padx=10)
+    riwayat = tk.Button(right_frame, text="Riwayat Pemesanan", font=("arial", 14), command=lambda frame=frame: ToRiwayat(frame)).pack(side="left", padx=10)
+    logout = tk.Button(right_frame, text="Log Out", font=("arial", 14), command=lambda frame=frame: ClickLogOut(frame)).pack(side="left", padx=10)
+    akun = tk.Label(right_frame, text=f"Halo {list_user[user_ke]['nama']}!", font=("arial", 14)).pack(side="right", padx=10)
 
 
 # FRAME SALDO
 def SaldoFrame():   
     # Fungsi Pengecek Validasi Pembayaran
     def isValid(price, method):
-        if kode_valid.get() == list_validasi[price][method]:
-            read_file = open('database.py', 'r')
-            content = read_file.read()
-            old_dict_user = str(list_user[user_ke])
-            list_user[user_ke]['saldo'] += price
-            new_dict_user = str(list_user[user_ke])
-            content = content.replace(old_dict_user, new_dict_user)
-            read_file.close()
-
-            write_file = open('database.py', 'w')
-            write_file.write(content)
-            write_file.close()
-
-            sisa_saldo.set(locale.currency(list_user[user_ke]['saldo'], grouping=True))
-            showinfo("Top Up Berhasil!", f"Top up Anda sebesar {price} berhasil!")
-            kode_valid.set("")
-            selected_price.set(0)
-            selected_method.set("N/A")
+        if selected_method.get() == "N/A" or selected_price.get() == 0:
+            showerror("Pilih Saldo/Metode!", f"Pilih saldo atau metode pembayaran yang benar!")
         else:
-            showerror("Top Up Gagal!", f"Top up Anda gagal! Coba masukkan kode yang benar!")
+            if kode_valid.get() == list_validasi[price][method]:
+                read_file = open('database.py', 'r')
+                content = read_file.read()
+                old_dict_user = str(list_user[user_ke])
+                list_user[user_ke]['saldo'] += price
+                new_dict_user = str(list_user[user_ke])
+                content = content.replace(old_dict_user, new_dict_user)
+                read_file.close()
+
+                write_file = open('database.py', 'w')
+                write_file.write(content)
+                write_file.close()
+
+                sisa_saldo.set(locale.currency(list_user[user_ke]['saldo'], grouping=True))
+                showinfo("Top Up Berhasil!", f"Top up Anda sebesar {price} berhasil!")
+                kode_valid.set("")
+                selected_price.set(0)
+                selected_method.set("N/A")
+            else:
+                showerror("Top Up Gagal!", f"Top up Anda gagal! Coba masukkan kode yang benar!")
 
     kode_valid = tk.StringVar()
     sisa_saldo = tk.StringVar()
@@ -309,6 +315,30 @@ def SaldoFrame():
     label_kode = tk.Label(frame_validasi, text="Masukkan kode validasi: ", font=("Roboto", 14, "bold"), fg="white", bg="#171a30").pack()
     entry_kode = tk.Entry(frame_validasi, width=20, font=("Roboto", 14, "bold"), textvariable=kode_valid, show="*").pack()
     tombol_bayar = tk.Button(frame_validasi, text="Bayar", font=("Roboto", 16, "bold"), bg="#fc094c", command=lambda: isValid(selected_price.get(), selected_method.get())).pack()
+
+
+# FRAME RIWAYAT
+def FrameRiwayat():
+    riwayat_frame = tk.Frame(root, bg="#171a30")
+    riwayat_frame.pack()
+
+    HeaderFrame(riwayat_frame)
+
+    tabel_frame = tk.Frame(riwayat_frame, bg="#171a30")
+    tabel_frame.pack()
+
+    row_riwayat = len(list_user[user_ke]['riwayat'])
+    tabel_frame.columnconfigure(6)
+    tabel_frame.rowconfigure(row_riwayat+1)
+
+    header = ["Tanggal Beli", "Lokasi", "Judul", "Jadwal", "Ticket", "Total"]
+    for i in range(row_riwayat+1):
+        if i == 0:
+            for j in range(6):
+                label = tk.Label(tabel_frame, text=header[j]).grid(row=i, column=j)
+        else:
+            for j in range(6):
+                label = tk.Label(tabel_frame, text=list_user[user_ke]['riwayat'][i-1][header[j]]).grid(row=i, column=j) 
 
 
 # FRAME LIST MOVIE
@@ -507,8 +537,7 @@ def UpcomingMovieInfoFrame(k):
 
 # FRAME SEAT BOOKING
 def SeatBookingFrame(k, place, day, time):
-    global count_seat, list_seat, str_seat, booking_frame
-    # Main Frame
+    global booking_frame, count_seat
     booking_frame = tk.Frame(root, background="#171a30",highlightbackground="red", highlightthickness=2)
 
     # Header
@@ -535,14 +564,14 @@ def SeatBookingFrame(k, place, day, time):
     text_var_ticket = tk.StringVar()
     text_var_ticket.set("Tickets: 0")
 
-    price = 50000
+    price = list_movie[k]['price']
     str_total = tk.StringVar()
     str_total.set("Total Payment: Rp0")
 
     list_seat = []
-    str_seat = ""
+    str_seat = "Seats: -"
     text_var_seat = tk.StringVar()
-    text_var_seat.set("Seats: -")
+    text_var_seat.set(str_seat)
 
     # Datas Frame
     data_frame = tk.Frame(information_frame, background="#171a30")
@@ -568,35 +597,37 @@ def SeatBookingFrame(k, place, day, time):
     seat_frame.rowconfigure((9), weight=1)
     seat_frame.columnconfigure(15, weight=1)
 
+    picked_seat_ij = [[0 for j in range(15)] for i in range(9)]
+
     # Fungsi bila seat diklik
-    def clicked_seat(par, i, j):
-        global count_seat, list_seat, str_seat
+    def clicked_seat(par, i, j, x, y):
+        global count_seat
         # Menambah Count Seat
+        picked_seat = x + y
         if par.get() == 1:
             count_seat += 1
+            list_seat.append(picked_seat)
+            picked_seat_ij[i][j] = True
         elif par.get() == 0:
             count_seat -= 1
+            list_seat.remove(picked_seat)
+            picked_seat_ij[i][j] = False
         text_var_ticket.set(f"Tickets: {count_seat}")
 
         # Menambah Total Belanja
         str_total.set(f"Total Payment: {locale.currency(price*count_seat, grouping=True)}")
 
-        # Mencetak Tempat Duduk Dipilih
-        picked_seat = i+j
-        if par.get() == 1:
-            list_seat.append(picked_seat)
-        elif par.get() == 0:
-            list_seat.remove(picked_seat)
+        # Mengolah list_seat agar menjadi string
         list_seat.sort()
         str_seat = "Seats: "+str(list_seat).replace("[", "").replace("]", "").replace("'", "")
         text_var_seat.set(str_seat)
 
         # Mengubah State & Cursor
         if count_seat > 0:
-            confirm_button['state'] =  tk.NORMAL
+            confirm_button['state'] =  "normal"
             confirm_button['cursor'] = "hand2"
         else:
-            confirm_button['state'] = tk.DISABLED
+            confirm_button['state'] = "disabled"
             confirm_button['cursor'] = ""
             str_seat = "Seats: -"
             text_var_seat.set(str_seat)
@@ -616,6 +647,7 @@ def SeatBookingFrame(k, place, day, time):
                     item = tk.Label(seat_frame, image=seat_sold, background="#171a30").grid(row=i, column=j)
                 else: # Jika Available
                     # Penentu Kode Seat
+                    x_seat = ""
                     if j < 7:
                         x_seat = str(j+1)
                     elif j > 7:
@@ -624,7 +656,7 @@ def SeatBookingFrame(k, place, day, time):
                     seat_var = tk.IntVar()
                     
                     # Check Button Seat
-                    item = tk.Checkbutton(seat_frame, variable=seat_var, onvalue=1, offvalue=0, command=lambda num=seat_var, i=y_seat, j=x_seat: clicked_seat(num, i, j), indicatoron=False, image=seat_free, selectimage=seat_own, cursor="hand2", background="#171a30", selectcolor="#171a30", activebackground="#171a30")
+                    item = tk.Checkbutton(seat_frame, variable=seat_var, onvalue=1, offvalue=0, command=lambda num=seat_var, i=i, j=j, y=y_seat, x=x_seat: clicked_seat(num, i, j, y, x), indicatoron=False, image=seat_free, selectimage=seat_own, cursor="hand2", background="#171a30", selectcolor="#171a30", activebackground="#171a30")
                     item.bind('<Enter>', lambda event, imgs=seat_own: onHoverImage(event, imgs))
                     item.bind('<Leave>', lambda event, imgs=seat_free: onLeaveImage(event, imgs))
                     item.grid(row=i, column=j, padx=3, pady=3)
@@ -636,13 +668,59 @@ def SeatBookingFrame(k, place, day, time):
     # Separator
     separator = ttk.Separator(booking_frame, orient='horizontal').pack(fill='x', pady=10)
 
+    def click_confirm():
+        confirmation = askyesno(title='Confirmation', message='Are you sure of your purchase?')
+        if confirmation:
+            if list_user[user_ke]['saldo'] >= price*count_seat:
+                # Edit Database User
+                read_file = open('database.py', 'r')
+                content = read_file.read()
+                old_dict_user = str(list_user[user_ke])
+                dict_riwayat = {
+                    'Tanggal Beli': f"{hour_minute_now} {today}",
+                    'Lokasi': place,
+                    'Judul': list_movie[k]['title'],
+                    'Jadwal': f"{time} {day}",
+                    'Ticket': text_var_seat.get().replace("Seats: ", ""),
+                    'Total': locale.currency(price*count_seat, grouping=True)
+                }
+                list_user[user_ke]['riwayat'].append(dict_riwayat)
+                list_user[user_ke]['saldo'] -= price*count_seat
+                new_dict_user = str(list_user[user_ke])
+                content = content.replace(old_dict_user, new_dict_user)
+                read_file.close()
+
+                write_file = open('database.py', 'w')
+                write_file.write(content)
+                write_file.close()
+
+                # Edit Database Seat
+                for i in range(9):
+                    for j in range(15):
+                        append_file = open('database.py', 'a')
+                        if picked_seat_ij[i][j] == True:
+                            list_movie[k]['sold_seat'][place][day][time][i][j] = True
+                            append_file.write(f"\nlist_movie[{k}]['sold_seat']['{place}']['{day}']['{time}'][{i}][{j}] = True")
+                        append_file.close()
+
+                # Transisi
+                booking_frame.forget()
+                MovieListFrame(list_movie, img, ListToNowMovieInfo, "Film Yang Sedang Tayang Di XX5")
+            else:
+                showerror("Kurang Saldo", "Anda kekurangan saldo! Silahkan toup terlebih dahulu")
+
+    def click_cancel():
+        booking_frame.forget()
+        NowMovieInfoFrame(k)
+        
+
     # Confirm and Cancel Button Frame
     button_frame = tk.Frame(booking_frame, background="#171a30")
     button_frame.rowconfigure(1)
     button_frame.columnconfigure(2)
-    confirm_button = tk.Button(button_frame, text="Confirm Order", command="", font=("Helvetica", "13", "bold"), bg="green", fg="#eaebf1", state=tk.DISABLED)
+    confirm_button = tk.Button(button_frame, text="Confirm Order", command=click_confirm, font=("Helvetica", "13", "bold"), bg="green", fg="#eaebf1", state="disabled")
     confirm_button.grid(row=0, column=0, padx=5, ipadx=28, ipady=8)
-    cancel_button = tk.Button(button_frame, text="Cancel", command=lambda: BookingToInfo(k), font=("Helvetica", "13", "bold"), bg="red", fg="#eaebf1", cursor="hand2").grid(row=0, column=1, padx=5, ipadx=55, ipady=8)
+    cancel_button = tk.Button(button_frame, text="Cancel", command= click_cancel, font=("Helvetica", "13", "bold"), bg="red", fg="#eaebf1", cursor="hand2").grid(row=0, column=1, padx=5, ipadx=55, ipady=8)
     button_frame.pack()
 
     booking_frame.pack()
@@ -679,6 +757,11 @@ def ToSaldo(frame):
     frame.forget()
     SaldoFrame()
 
+# HEADING RIWAYAT
+def ToRiwayat(frame):
+    frame.forget()
+    FrameRiwayat()
+
 # HEADING LOGOUT
 def ClickLogOut(frame):
     confirmation = askyesno(title='Confirmation', message='Are you sure that you want to logout?')
@@ -701,11 +784,6 @@ def ListToUpcomingMovieInfo(k):
 def InfoToBooking(k, place, day, time):
     movieinfo_frame.forget()
     SeatBookingFrame(k, place, day, time)
-
-# TRANSISI DARI BOOKING MOVIE KE INFORMASI MOVIE
-def BookingToInfo(k):
-    booking_frame.forget()
-    NowMovieInfoFrame(k)
 
 
 LoginFrame()
