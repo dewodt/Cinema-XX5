@@ -160,6 +160,7 @@ def RegisterFrame():
                 "email": akun_email,
                 "password": akun_password,
                 "saldo": 0,
+                "riwayat": []
             }
             read_file = open('database.py', 'r')
             content = read_file.read()
