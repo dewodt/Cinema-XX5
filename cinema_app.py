@@ -16,8 +16,8 @@ import datetime
 from database import *
 
 # Define Date
-today = datetime.date.today().strftime("%d-%m-%Y")
-tomorrow =  (datetime.date.today() + datetime.timedelta(days=1)).strftime("%d-%m-%Y")
+today_date = datetime.date.today().strftime("%d-%m-%Y")
+tomorrow_date =  (datetime.date.today() + datetime.timedelta(days=1)).strftime("%d-%m-%Y")
 
 # Define Time (Now)
 time_now = datetime.datetime.now()
@@ -63,8 +63,10 @@ seat_sold = tk.PhotoImage(file="images/seat_sold.png")
 screen_img = tk.PhotoImage(file="images/screen.png")
 
 # Buttons On Hover
-button1 = tk.PhotoImage(file="images/button1.png")
-button2 = tk.PhotoImage(file="images/button2.png")
+button_heading_on = tk.PhotoImage(file="images/heading_on.png")
+button_heading_off = tk.PhotoImage(file="images/heading_off.png")
+button_time_on = tk.PhotoImage(file="images/time_on.png")
+button_time_off = tk.PhotoImage(file="images/time_off.png")
 
 # Callback function bila box kosong
 def onclick_entry(event, word):
@@ -227,18 +229,37 @@ def HeaderFrame(frame):
 
     # Left Frame (Logo, Now Playing, Upcoming)
     left_frame = tk.Frame(header_frame, bg="#171a30")
-    left_frame.pack(side="left", padx=(0, 80))
+    left_frame.pack(side="left", padx=(0, 50))
     label_gambar = tk.Label(left_frame, image=img_xx5_heading, bg="#171a30").pack(side="left", padx=10)
-    now_playing = tk.Button(left_frame, text="Now Playing", font=("arial", 14), command=lambda frame=frame: ToNowPlaying(frame)).pack(side="left", anchor="center", padx=10)
-    up_coming = tk.Button(left_frame, text="Upcoming", font=("arial", 14), command=lambda frame=frame: ToUpcoming(frame)).pack(side="right",anchor="center", padx=10)
+    # Now Playing
+    now_playing = tk.Button(left_frame, text="Now Playing", command=lambda frame=frame: ToNowPlaying(frame), image=button_heading_off, font=("arial", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", relief="flat", compound="center")
+    now_playing.pack(side="left", anchor="center", padx=10)
+    now_playing.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
+    now_playing.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
+    # Upcoming
+    up_coming = tk.Button(left_frame, text="Upcoming", command=lambda frame=frame: ToUpcoming(frame), image=button_heading_off, font=("arial", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", relief="flat", compound="center")
+    up_coming.pack(side="left", anchor="center", padx=10)
+    up_coming.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
+    up_coming.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
 
     # Right Frame (Saldo, Loglout, Name)
     right_frame = tk.Frame(header_frame, bg="#171a30")
-    right_frame.pack(side="right", padx=(80, 0))
-    topup = tk.Button(right_frame, text="Top Up", command=lambda frame=frame: ToSaldo(frame), font=("arial", 14)).pack(side="left", padx=10)
-    riwayat = tk.Button(right_frame, text="Riwayat Pemesanan", font=("arial", 14), command=lambda frame=frame: ToRiwayat(frame)).pack(side="left", padx=10)
-    logout = tk.Button(right_frame, text="Log Out", font=("arial", 14), command=lambda frame=frame: ClickLogOut(frame)).pack(side="left", padx=10)
-    akun = tk.Label(right_frame, text=f"Halo {list_user[user_ke]['nama']}!", font=("arial", 14)).pack(side="right", padx=10)
+    right_frame.pack(side="right", padx=(50, 0))
+    # Topup
+    topup = tk.Button(right_frame, text="Top Up", command=lambda frame=frame: ToSaldo(frame), image=button_heading_off, font=("arial", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", relief="flat", compound="center")
+    topup.pack(side="left", padx=10)
+    topup.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
+    topup.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
+    # Riwayat
+    riwayat = tk.Button(right_frame, text="Riwayat", command=lambda frame=frame: ToRiwayat(frame), image=button_heading_off, font=("arial", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", relief="flat", compound="center")
+    riwayat.pack(side="left", padx=10)
+    riwayat.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
+    riwayat.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
+    # Logout
+    logout = tk.Button(right_frame, text=f"Log Out ({list_user[user_ke]['nama']})", command=lambda frame=frame: ClickLogOut(frame), image=button_heading_off, font=("arial", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", relief="flat", compound="center")
+    logout.pack(side="left", padx=10)
+    logout.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
+    logout.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
 
 
 # FRAME SALDO
@@ -425,18 +446,18 @@ def NowMovieInfoFrame(k):
     # Looping 3 Lokasi
     for i in range(3):
         loc_title = tk.Label(buy_frame, text=location[i], background="#171a30", font=("Helvetica", "12", "bold"), fg="#b70e43").grid(row=0+3*i, column=0, columnspan=5, sticky="w", pady=(10, 0))
-        today_label = tk.Label(buy_frame, text=today, background="#171a30", font=("Helvetica", "11", "bold"), fg="#eaebf1").grid(row=1+3*i, column=0, padx=(0, 5))
+        today_label = tk.Label(buy_frame, text=today_date, background="#171a30", font=("Helvetica", "11", "bold"), fg="#eaebf1").grid(row=1+3*i, column=0, padx=(0, 5))
         for j in range(4):
-            today_time = tk.Button(buy_frame, text=time_str[j], image=button2, state=CekDisabled(time_int[j]["hour"], time_int[j]["minute"]), command=lambda i=i, j=j: InfoToBooking(k, location[i], "today", time_str[j]), fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", font=("Helvetica", "11", "bold"), relief="flat", cursor="hand2", compound="center")
-            today_time.bind('<Enter>', lambda event, imgs=button1: onHoverImage(event, imgs))
-            today_time.bind('<Leave>', lambda event, imgs=button2: onLeaveImage(event, imgs))
+            today_time = tk.Button(buy_frame, text=time_str[j], image=button_time_off, state=CekDisabled(time_int[j]["hour"], time_int[j]["minute"]), command=lambda i=i, j=j: InfoToBooking(k, location[i], "today", time_str[j]), fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", font=("Helvetica", "11", "bold"), relief="flat", cursor="hand2", compound="center")
+            today_time.bind('<Enter>', lambda event, imgs=button_time_on: onHoverImage(event, imgs))
+            today_time.bind('<Leave>', lambda event, imgs=button_time_off: onLeaveImage(event, imgs))
             today_time.grid(row=1+3*i, column=j+1, padx=5, pady= 4)
 
-        tomorrow_label = tk.Label(buy_frame, text=tomorrow, background="#171a30", font=("Helvetica", "11", "bold"), fg="#eaebf1").grid(row=2+3*i, column=0, padx=(0, 5))
+        tomorrow_label = tk.Label(buy_frame, text=tomorrow_date, background="#171a30", font=("Helvetica", "11", "bold"), fg="#eaebf1").grid(row=2+3*i, column=0, padx=(0, 5))
         for j in range(4):
-            tomorrow_time = tk.Button(buy_frame, text=time_str[j], image=button2, command=lambda i=i, j=j: InfoToBooking(k, location[i], "tomorrow", time_str[j]), fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", font=("Helvetica", "11", "bold"), relief="flat", cursor="hand2", compound="center")
-            tomorrow_time.bind('<Enter>', lambda event, imgs=button1: onHoverImage(event, imgs))
-            tomorrow_time.bind('<Leave>', lambda event, imgs=button2: onLeaveImage(event, imgs))
+            tomorrow_time = tk.Button(buy_frame, text=time_str[j], image=button_time_off, command=lambda i=i, j=j: InfoToBooking(k, location[i], "tomorrow", time_str[j]), fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", font=("Helvetica", "11", "bold"), relief="flat", cursor="hand2", compound="center")
+            tomorrow_time.bind('<Enter>', lambda event, imgs=button_time_on: onHoverImage(event, imgs))
+            tomorrow_time.bind('<Leave>', lambda event, imgs=button_time_off: onLeaveImage(event, imgs))
             tomorrow_time.grid(row=2+3*i, column=j+1, padx=5, pady= 4)
 
 
@@ -582,9 +603,9 @@ def SeatBookingFrame(k, place, day, time):
     location = tk.Label(data_frame, text=place, background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
     studio = tk.Label(data_frame, text=f"Studio: {k+1}", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
     if day == "today":
-        date = tk.Label(data_frame, text=f"{today}, Time: {time}", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+        date = tk.Label(data_frame, text=f"{today_date}, Time: {time}", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
     elif day == "tomorrow":
-        date = tk.Label(data_frame, text=f"{tomorrow}, Time: {time}", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+        date = tk.Label(data_frame, text=f"{tomorrow_date}, Time: {time}", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
     total = tk.Label(data_frame, textvariable=str_total, background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
     data_frame.pack(anchor=tk.W)
 
@@ -678,7 +699,7 @@ def SeatBookingFrame(k, place, day, time):
                 content = read_file.read()
                 old_dict_user = str(list_user[user_ke])
                 dict_riwayat = {
-                    'Tanggal Beli': f"{hour_minute_now} {today}",
+                    'Tanggal Beli': f"{hour_minute_now} {today_date}",
                     'Lokasi': place,
                     'Judul': list_movie[k]['title'],
                     'Jadwal': f"{time} {day}",
