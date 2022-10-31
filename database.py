@@ -1,5 +1,5 @@
 # Data User
-list_user = [{'nama': 'moi735', 'email': 'moi735@gmail.coom', 'password': '735', 'saldo': 500000, 'riwayat': []}, {'nama': 's', 'email': 's', 'password': 's', 'saldo': 435000, 'riwayat': [{'Tanggal Beli': '13:45 31-10-2022', 'Lokasi': 'XX5 Aeon Mall BSD', 'Judul': 'Black Adam', 'Jadwal': '16:00 today', 'Ticket': 'A1', 'Total': 'Rp45.000,00'}]}]
+list_user = [{'nama': 'moi735', 'email': 'moi735@gmail.coom', 'password': '735', 'saldo': 500000, 'riwayat': []}, {'nama': 's', 'email': 's', 'password': 's', 'saldo': 635000, 'riwayat': [{'Tanggal Beli': '13:45 31-10-2022', 'Lokasi': 'XX5 Aeon Mall BSD', 'Judul': 'Black Adam', 'Jadwal': '16:00 today', 'Ticket': 'A1', 'Total': 'Rp45.000,00'}]}]
 
 # Data Lokasi
 location =  ['XX5 Aeon Mall BSD', 'XX5 Ciwalk Bandung', 'XX5 Plaza Indonesia']
