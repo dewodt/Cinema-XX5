@@ -36,6 +36,7 @@ root.configure(background="#171a30")
 # Mencari Posisi Center sb x
 center_x = (screen_width - 980) * 0.5
 
+# IMAGES
 # Logo XX5
 xx5_img = tk.PhotoImage(file="images/xx5.png")
 img_xx5_heading = tk.PhotoImage(file="images/xx5heading.png")
@@ -53,6 +54,8 @@ seat_sold = tk.PhotoImage(file="images/seat_sold.png")
 screen_img = tk.PhotoImage(file="images/screen.png")
 
 # Buttons On Hover
+button_logreg_on = tk.PhotoImage(file="images/logreg_on.png")
+button_logreg_off = tk.PhotoImage(file="images/logreg_off.png")
 button_heading_on = tk.PhotoImage(file="images/heading_on.png")
 button_heading_off = tk.PhotoImage(file="images/heading_off.png")
 button_time_on = tk.PhotoImage(file="images/time_on.png")
@@ -124,8 +127,10 @@ def LoginFrame():
     global login_frame
     login_frame = tk.Frame(root, bg="#171a30")
     login_frame.pack()
+
+    # Logo & Title
     label_gambar = tk.Label(login_frame, image=xx5_img, border=0).pack()
-    heading = tk.Label(login_frame, text="Login", fg="#eaebf1", bg="#171a30", font=("Roboto", 23, "bold")).pack(pady=10)
+    heading = tk.Label(login_frame, text="Login", fg="#fc094c", bg="#171a30", font=("Roboto", 23, "bold")).pack(pady=10)
 
     # Email
     email = tk.Entry(login_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Roboto", 11))
@@ -143,11 +148,16 @@ def LoginFrame():
     pasw.bind("<FocusIn>", lambda event: onclick_entry(event, "Password"))
     pasw.bind("<FocusOut>", lambda event: onleave_entry(event, "Password"))
     
-    # Register & Login Button
-    tombol_login = tk.Button(login_frame, width=32, pady=7, activebackground="#fc094c", activeforeground="#eaebf1", text="Login", fg="#eaebf1", bg="#fc094c", cursor="hand2", command=login, font=("Roboto", 12)).pack(pady=(0, 5))
+    # Tombol Login
+    tombol_login = tk.Button(login_frame, text="Login", command=login, image=button_logreg_off, font=("Roboto", 13, "bold"), activebackground="#171a30", activeforeground="#eaebf1", fg="#eaebf1", bg="#171a30", cursor="hand2", borderwidth=0, compound="center")
+    tombol_login.pack(pady=(0, 5))
+    tombol_login.bind('<Enter>', lambda event, imgs=button_logreg_on: onHoverImage(event, imgs))
+    tombol_login.bind('<Leave>', lambda event, imgs=button_logreg_off: onLeaveImage(event, imgs))
+
+    # Tidak punya akun
     noacc_frame = tk.Frame(login_frame, bg="#171a30")
-    label_register = tk.Label(noacc_frame, text="Belum punya akun?", fg="#eaebf1", bg="#171a30", font=("Roboto", 9)).pack(side="left")
-    tombol_register = tk.Button(noacc_frame, width=6, text="Register", border=0, cursor="hand2", bg="#171a30", fg="#fc094c", activebackground="#171a30", activeforeground="#fc094c", command=LoginToRegister).pack()
+    label_register = tk.Label(noacc_frame, text="Belum punya akun?", fg="#eaebf1", bg="#171a30", font=("Roboto", 11, "bold")).pack(side="left")
+    tombol_register = tk.Button(noacc_frame, text="Register", command=LoginToRegister,  font=("Roboto", 11, "bold"), borderwidth=0, cursor="hand2", bg="#171a30", fg="#fc094c", activebackground="#171a30", activeforeground="#fc094c").pack()
     noacc_frame.pack()
 
 
@@ -195,9 +205,9 @@ def RegisterFrame():
     register_frame = tk.Frame(root, bg="#171a30")
     register_frame.pack()
 
-    # Logo
+    # Logo & Title
     label_gambar = tk.Label(register_frame, image=xx5_img, border=0).pack()
-    heading = tk.Label(register_frame, text="Register", fg="#eaebf1", bg="#171a30", font=("Roboto", 23, "bold")).pack(pady=10)
+    heading = tk.Label(register_frame, text="Register", fg="#fc094c", bg="#171a30", font=("Roboto", 23, "bold")).pack(pady=10)
 
     # Input nama lengkap
     nama = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Roboto", 11))
@@ -215,6 +225,7 @@ def RegisterFrame():
     email.bind("<FocusOut>", lambda event: onleave_entry(event, "Email"))
     frame2 = tk.Frame(register_frame, width=295, height=2, bg="#eaebf1").pack(pady=(5, 20))
 
+    # Input Password
     pasw = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Roboto", 11))
     pasw.pack()
     pasw.insert(0, "Password")
@@ -222,6 +233,7 @@ def RegisterFrame():
     pasw.bind("<FocusOut>", lambda event: onleave_entry(event, "Password"))
     frame3 = tk.Frame(register_frame, width=295, height=2, bg="#eaebf1").pack(pady=(5, 20))
 
+    # Konfirmasi Password
     conf_pasw = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Roboto", 11))
     conf_pasw.pack()
     conf_pasw.insert(0, "Konfirmasi Password")
@@ -229,10 +241,16 @@ def RegisterFrame():
     conf_pasw.bind("<FocusOut>", lambda event: onleave_entry(event, "Konfirmasi Password"))
     frame3 = tk.Frame(register_frame, width=295, height=2, bg="#eaebf1").pack(pady=(5, 20))
 
-    tombol_register = tk.Button(register_frame, width=32, pady=7, text="Register", activebackground="#fc094c", activeforeground="#eaebf1", bg="#fc094c", fg="#eaebf1", cursor="hand2", command=klik_register, font=("Roboto", 12)).pack(pady=(0, 5))
+    # Tombol Register
+    tombol_register = tk.Button(register_frame, text="Register", command=klik_register, image=button_logreg_off, font=("Roboto", 13, "bold"), activebackground="#171a30", activeforeground="#eaebf1", fg="#eaebf1", bg="#171a30", cursor="hand2", borderwidth=0, compound="center")
+    tombol_register.pack(pady=(0, 5))
+    tombol_register.bind('<Enter>', lambda event, imgs=button_logreg_on: onHoverImage(event, imgs))
+    tombol_register.bind('<Leave>', lambda event, imgs=button_logreg_off: onLeaveImage(event, imgs))
+
+    # Sudah punya akun
     sudah_akun = tk.Frame(register_frame, bg="#171a30")
-    ada_akun = tk.Label(sudah_akun, text="Saya sudah punya akun?", fg="#eaebf1", bg="#171a30", font=("Roboto", 9)).pack(side="left")
-    tombol_login = tk.Button(sudah_akun, width=6, text="Login", border=0, bg="#171a30", cursor="hand2", fg="#fc094c", activebackground="#171a30", activeforeground="#fc094c", font=("Roboto", 9), command=RegisterToLogin).pack()
+    ada_akun = tk.Label(sudah_akun, text="Saya sudah punya akun?", fg="#eaebf1", bg="#171a30", font=("Roboto", 11, "bold")).pack(side="left")
+    tombol_login = tk.Button(sudah_akun, width=6, text="Login", border=0, bg="#171a30", cursor="hand2", fg="#fc094c", activebackground="#171a30", activeforeground="#fc094c", font=("Roboto", 11, "bold"), command=RegisterToLogin).pack()
     sudah_akun.pack()
 
 
