@@ -44,14 +44,6 @@ img_xx5_heading = tk.PhotoImage(file="images/xx5heading.png")
 img = [tk.PhotoImage(file=list_movie[i]["img"]) for i in range(4)]
 upcoming_img = [tk.PhotoImage(file=upcoming_movie[i]["img"]) for i in range(4)]
 
-# Image Beberapa Pembayaran
-logo_gopay = tk.PhotoImage(file="images/gopay.png")
-logo_ovo = tk.PhotoImage(file="images/ovo.png")
-logo_bca = tk.PhotoImage(file="images/bca.png")
-logo_mandiri = tk.PhotoImage(file="images/mandiri.png")
-logo_bni = tk.PhotoImage(file="images/bni.png")
-logo_bri = tk.PhotoImage(file="images/bri.png")
-
 # Image Kursi
 seat_free = tk.PhotoImage(file="images/seat_free.png")
 seat_own = tk.PhotoImage(file="images/seat_own.png")
@@ -254,7 +246,7 @@ def HeaderFrame(frame):
     topup.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
     topup.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
     # Riwayat
-    riwayat = tk.Button(right_frame, text="Riwayat", command=lambda frame=frame: ToRiwayat(frame), image=button_heading_off, font=("arial", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
+    riwayat = tk.Button(right_frame, text="History", command=lambda frame=frame: ToRiwayat(frame), image=button_heading_off, font=("arial", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
     riwayat.pack(side="left", padx=10)
     riwayat.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
     riwayat.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
@@ -391,7 +383,7 @@ def FrameRiwayat():
     HeaderFrame(riwayat_frame)
 
     tabel_frame = tk.Frame(riwayat_frame, bg="#171a30")
-    tabel_frame.pack()
+    tabel_frame.pack(pady=20)
 
     row_riwayat = len(list_user[user_ke]['riwayat'])
     tabel_frame.columnconfigure(6)
@@ -401,10 +393,10 @@ def FrameRiwayat():
     for i in range(row_riwayat+1):
         if i == 0:
             for j in range(6):
-                label = tk.Label(tabel_frame, text=header[j]).grid(row=i, column=j)
+                label = tk.Label(tabel_frame, text=header[j], font=("Roboto", 14, "bold"), bg="#fc094c", fg="#eaebf1").grid(row=i, column=j, sticky="we", ipadx=25, ipady=5, padx=3)
         else:
             for j in range(6):
-                label = tk.Label(tabel_frame, text=list_user[user_ke]['riwayat'][i-1][header[j]]).grid(row=i, column=j) 
+                label = tk.Label(tabel_frame, text=list_user[user_ke]['riwayat'][i-1][header[j]], font=("Roboto", 14, "bold"), bg="#252c54", fg="#eaebf1").grid(row=i, column=j, sticky="we", ipadx=25, ipady=8, padx=3) 
 
 
 # FRAME LIST MOVIE
