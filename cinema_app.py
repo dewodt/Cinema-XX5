@@ -5,6 +5,7 @@
 # 4. Berto Togatorop/ 19622192
 
 # Algoritma:
+# Import library
 import tkinter as tk
 from tkinter import ttk
 from tkinter.messagebox import showinfo, showerror, askyesno
@@ -33,8 +34,9 @@ root.state('zoomed')
 root.configure(background="#171a30")
 
 # Mencari Posisi Center sb x
-center_x = (screen_width - 980) * 0.5
-
+center_x_info = (screen_width - 980) * 0.5
+center_x_seat = (screen_width - 450) * 0.5
+center_x_history = (screen_width - 1150) * 0.5
 
 # Image logo XX5
 xx5_img = tk.PhotoImage(file="images/xx5.png")
@@ -42,7 +44,7 @@ img_xx5_heading = tk.PhotoImage(file="images/xx5heading.png")
 # Imagemovie now
 now_img_on = [tk.PhotoImage(file=list_movie[i]["img_on"]) for i in range(4)]
 now_img_off = [tk.PhotoImage(file=list_movie[i]['img_off']) for i in range(4)]
-# Image movie upcoming
+# Image movie upcoming 
 upcoming_img_on = [tk.PhotoImage(file=upcoming_movie[i]['img_on']) for i in range(4)]
 upcoming_img_off = [tk.PhotoImage(file=upcoming_movie[i]['img_off']) for i in range(4)]
 # Image button login/register
@@ -443,17 +445,31 @@ def SaldoFrame():
 # FRAME RIWAYAT
 def FrameRiwayat():
     # Main Frame
+    global riwayat_frame
     riwayat_frame = tk.Frame(root, bg="#171a30")
-    riwayat_frame.pack()
+    riwayat_frame.pack(fill="both", expand=1)
 
     # Header
     HeaderFrame(riwayat_frame)
 
+    # Membuat Scrollbar
+    my_canvas = tk.Canvas(riwayat_frame, background="#171a30", bd=0, highlightthickness=0)
+    my_canvas.pack(side="left", fill="both", expand=1)
+
+    scroll_bar = ttk.Scrollbar(riwayat_frame, orient="vertical", command=my_canvas.yview)
+    scroll_bar.pack(side="right", fill="y")
+
+    my_canvas.configure(yscrollcommand=scroll_bar.set)
+    my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all")))
+
+    scrollable_riwayat_frame = tk.Frame(my_canvas, background="#171a30")
+    my_canvas.create_window((center_x_history, 0), window=scrollable_riwayat_frame, anchor="nw")
+
     # Judul
-    riwayat_title = tk.Label(riwayat_frame, text="Riwayat Pembelian", font=("Roboto", "30", "bold"), background="#171a30", fg="#fc094c").pack(pady=20)
+    riwayat_title = tk.Label(scrollable_riwayat_frame, text="Riwayat Pembelian", font=("Roboto", "30", "bold"), background="#171a30", fg="#fc094c").pack(pady=20)
 
     # Frame Tabel
-    tabel_frame = tk.Frame(riwayat_frame, bg="#171a30")
+    tabel_frame = tk.Frame(scrollable_riwayat_frame, bg="#171a30")
     tabel_frame.pack()
 
     # Konfigurasi
@@ -559,7 +575,7 @@ def NowMovieInfoFrame(k):
     # Header
     HeaderFrame(movieinfo_frame)
 
-    my_canvas = tk.Canvas(movieinfo_frame, background="#171a30")
+    my_canvas = tk.Canvas(movieinfo_frame, background="#171a30", bd=0, highlightthickness=0)
     my_canvas.pack(side="left", fill="both", expand=1)
 
     scroll_bar = ttk.Scrollbar(movieinfo_frame, orient="vertical", command=my_canvas.yview)
@@ -571,7 +587,7 @@ def NowMovieInfoFrame(k):
     # Membuat Frame
     moviedesc_frame = tk.Frame(my_canvas, background="#171a30")
 
-    my_canvas.create_window((center_x, 0), window=moviedesc_frame, anchor="nw")
+    my_canvas.create_window((center_x_info, 0), window=moviedesc_frame, anchor="nw")
 
     # Title, Genre, Duration
     titlegenre_frame = tk.Frame(moviedesc_frame, background="#171a30")
@@ -648,7 +664,7 @@ def UpcomingMovieInfoFrame(k):
     # Header
     HeaderFrame(upcoming_movie_frame)
 
-    my_canvas = tk.Canvas(upcoming_movie_frame, background="#171a30")
+    my_canvas = tk.Canvas(upcoming_movie_frame, background="#171a30", bd=0, highlightthickness=0)
     my_canvas.pack(side="left", fill="both", expand=1)
 
     scroll_bar = ttk.Scrollbar(upcoming_movie_frame, orient="vertical", command=my_canvas.yview)
@@ -660,7 +676,7 @@ def UpcomingMovieInfoFrame(k):
     # Membuat Frame
     moviedesc_frame = tk.Frame(my_canvas, background="#171a30")
 
-    my_canvas.create_window((center_x, 0), window=moviedesc_frame, anchor="nw")
+    my_canvas.create_window((center_x_info, 0), window=moviedesc_frame, anchor="nw")
 
     # Title, Genre, Duration
     titlegenre_frame = tk.Frame(moviedesc_frame, background="#171a30")
@@ -801,16 +817,30 @@ def SeatBookingFrame(k, place, day, time):
             str_seat = "Seats: -"
             text_var_seat.set(str_seat)
     
+
     # Main Frame
+    # Membuat Scrollbar
     global booking_frame
     booking_frame = tk.Frame(root, background="#171a30")
-    booking_frame.pack()
+    booking_frame.pack(fill="both", expand=1)
 
     # Header
-    HeaderFrame(booking_frame)    
+    HeaderFrame(booking_frame)  
+
+    my_canvas = tk.Canvas(booking_frame, background="#171a30", bd=0, highlightthickness=0)
+    my_canvas.pack(side="left", fill="both", expand=1)
+
+    scroll_bar = ttk.Scrollbar(booking_frame, orient="vertical", command=my_canvas.yview)
+    scroll_bar.pack(side="right", fill="y")
+
+    my_canvas.configure(yscrollcommand=scroll_bar.set)
+    my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all")))
+
+    scrollable_frame = tk.Frame(my_canvas, background="#171a30")
+    my_canvas.create_window((center_x_seat, 0), window=scrollable_frame, anchor="nw")
 
     # Information Frame
-    information_frame = tk.Frame(booking_frame, background="#171a30")
+    information_frame = tk.Frame(scrollable_frame, background="#171a30")
     information_frame.pack(anchor="w", fill="x")
 
     # Seat Icons
@@ -841,10 +871,10 @@ def SeatBookingFrame(k, place, day, time):
     total = tk.Label(data_frame, textvariable=str_total, background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
 
     # Seperator
-    separator = ttk.Separator(booking_frame, orient='horizontal').pack(fill='x', pady=10)
+    separator = ttk.Separator(scrollable_frame, orient='horizontal').pack(fill='x', pady=10)
 
     # Seats Frame
-    seat_frame = tk.Frame(booking_frame, background="#171a30")
+    seat_frame = tk.Frame(scrollable_frame, background="#171a30")
     seat_frame.pack()
     seat_frame.rowconfigure((9), weight=1)
     seat_frame.columnconfigure(15, weight=1)
@@ -884,18 +914,17 @@ def SeatBookingFrame(k, place, day, time):
     screen = tk.Label(seat_frame, image=screen_img, background="#171a30").grid(row=11, column=0, columnspan=15)
 
     # Separator
-    separator = ttk.Separator(booking_frame, orient='horizontal').pack(fill='x', pady=10)
+    separator = ttk.Separator(scrollable_frame, orient='horizontal').pack(fill='x', pady=10)
 
     # Confirm and Cancel Button Frame
-    button_frame = tk.Frame(booking_frame, background="#171a30")
-    button_frame.pack()
-    button_frame.rowconfigure(1)
-    button_frame.columnconfigure(2)
+    button_frame = tk.Frame(scrollable_frame, background="#171a30")
+    button_frame.pack(pady=(10, 25))
     confirm_button = tk.Button(button_frame, text="Confirm Order", command=click_confirm, font=("Helvetica", "13", "bold"), bg="green", fg="#eaebf1", state="disabled")
-    confirm_button.grid(row=0, column=0, padx=5, ipadx=28, ipady=8)
-    cancel_button = tk.Button(button_frame, text="Cancel", command= click_cancel, font=("Helvetica", "13", "bold"), bg="red", fg="#eaebf1", cursor="hand2").grid(row=0, column=1, padx=5, ipadx=55, ipady=8)
+    confirm_button.pack(side="left",padx=5, ipadx=28, ipady=8)
+    cancel_button = tk.Button(button_frame, text="Cancel", command= click_cancel, font=("Helvetica", "13", "bold"), bg="red", fg="#eaebf1", cursor="hand2").pack(side="right", padx=5, ipadx=55, ipady=8)
 
 
+# Frame pertama
 LoginFrame()
 
 root.mainloop()
