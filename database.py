@@ -284,7 +284,7 @@ list_movie = [
     {
         'img_on': 'images/onepiece_on.png',
         'img_off': 'images/onepiece_off.png',
-        'title': 'ONE PIECE: RED',
+        'title': 'ONE PIECE FILM: RED',
         'age': 'R13',
         'genre': 'Animation, Adventure, Fantasy',
         'duration': '115 Minutes',

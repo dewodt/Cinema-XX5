@@ -496,13 +496,20 @@ def MovieListFrame(show_type):
             else:
                 return upcoming_img_off[i]
 
-    # Fungsi Memilih Title
+    # Fungsi Memilih Title Frame
     def pilih_title():
         if show_type == "nowshowing":
             return str("Film Sedang Tayang Di XX5")
         else:
             return str("Film Akan Tayang Di XX5")
 
+    # Fungsi Memilih Title Movie
+    def pilih_movie(i):
+        if show_type == "nowshowing":
+            return f"\n{list_movie[i]['title']}\n{list_movie[i]['age']}"
+        else:
+            return f"\n{upcoming_movie[i]['title']}\n{upcoming_movie[i]['age']}"
+    
     # Frame Utama
     global movielist_frame
     movielist_frame = tk.Frame(root, background="#171a30")
@@ -523,7 +530,7 @@ def MovieListFrame(show_type):
         movie_frame.pack(padx=20, pady=10, side="left", anchor="n")
 
         # Image, Title, and Genre
-        movie_img = tk.Button(movie_frame, text=f"\n{list_movie[i]['title']}\n{list_movie[i]['age']}", command=lambda i=i: klik_img(i), image=pilih_image(i, "off"), font=("Helvetica", 14, "bold"), cursor="hand2", bg="#171a30", fg="#eaebf1", activebackground="#171a30", activeforeground="#eaebf1", wraplength=220, bd=0, compound="top")  # type: ignore
+        movie_img = tk.Button(movie_frame, text=pilih_movie(i), command=lambda i=i: klik_img(i), image=pilih_image(i, "off"), font=("Helvetica", 14, "bold"), cursor="hand2", bg="#171a30", fg="#eaebf1", activebackground="#171a30", activeforeground="#eaebf1", wraplength=220, bd=0, compound="top")  # type: ignore
         movie_img.pack(ipadx=5, ipady=5, anchor="n")
         movie_img.bind('<Enter>', lambda event, imgs=pilih_image(i, "on"): onHoverImage(event, imgs))
         movie_img.bind('<Leave>', lambda event, imgs=pilih_image(i, "off"): onLeaveImage(event, imgs))
