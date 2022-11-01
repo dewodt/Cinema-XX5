@@ -358,9 +358,12 @@ def SaldoFrame():
     sisa_saldo = tk.StringVar()
     sisa_saldo.set(locale.currency(list_user[user_ke]['saldo'], grouping=True))
 
+    # Title
+    saldo_title = tk.Label(saldo_frame, text="Top Up Saldo", font=("Roboto", "30", "bold"), background="#171a30", fg="#fc094c").pack(pady=15)
+
     # Saldo dan Nominal User
     frame_nomimal = tk.Frame(saldo_frame, bg="#171a30", width=1000, height=600)
-    frame_nomimal.pack()
+    frame_nomimal.pack(pady=5)
     label_saldo = tk.Label(frame_nomimal, text="Saldo Anda: ", font=("Roboto", 20, "bold"), fg="white", bg="#171a30").pack(side="left")
     label_sisa_saldo = tk.Label(frame_nomimal, textvariable=sisa_saldo, font=("Roboto", 20, "bold"), fg="#50c143", bg="#171a30").pack()
 
@@ -368,7 +371,7 @@ def SaldoFrame():
     frame_pilih_nominal = tk.Frame(saldo_frame, background="#171a30")
     frame_pilih_nominal.pack(pady=15)
     selected_price = tk.IntVar(value=0)
-    label_nominal_topup = tk.Label(frame_pilih_nominal, text="Pilih Nominal Top Up", font=("Roboto", 16, "bold"), fg="#fc094c", bg="#171a30").pack(pady=5)
+    label_nominal_topup = tk.Label(frame_pilih_nominal, text="Pilih Nominal", font=("Roboto", 16, "bold"), fg="#fc094c", bg="#171a30").pack(pady=5)
     # 50 ribu
     tombol_50ribu = tk.Radiobutton(frame_pilih_nominal, text="Rp50.000,00", value=50000, variable=selected_price, font=("Roboto", 14, "bold"), image=button_price_off, selectimage=button_price_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
     tombol_50ribu.pack(side="left", padx=20)
@@ -446,9 +449,12 @@ def FrameRiwayat():
     # Header
     HeaderFrame(riwayat_frame)
 
+    # Judul
+    riwayat_title = tk.Label(riwayat_frame, text="Riwayat Pembelian", font=("Roboto", "30", "bold"), background="#171a30", fg="#fc094c").pack(pady=20)
+
     # Frame Tabel
     tabel_frame = tk.Frame(riwayat_frame, bg="#171a30")
-    tabel_frame.pack(pady=20)
+    tabel_frame.pack()
 
     # Konfigurasi
     row_riwayat = len(list_user[user_ke]['riwayat'])
@@ -506,7 +512,7 @@ def MovieListFrame(show_type):
     HeaderFrame(movielist_frame)
 
     # Title Movie List
-    movielist_title = tk.Label(movielist_frame, text=pilih_title(), background="#171a30", font=("Roboto", "30", "bold"), fg="#eaebf1").pack(ipadx=10, ipady=10, pady=10)
+    movielist_title = tk.Label(movielist_frame, text=pilih_title(), font=("Roboto", "30", "bold"), background="#171a30", fg="#fc094c").pack(ipadx=10, ipady=10, pady=10)
 
     # Mencetak 4 Movie
     fourmovie_frame = tk.Frame(movielist_frame, bg="#171a30")
