@@ -1,5 +1,5 @@
 # Data User
-list_user = [{'nama': 'moi735', 'email': 'moi735@gmail.coom', 'password': '735', 'saldo': 500000, 'riwayat': []}, {'nama': 's', 'email': 's', 'password': 's', 'saldo': 635000, 'riwayat': [{'Tanggal Beli': '13:45 31-10-2022', 'Lokasi': 'XX5 Aeon Mall BSD', 'Judul': 'Black Adam', 'Jadwal': '16:00 today', 'Ticket': 'A1', 'Total': 'Rp45.000,00'}]}]
+list_user = [{'nama': 'moi735', 'email': 'moi735@gmail.coom', 'password': '735', 'saldo': 500000, 'riwayat': []}, {'nama': 's', 'email': 's', 'password': 's', 'saldo': 550000, 'riwayat': [{'Tanggal Beli': '13:45 31-10-2022', 'Lokasi': 'XX5 Aeon Mall BSD', 'Judul': 'Black Adam', 'Jadwal': '16:00 today', 'Ticket': 'A1', 'Total': 'Rp45.000,00'}, {'Tanggal Beli': '22:51 31-10-2022', 'Lokasi': 'XX5 Aeon Mall BSD', 'Judul': 'Black Adam', 'Jadwal': '13:30 tomorrow', 'Ticket': 'A1', 'Total': 'Rp45.000,00'}, {'Tanggal Beli': '22:51 31-10-2022', 'Lokasi': 'XX5 Aeon Mall BSD', 'Judul': 'AMSTERDAM', 'Jadwal': '13:30 tomorrow', 'Ticket': 'A1', 'Total': 'Rp40.000,00'}]}]
 
 # Data Lokasi
 location =  ['XX5 Aeon Mall BSD', 'XX5 Ciwalk Bandung', 'XX5 Plaza Indonesia']
@@ -52,7 +52,8 @@ list_validasi = {
 # Data Upcoming Movie
 upcoming_movie = [
     {
-        'img': 'images/blackpanther.png',
+        'img_on': 'images/blackpanther_on.png',
+        'img_off': 'images/blackpanther_off.png',
         'title': 'Black Panther: Wakanda Forever',
         'age': '-',
         'genre': 'Action, Adventure, Drama',
@@ -64,7 +65,8 @@ upcoming_movie = [
         'cast': 'Letitia Wright, Lupita Nyong\'o, Tenoch Huerta, Angela Bassett, Martin Freeman, Danai Gurira, Michaela Coel, Dominique Thorne, Winston Duke, Richard Schiff, Mabel Cadena',
     },
     {
-        'img': 'images/bosslevel.png',
+        'img_on': 'images/bosslevel_on.png',
+        'img_off': 'images/bosslevel_off.png',
         'title': 'BOSS LEVEL',
         'age': '17+',
         'genre': 'Action, Adventure, Comedy',
@@ -76,7 +78,8 @@ upcoming_movie = [
         'cast': 'Frank Grillo, Mel Gibson, Naomi Watts, Will Sasso, Annabelle Walls, Sheaun Mckinney, Selina Lo, Michelle Yeoh, Ken Jeong, Meadow Williams, Mathilde Ollivier, Armida Lopez',
     },
     {
-        'img': 'images/sriasih.png',
+        'img_on': 'images/sriasih_on.png',
+        'img_off': 'images/sriasih_off.png',
         'title': 'SRI ASIH',
         'age': '-',
         'genre': 'Action, Sci-fi',
@@ -88,7 +91,8 @@ upcoming_movie = [
         'cast': 'Pevita Pearce, Reza Rahadian, Christine Hakim, Jefri Nichol, Dimas Anggara, Surya Saputra, Jenny Zhang, Randy Pangalila',
     },
     {
-        'img': 'images/tegar.png',
+        'img_on': 'images/tegar_on.png',
+        'img_off': 'images/tegar_off.png',
         'title': 'TEGAR',
         'age': 'SU',
         'genre': 'Drama',
@@ -104,7 +108,8 @@ upcoming_movie = [
 # Data Daftar Film
 list_movie = [
     {
-        'img': 'images/blackadam.png',
+        'img_on': 'images/blackadam_on.png',
+        'img_off': 'images/blackadam_off.png',
         'title': 'Black Adam',
         'age': 'R13',
         'genre': 'Action, Fantasy, Sci-Fi',
@@ -161,7 +166,8 @@ list_movie = [
         },
     },
     {
-        'img': 'images/amsterdam.png',
+        'img_on': 'images/amsterdam_on.png',
+        'img_off': 'images/amsterdam_off.png',
         'title': 'AMSTERDAM',
         'age': 'R13',
         'genre': 'Drama, History',
@@ -218,7 +224,8 @@ list_movie = [
         },
     },
     {
-        'img': 'images/doctorg.png',
+        'img_on': 'images/doctorg_on.png',
+        'img_off': 'images/doctorg_off.png',
         'title': 'DOCTOR G',
         'age': 'R17+',
         'genre': 'Comedy',
@@ -275,7 +282,8 @@ list_movie = [
         }, 
     },
     {
-        'img': 'images/onepiece.png',
+        'img_on': 'images/onepiece_on.png',
+        'img_off': 'images/onepiece_off.png',
         'title': 'ONE PIECE: RED',
         'age': 'R13',
         'genre': 'Animation, Adventure, Fantasy',
@@ -336,3 +344,5 @@ list_movie = [
 # Daftar Sold Movie
 
 list_movie[0]['sold_seat']['XX5 Aeon Mall BSD']['today']['16:00'][1][0] = True
+list_movie[0]['sold_seat']['XX5 Aeon Mall BSD']['tomorrow']['13:30'][1][0] = True
+list_movie[1]['sold_seat']['XX5 Aeon Mall BSD']['tomorrow']['13:30'][1][0] = True

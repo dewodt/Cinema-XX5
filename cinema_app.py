@@ -5,7 +5,6 @@
 # 4. Berto Togatorop/ 19622192
 
 # Algoritma:
-from itertools import count
 import tkinter as tk
 from tkinter import ttk
 from tkinter.messagebox import showinfo, showerror, askyesno
@@ -36,37 +35,40 @@ root.configure(background="#171a30")
 # Mencari Posisi Center sb x
 center_x = (screen_width - 980) * 0.5
 
-# IMAGES
-# Logo XX5
+
+# Image logo XX5
 xx5_img = tk.PhotoImage(file="images/xx5.png")
 img_xx5_heading = tk.PhotoImage(file="images/xx5heading.png")
-
-# Array Image Movie
-img = [tk.PhotoImage(file=list_movie[i]["img"]) for i in range(4)]
-upcoming_img = [tk.PhotoImage(file=upcoming_movie[i]["img"]) for i in range(4)]
-
+# Imagemovie now
+now_img_on = [tk.PhotoImage(file=list_movie[i]["img_on"]) for i in range(4)]
+now_img_off = [tk.PhotoImage(file=list_movie[i]['img_off']) for i in range(4)]
+# Image movie upcoming
+upcoming_img_on = [tk.PhotoImage(file=upcoming_movie[i]['img_on']) for i in range(4)]
+upcoming_img_off = [tk.PhotoImage(file=upcoming_movie[i]['img_off']) for i in range(4)]
+# Image button login/register
+button_logreg_on = tk.PhotoImage(file="images/logreg_on.png")
+button_logreg_off = tk.PhotoImage(file="images/logreg_off.png")
+# Image button di heading
+button_heading_on = tk.PhotoImage(file="images/heading_on.png")
+button_heading_off = tk.PhotoImage(file="images/heading_off.png")
+# Image button pemilihan waktu
+button_time_on = tk.PhotoImage(file="images/time_on.png")
+button_time_off = tk.PhotoImage(file="images/time_off.png")
+# Image button memilih nominal
+button_price_on = tk.PhotoImage(file="images/price_on.png")
+button_price_off = tk.PhotoImage(file="images/price_off.png")
+# Image button memilih metode pembayaran
+button_method_on = tk.PhotoImage(file="images/method_on.png")
+button_method_off = tk.PhotoImage(file="images/method_off.png")
 # Image Kursi
 seat_free = tk.PhotoImage(file="images/seat_free.png")
 seat_own = tk.PhotoImage(file="images/seat_own.png")
 seat_sold = tk.PhotoImage(file="images/seat_sold.png")
-
 # Image Screen
 screen_img = tk.PhotoImage(file="images/screen.png")
 
-# Buttons On Hover
-button_logreg_on = tk.PhotoImage(file="images/logreg_on.png")
-button_logreg_off = tk.PhotoImage(file="images/logreg_off.png")
-button_heading_on = tk.PhotoImage(file="images/heading_on.png")
-button_heading_off = tk.PhotoImage(file="images/heading_off.png")
-button_time_on = tk.PhotoImage(file="images/time_on.png")
-button_time_off = tk.PhotoImage(file="images/time_off.png")
-button_price_on = tk.PhotoImage(file="images/price_on.png")
-button_price_off = tk.PhotoImage(file="images/price_off.png")
-button_method_on = tk.PhotoImage(file="images/method_on.png")
-button_method_off = tk.PhotoImage(file="images/method_off.png")
 
-
-# Callback function bila box kosong
+# Callback function bila Entry/input box kosong
 def onclick_entry(event, word):
     if event.widget.get() == f"{word}" and (event.widget.get() == "Password" or event.widget.get() == "Konfirmasi Password"):
         event.widget.delete(0, "end")
@@ -85,14 +87,7 @@ def onHoverImage(event, img):
 
 def onLeaveImage(event, img):
     event.widget.config(image=img)
-
-# Fungsi Mengganti Warna Border Saat Ditunjuk Mouse
-def onHoverBorder(event):
-    event.widget.config(background="#fc094c")
-
-def onLeaveBorder(event):
-    event.widget.config(background="#171a30")
-
+    
 
 # FRAME LOGIN
 def LoginFrame():
@@ -121,7 +116,7 @@ def LoginFrame():
     # TRANSISI LOGIN KE LIST MOVIE
     def LoginToList():
         login_frame.forget()
-        MovieListFrame(list_movie, img, "nowshowing", "Film Yang Sedang Tayang Di XX5")
+        MovieListFrame("nowshowing")
     
     # Main Frame
     global login_frame
@@ -256,6 +251,33 @@ def RegisterFrame():
 
 # FRAME HEADER
 def HeaderFrame(frame):
+    # HEADING NOW PLAYING
+    def ToNowPlaying(frame):
+        frame.forget()
+        MovieListFrame("nowshowing")
+
+    # HEADING UPCOMING
+    def ToUpcoming(frame):
+        frame.forget()
+        MovieListFrame("upcoming")
+
+    # HEADING SALDO
+    def ToSaldo(frame):
+        frame.forget()
+        SaldoFrame()
+
+    # HEADING RIWAYAT
+    def ToRiwayat(frame):
+        frame.forget()
+        FrameRiwayat()
+
+    # HEADING LOGOUT
+    def ClickLogOut(frame):
+        confirmation = askyesno(title='Confirmation', message='Are you sure that you want to logout?')
+        if confirmation:
+            frame.forget()
+            LoginFrame()
+    
     # Main Frame
     header_frame = tk.Frame(frame, bg="#171a30")
     header_frame.pack()
@@ -293,33 +315,6 @@ def HeaderFrame(frame):
     logout.pack(side="left", padx=10)
     logout.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
     logout.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
-
-    # HEADING NOW PLAYING
-    def ToNowPlaying(frame):
-        frame.forget()
-        MovieListFrame(list_movie, img, "nowshowing", "Film Yang Sedang Tayang Di XX5")
-
-    # HEADING UPCOMING
-    def ToUpcoming(frame):
-        frame.forget()
-        MovieListFrame(upcoming_movie, upcoming_img, "upcoming", "Film Akan Tayang Di XX5")
-
-    # HEADING SALDO
-    def ToSaldo(frame):
-        frame.forget()
-        SaldoFrame()
-
-    # HEADING RIWAYAT
-    def ToRiwayat(frame):
-        frame.forget()
-        FrameRiwayat()
-
-    # HEADING LOGOUT
-    def ClickLogOut(frame):
-        confirmation = askyesno(title='Confirmation', message='Are you sure that you want to logout?')
-        if confirmation:
-            frame.forget()
-            LoginFrame()
 
 
 # FRAME SALDO
@@ -472,42 +467,60 @@ def FrameRiwayat():
 
 
 # FRAME LIST MOVIE
-def MovieListFrame(list, image, show_type, title):
-    # Frame Utama
-    global movielist_frame
-    movielist_frame = tk.Frame(root, background="#171a30", highlightbackground="red", highlightthickness=2)
-    movielist_frame.pack()
-
-    # Header
-    HeaderFrame(movielist_frame)
-
-    # Title Movie List
-    movielist_title = tk.Label(movielist_frame, text=title, background="#171a30", font=("Roboto", "30", "bold"), fg="#eaebf1").pack(ipadx=10, ipady=10, pady=10)
-
-    # Mencetak 4 Movie
-    fourmovie_frame = tk.Frame(movielist_frame, bg="#171a30")
-    fourmovie_frame.pack()
-
-    # Jika Click Image
+def MovieListFrame(show_type):
+    # TRANSISI Jika Click Image
     def klik_img(k):
         if show_type == "nowshowing":
             movielist_frame.forget()
             NowMovieInfoFrame(k)
         elif show_type == "upcoming":
             movielist_frame.forget()
-            UpcomingMovieInfoFrame(k)                 
+            UpcomingMovieInfoFrame(k)
+    
+    # Fungsi Memilih Image
+    def pilih_image(i, state):
+        if state == "on":
+            if show_type == "nowshowing":
+                return now_img_on[i]
+            else:
+                return upcoming_img_on[i]
+        else:
+            if show_type == "nowshowing":
+                return now_img_off[i]
+            else:
+                return upcoming_img_off[i]
 
-    for i in range(len(list)):
+    # Fungsi Memilih Title
+    def pilih_title():
+        if show_type == "nowshowing":
+            return str("Film Sedang Tayang Di XX5")
+        else:
+            return str("Film Akan Tayang Di XX5")
+
+    # Frame Utama
+    global movielist_frame
+    movielist_frame = tk.Frame(root, background="#171a30")
+    movielist_frame.pack()
+
+    # Header
+    HeaderFrame(movielist_frame)
+
+    # Title Movie List
+    movielist_title = tk.Label(movielist_frame, text=pilih_title(), background="#171a30", font=("Roboto", "30", "bold"), fg="#eaebf1").pack(ipadx=10, ipady=10, pady=10)
+
+    # Mencetak 4 Movie
+    fourmovie_frame = tk.Frame(movielist_frame, bg="#171a30")
+    fourmovie_frame.pack()       
+
+    for i in range(4):
         movie_frame = tk.Frame(fourmovie_frame, background="#171a30")
-        movie_img = tk.Button(movie_frame, image=image[i], cursor="hand2", background="#171a30", bd=0, command=lambda i=i: klik_img(i), fg="#eaebf1")
-        movie_img.bind("<Enter>", onHoverBorder)
-        movie_img.bind("<Leave>", onLeaveBorder)
-        movie_img.pack(ipadx=5, ipady=5)
-        title_age_frame = tk.Frame(movie_frame, background="#fc094c")
-        movie_title = tk.Label(title_age_frame, text=list[i]["title"], background="#fc094c", wraplength=190, font=("Helvatica", "18", "bold"), fg="#eaebf1").pack(pady=(5, 0))
-        movie_age = tk.Label(title_age_frame, text=list[i]["age"], background="#fc094c", font=("Helvatica", "15"), fg="#eaebf1").pack(pady=(0, 5))
-        title_age_frame.pack(pady=15, fill="x", ipadx=10)
-        movie_frame.pack(padx=20, pady=10, side="left")
+        movie_frame.pack(padx=20, pady=10, side="left", anchor="n")
+
+        # Image, Title, and Genre
+        movie_img = tk.Button(movie_frame, text=f"\n{list_movie[i]['title']}\n{list_movie[i]['age']}", command=lambda i=i: klik_img(i), image=pilih_image(i, "off"), font=("Helvetica", 14, "bold"), cursor="hand2", bg="#171a30", fg="#eaebf1", activebackground="#171a30", activeforeground="#eaebf1", wraplength=220, bd=0, compound="top")  # type: ignore
+        movie_img.pack(ipadx=5, ipady=5, anchor="n")
+        movie_img.bind('<Enter>', lambda event, imgs=pilih_image(i, "on"): onHoverImage(event, imgs))
+        movie_img.bind('<Leave>', lambda event, imgs=pilih_image(i, "off"): onLeaveImage(event, imgs))
 
 
 # FRAME INFORMASI MOVIE
@@ -543,25 +556,25 @@ def NowMovieInfoFrame(k):
     my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all")))
 
     # Membuat Frame
-    moviedesc_frame = tk.Frame(my_canvas, background="#171a30", highlightbackground="red", highlightthickness=2)
+    moviedesc_frame = tk.Frame(my_canvas, background="#171a30")
 
     my_canvas.create_window((center_x, 0), window=moviedesc_frame, anchor="nw")
 
     # Title, Genre, Duration
     titlegenre_frame = tk.Frame(moviedesc_frame, background="#171a30")
     titlegenre_frame.pack()
-    moviedesc_title = tk.Label(titlegenre_frame, font=("Helvetica 18 bold"), text=list_movie[k]["title"], background="#171a30", fg="#eaebf1").pack()
-    moviedesc_genre = tk.Label(titlegenre_frame, font=("Helvetica 14 bold"), text=list_movie[k]["genre"], background="#171a30", fg="#fc094c").pack()
-    moviedesc_duration = tk.Label(titlegenre_frame, font=("Helvetica 14 bold"), text=list_movie[k]["duration"], background="#171a30", fg="#fc094c").pack()
+    moviedesc_title = tk.Label(titlegenre_frame, font=("Helvetica 18 bold"), text=list_movie[k]["title"], background="#171a30", fg="#fc094c").pack()
+    moviedesc_genre = tk.Label(titlegenre_frame, font=("Helvetica 14 bold"), text=list_movie[k]["genre"], background="#171a30", fg="#eaebf1").pack()
+    moviedesc_duration = tk.Label(titlegenre_frame, font=("Helvetica 14 bold"), text=list_movie[k]["duration"], background="#171a30", fg="#eaebf1").pack()
 
     # Image
     img_and_buy_frame = tk.Frame(moviedesc_frame, background="#171a30")
     img_and_buy_frame.pack(anchor="w", padx=10, pady=10)
-    movie_img = tk.Label(img_and_buy_frame, image=img[k], relief="flat", highlightthickness = 0, bd = 0).pack(side="left")
+    movie_img = tk.Label(img_and_buy_frame, image=now_img_on[k], relief="flat", bg="#171a30", bd=0).pack(side="left")
 
     # Buy Frame
     buy_frame = tk.Frame(img_and_buy_frame, background="#171a30")
-    buy_frame.pack(side="right", padx=15)
+    buy_frame.pack(side="right", padx=40)
     buy_frame.rowconfigure(9, weight=1)
     buy_frame.columnconfigure(5, weight=1)
 
@@ -632,21 +645,21 @@ def UpcomingMovieInfoFrame(k):
     my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all")))
 
     # Membuat Frame
-    moviedesc_frame = tk.Frame(my_canvas, background="#171a30", highlightbackground="red", highlightthickness=2)
+    moviedesc_frame = tk.Frame(my_canvas, background="#171a30")
 
     my_canvas.create_window((center_x, 0), window=moviedesc_frame, anchor="nw")
 
     # Title, Genre, Duration
     titlegenre_frame = tk.Frame(moviedesc_frame, background="#171a30")
     titlegenre_frame.pack()
-    moviedesc_title = tk.Label(titlegenre_frame, font=("Helvetica 18 bold"), text=upcoming_movie[k]["title"], background="#171a30", fg="#eaebf1").pack()
-    moviedesc_genre = tk.Label(titlegenre_frame, font=("Helvetica 14 bold"), text=upcoming_movie[k]["genre"], background="#171a30", fg="#fc094c").pack()
-    moviedesc_duration = tk.Label(titlegenre_frame, font=("Helvetica 14 bold"), text=upcoming_movie[k]["duration"], background="#171a30", fg="#fc094c").pack()
+    moviedesc_title = tk.Label(titlegenre_frame, font=("Helvetica 18 bold"), text=upcoming_movie[k]["title"], background="#171a30", fg="#fc094c").pack()
+    moviedesc_genre = tk.Label(titlegenre_frame, font=("Helvetica 14 bold"), text=upcoming_movie[k]["genre"], background="#171a30", fg="#eaebf1").pack()
+    moviedesc_duration = tk.Label(titlegenre_frame, font=("Helvetica 14 bold"), text=upcoming_movie[k]["duration"], background="#171a30", fg="#eaebf1").pack()
 
     # Image
     img_and_buy_frame = tk.Frame(moviedesc_frame, background="#171a30")
     img_and_buy_frame.pack(anchor="w", padx=10, pady=10)
-    movie_img = tk.Label(img_and_buy_frame, image=upcoming_img[k], relief="flat", highlightthickness = 0, bd = 0).pack(side="left")
+    movie_img = tk.Label(img_and_buy_frame, image=upcoming_img_on[k], relief="flat", bg="#171a30", bd = 0).pack(side="left")
 
     # Movie Plot
     movie_plot_frame = tk.Frame(moviedesc_frame, background="#171a30")
@@ -733,7 +746,7 @@ def SeatBookingFrame(k, place, day, time):
 
                 # TRANSISI DARI SEAT BOOKING KE NOW INFO MOVIE
                 booking_frame.forget()
-                MovieListFrame(list_movie, img, "nowshowing", "Film Yang Sedang Tayang Di XX5")
+                MovieListFrame("nowshowing")
             else:
                 showerror("Kurang Saldo", "Anda kekurangan saldo! Silahkan toup terlebih dahulu")
 
@@ -777,7 +790,7 @@ def SeatBookingFrame(k, place, day, time):
     
     # Main Frame
     global booking_frame
-    booking_frame = tk.Frame(root, background="#171a30",highlightbackground="red", highlightthickness=2)
+    booking_frame = tk.Frame(root, background="#171a30")
     booking_frame.pack()
 
     # Header
