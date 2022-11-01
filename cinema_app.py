@@ -586,7 +586,6 @@ def NowMovieInfoFrame(k):
 
     # Membuat Frame
     moviedesc_frame = tk.Frame(my_canvas, background="#171a30")
-
     my_canvas.create_window((center_x_info, 0), window=moviedesc_frame, anchor="nw")
 
     # Title, Genre, Duration
@@ -598,7 +597,7 @@ def NowMovieInfoFrame(k):
 
     # Image
     img_and_buy_frame = tk.Frame(moviedesc_frame, background="#171a30")
-    img_and_buy_frame.pack(anchor="w", padx=10, pady=10)
+    img_and_buy_frame.pack(anchor="w", padx=10, pady=20)
     movie_img = tk.Label(img_and_buy_frame, image=now_img_on[k], relief="flat", bg="#171a30", bd=0).pack(side="left")
 
     # Buy Frame
@@ -687,8 +686,8 @@ def UpcomingMovieInfoFrame(k):
 
     # Image
     img_and_buy_frame = tk.Frame(moviedesc_frame, background="#171a30")
-    img_and_buy_frame.pack(anchor="w", padx=10, pady=10)
-    movie_img = tk.Label(img_and_buy_frame, image=upcoming_img_on[k], relief="flat", bg="#171a30", bd = 0).pack(side="left")
+    img_and_buy_frame.pack(padx=10, pady=20)
+    movie_img = tk.Label(img_and_buy_frame, image=upcoming_img_on[k], relief="flat", bg="#171a30", bd = 0).pack()
 
     # Movie Plot
     movie_plot_frame = tk.Frame(moviedesc_frame, background="#171a30")
