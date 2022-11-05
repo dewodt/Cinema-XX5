@@ -764,13 +764,20 @@ def SeatBookingFrame(k, place, day, time):
                 write_file.close()
 
                 # Edit Database Seat
+                read_file = open('database.py', 'r')
+                content = read_file.read()
+                old_dict_seat = str(list_movie[k]["sold_seat"])
                 for i in range(9):
                     for j in range(15):
-                        append_file = open('database.py', 'a')
                         if picked_seat_ij[i][j] == True:
                             list_movie[k]['sold_seat'][f"{place}_{k}"][day][time][i][j] = True
-                            append_file.write(f"\nlist_movie[{k}]['sold_seat']['{place}_{k}']['{day}']['{time}'][{i}][{j}] = True")
-                        append_file.close()
+                new_dict_seat = str(list_movie[k]["sold_seat"])
+                content = content.replace(old_dict_seat, new_dict_seat)
+                read_file.close()
+
+                write_file = open('database.py', 'w')
+                write_file.write(content)
+                write_file.close()
 
                 # TRANSISI DARI SEAT BOOKING KE NOW INFO MOVIE
                 booking_frame.forget()

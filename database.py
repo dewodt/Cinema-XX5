@@ -1,5 +1,5 @@
 # Data User
-list_user = [{'nama': 'moi735', 'email': 'moi735@gmail.coom', 'password': '735', 'saldo': 500000, 'riwayat': []}, {'nama': 's', 'email': 's', 'password': 's', 'saldo': 190000, 'riwayat': [{'Tanggal Beli': '18:20 05-11-2022', 'Lokasi': 'XX5 Aeon Mall BSD', 'Judul': 'Black Adam', 'Jadwal': '18:30 05-11-2022', 'Ticket': 'A1', 'Total': 'Rp45.000,00'}, {'Tanggal Beli': '18:23 05-11-2022', 'Lokasi': 'XX5 Aeon Mall BSD', 'Judul': 'Black Adam', 'Jadwal': '13:30 06-11-2022', 'Ticket': 'A1', 'Total': 'Rp45.000,00'}]}]
+list_user = [{'nama': 'moi735', 'email': 'moi735@gmail.coom', 'password': '735', 'saldo': 500000, 'riwayat': []}, {'nama': 's', 'email': 's', 'password': 's', 'saldo': 190000, 'riwayat': []}]
 
 # Data Lokasi
 location =  ['XX5 Aeon Mall BSD', 'XX5 Ciwalk Bandung', 'XX5 Plaza Indonesia']
@@ -120,7 +120,7 @@ list_movie = [
         'writer': 'Adam Sztykiel, Rory Haines, Sohrab Noshirvani',
         'cast': 'Dwayne Johnson, Viola Davis, Sarah Shahi, Pierce Brosnan, Noah Centineo, Aldis Hodge, Angel Rosario Jr., Joseph Gatt, Mohammed Amer, Quintessa Swindell',
         'price': 45000,
-        'sold_seat': {'XX5 Aeon Mall BSD_0': {'05-11-2022': {'18:30': [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]}}, 'XX5 Ciwalk Bandung_0': {}, 'XX5 Plaza Indonesia_0': {}}
+        'sold_seat': {'XX5 Aeon Mall BSD_0': {}, 'XX5 Ciwalk Bandung_0': {}, 'XX5 Plaza Indonesia_0': {}}
     },
     {
         'img_on': 'images/amsterdam_on.png',
@@ -168,8 +168,3 @@ list_movie = [
         'sold_seat': {'XX5 Aeon Mall BSD_3': {}, 'XX5 Ciwalk Bandung_3': {}, 'XX5 Plaza Indonesia_3': {}},
     }
 ]
-
-# Daftar Sold Movie
-
-list_movie[0]['sold_seat']['XX5 Aeon Mall BSD_0']['05-11-2022']['18:30'][1][0] = True
-list_movie[0]['sold_seat']['XX5 Aeon Mall BSD_0']['06-11-2022']['13:30'][1][0] = True
