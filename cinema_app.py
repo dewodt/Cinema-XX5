@@ -36,7 +36,7 @@ root.configure(background="#171a30")
 # Mencari Posisi Center sb x
 center_x_info = (screen_width - 980) * 0.5
 center_x_seat = (screen_width - 450) * 0.5
-center_x_history = (screen_width - 1150) * 0.5
+center_x_history = (screen_width - 1085) * 0.5
 
 # Image logo XX5
 xx5_img = tk.PhotoImage(file="images/xx5.png")
@@ -466,7 +466,7 @@ def FrameRiwayat():
     my_canvas.create_window((center_x_history, 0), window=scrollable_riwayat_frame, anchor="nw")
 
     # Judul
-    riwayat_title = tk.Label(scrollable_riwayat_frame, text="Riwayat Pembelian", font=("Roboto", "30", "bold"), background="#171a30", fg="#fc094c").pack(pady=20)
+    riwayat_title = tk.Label(scrollable_riwayat_frame, text="Riwayat Pembelian", font=("Roboto", "26", "bold"), background="#171a30", fg="#fc094c").pack(pady=20)
 
     # Frame Tabel
     tabel_frame = tk.Frame(scrollable_riwayat_frame, bg="#171a30")
@@ -482,10 +482,10 @@ def FrameRiwayat():
     for i in range(row_riwayat+1):
         if i == 0:
             for j in range(6):
-                label = tk.Label(tabel_frame, text=header[j], font=("Roboto", 14, "bold"), bg="#fc094c", fg="#eaebf1").grid(row=i, column=j, sticky="we", ipadx=25, ipady=5, padx=3)
+                label = tk.Label(tabel_frame, text=header[j], font=("Roboto", 13, "bold"), bg="#fc094c", fg="#eaebf1", width=17).grid(row=i, column=j, sticky="we", ipady=5, padx=3)
         else:
             for j in range(6):
-                label = tk.Label(tabel_frame, text=list_user[user_ke]['riwayat'][i-1][header[j]], font=("Roboto", 14, "bold"), bg="#252c54", fg="#eaebf1").grid(row=i, column=j, sticky="we", ipadx=25, ipady=8, padx=3) 
+                label = tk.Label(tabel_frame, text=list_user[user_ke]['riwayat'][i-1][header[j]], font=("Roboto", 13, "bold"), bg="#252c54", fg="#eaebf1", width=17).grid(row=i, column=j, sticky="we", ipady=8, padx=3) 
 
 
 # FRAME LIST MOVIE
