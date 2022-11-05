@@ -127,10 +127,10 @@ def LoginFrame():
 
     # Logo & Title
     label_gambar = tk.Label(login_frame, image=xx5_img, border=0).pack()
-    heading = tk.Label(login_frame, text="Login", fg="#fc094c", bg="#171a30", font=("Roboto", 23, "bold")).pack(pady=10)
+    heading = tk.Label(login_frame, text="Login", fg="#fc094c", bg="#171a30", font=("Segoe UI", 23, "bold")).pack(pady=10)
 
     # Email
-    email = tk.Entry(login_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Roboto", 11))
+    email = tk.Entry(login_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11))
     email.pack()
     email_border = tk.Frame(login_frame,width=295,height=2,bg="#eaebf1").pack(pady=(5, 20))
     email.insert(0, "Email")
@@ -138,7 +138,7 @@ def LoginFrame():
     email.bind("<FocusOut>", lambda event: onleave_entry(event, "Email"))
 
     # Password
-    pasw = tk.Entry(login_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Roboto", 11))
+    pasw = tk.Entry(login_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11))
     pasw.pack()
     pasword_border = tk.Frame(login_frame, width=295, height=2, bg="#eaebf1").pack(pady=(5, 20))
     pasw.insert(0, "Password")
@@ -146,15 +146,15 @@ def LoginFrame():
     pasw.bind("<FocusOut>", lambda event: onleave_entry(event, "Password"))
     
     # Tombol Login
-    tombol_login = tk.Button(login_frame, text="Login", command=login, image=button_logreg_off, font=("Roboto", 13, "bold"), activebackground="#171a30", activeforeground="#eaebf1", fg="#eaebf1", bg="#171a30", cursor="hand2", borderwidth=0, compound="center")
+    tombol_login = tk.Button(login_frame, text="Login", command=login, image=button_logreg_off, font=("Segoe UI", 13, "bold"), activebackground="#171a30", activeforeground="#eaebf1", fg="#eaebf1", bg="#171a30", cursor="hand2", borderwidth=0, compound="center")
     tombol_login.pack(pady=(0, 5))
     tombol_login.bind('<Enter>', lambda event, imgs=button_logreg_on: onHoverImage(event, imgs))
     tombol_login.bind('<Leave>', lambda event, imgs=button_logreg_off: onLeaveImage(event, imgs))
 
     # Tidak punya akun
     noacc_frame = tk.Frame(login_frame, bg="#171a30")
-    label_register = tk.Label(noacc_frame, text="Belum punya akun?", fg="#eaebf1", bg="#171a30", font=("Roboto", 11, "bold")).pack(side="left")
-    tombol_register = tk.Button(noacc_frame, text="Register", command=LoginToRegister,  font=("Roboto", 11, "bold"), borderwidth=0, cursor="hand2", bg="#171a30", fg="#fc094c", activebackground="#171a30", activeforeground="#fc094c").pack()
+    label_register = tk.Label(noacc_frame, text="Belum punya akun?", fg="#eaebf1", bg="#171a30", font=("Segoe UI", 11, "bold")).pack(side="left")
+    tombol_register = tk.Button(noacc_frame, text="Register", command=LoginToRegister,  font=("Segoe UI", 11, "bold"), borderwidth=0, cursor="hand2", bg="#171a30", fg="#fc094c", activebackground="#171a30", activeforeground="#fc094c").pack()
     noacc_frame.pack()
 
 
@@ -204,10 +204,10 @@ def RegisterFrame():
 
     # Logo & Title
     label_gambar = tk.Label(register_frame, image=xx5_img, border=0).pack()
-    heading = tk.Label(register_frame, text="Register", fg="#fc094c", bg="#171a30", font=("Roboto", 23, "bold")).pack(pady=10)
+    heading = tk.Label(register_frame, text="Register", fg="#fc094c", bg="#171a30", font=("Segoe UI", 23, "bold")).pack(pady=10)
 
     # Input nama lengkap
-    nama = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Roboto", 11))
+    nama = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11))
     nama.pack()
     nama.insert(0, "Nama Lengkap")
     nama.bind("<FocusIn>", lambda event: onclick_entry(event, "Nama Lengkap"))
@@ -215,7 +215,7 @@ def RegisterFrame():
     frame2 = tk.Frame(register_frame, width=295, height=2, bg="#eaebf1").pack(pady=(5, 20))
 
     # Input email
-    email = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Roboto", 11))
+    email = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11))
     email.pack()
     email.insert(0, "Email")
     email.bind("<FocusIn>", lambda event: onclick_entry(event, "Email"))
@@ -223,7 +223,7 @@ def RegisterFrame():
     frame2 = tk.Frame(register_frame, width=295, height=2, bg="#eaebf1").pack(pady=(5, 20))
 
     # Input Password
-    pasw = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Roboto", 11))
+    pasw = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11))
     pasw.pack()
     pasw.insert(0, "Password")
     pasw.bind("<FocusIn>", lambda event: onclick_entry(event, "Password"))
@@ -231,7 +231,7 @@ def RegisterFrame():
     frame3 = tk.Frame(register_frame, width=295, height=2, bg="#eaebf1").pack(pady=(5, 20))
 
     # Konfirmasi Password
-    conf_pasw = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Roboto", 11))
+    conf_pasw = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11))
     conf_pasw.pack()
     conf_pasw.insert(0, "Konfirmasi Password")
     conf_pasw.bind("<FocusIn>", lambda event: onclick_entry(event, "Konfirmasi Password"))
@@ -239,15 +239,15 @@ def RegisterFrame():
     frame3 = tk.Frame(register_frame, width=295, height=2, bg="#eaebf1").pack(pady=(5, 20))
 
     # Tombol Register
-    tombol_register = tk.Button(register_frame, text="Register", command=klik_register, image=button_logreg_off, font=("Roboto", 13, "bold"), activebackground="#171a30", activeforeground="#eaebf1", fg="#eaebf1", bg="#171a30", cursor="hand2", borderwidth=0, compound="center")
+    tombol_register = tk.Button(register_frame, text="Register", command=klik_register, image=button_logreg_off, font=("Segoe UI", 13, "bold"), activebackground="#171a30", activeforeground="#eaebf1", fg="#eaebf1", bg="#171a30", cursor="hand2", borderwidth=0, compound="center")
     tombol_register.pack(pady=(0, 5))
     tombol_register.bind('<Enter>', lambda event, imgs=button_logreg_on: onHoverImage(event, imgs))
     tombol_register.bind('<Leave>', lambda event, imgs=button_logreg_off: onLeaveImage(event, imgs))
 
     # Sudah punya akun
     sudah_akun = tk.Frame(register_frame, bg="#171a30")
-    ada_akun = tk.Label(sudah_akun, text="Saya sudah punya akun?", fg="#eaebf1", bg="#171a30", font=("Roboto", 11, "bold")).pack(side="left")
-    tombol_login = tk.Button(sudah_akun, width=6, text="Login", border=0, bg="#171a30", cursor="hand2", fg="#fc094c", activebackground="#171a30", activeforeground="#fc094c", font=("Roboto", 11, "bold"), command=RegisterToLogin).pack()
+    ada_akun = tk.Label(sudah_akun, text="Saya sudah punya akun?", fg="#eaebf1", bg="#171a30", font=("Segoe UI", 11, "bold")).pack(side="left")
+    tombol_login = tk.Button(sudah_akun, width=6, text="Login", border=0, bg="#171a30", cursor="hand2", fg="#fc094c", activebackground="#171a30", activeforeground="#fc094c", font=("Segoe UI", 11, "bold"), command=RegisterToLogin).pack()
     sudah_akun.pack()
 
 
@@ -289,12 +289,12 @@ def HeaderFrame(frame):
     left_frame.pack(side="left", padx=(0, 50))
     label_gambar = tk.Label(left_frame, image=img_xx5_heading, bg="#171a30").pack(side="left", padx=10)
     # Now Playing
-    now_playing = tk.Button(left_frame, text="Now Playing", command=lambda frame=frame: ToNowPlaying(frame), image=button_heading_off, font=("arial", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
+    now_playing = tk.Button(left_frame, text="Now Playing", command=lambda frame=frame: ToNowPlaying(frame), image=button_heading_off, font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
     now_playing.pack(side="left", anchor="center", padx=10)
     now_playing.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
     now_playing.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
     # Upcoming
-    up_coming = tk.Button(left_frame, text="Upcoming", command=lambda frame=frame: ToUpcoming(frame), image=button_heading_off, font=("arial", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
+    up_coming = tk.Button(left_frame, text="Upcoming", command=lambda frame=frame: ToUpcoming(frame), image=button_heading_off, font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
     up_coming.pack(side="left", anchor="center", padx=10)
     up_coming.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
     up_coming.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
@@ -303,17 +303,17 @@ def HeaderFrame(frame):
     right_frame = tk.Frame(header_frame, bg="#171a30")
     right_frame.pack(side="right", padx=(50, 0))
     # Topup
-    topup = tk.Button(right_frame, text="Top Up", command=lambda frame=frame: ToSaldo(frame), image=button_heading_off, font=("arial", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
+    topup = tk.Button(right_frame, text="Top Up", command=lambda frame=frame: ToSaldo(frame), image=button_heading_off, font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
     topup.pack(side="left", padx=10)
     topup.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
     topup.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
     # Riwayat
-    riwayat = tk.Button(right_frame, text="History", command=lambda frame=frame: ToRiwayat(frame), image=button_heading_off, font=("arial", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
+    riwayat = tk.Button(right_frame, text="History", command=lambda frame=frame: ToRiwayat(frame), image=button_heading_off, font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
     riwayat.pack(side="left", padx=10)
     riwayat.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
     riwayat.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
     # Logout
-    logout = tk.Button(right_frame, text=f"Log Out ({list_user[user_ke]['nama']})", command=lambda frame=frame: ClickLogOut(frame), image=button_heading_off, font=("arial", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
+    logout = tk.Button(right_frame, text=f"Log Out ({list_user[user_ke]['nama']})", command=lambda frame=frame: ClickLogOut(frame), image=button_heading_off, font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
     logout.pack(side="left", padx=10)
     logout.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
     logout.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
@@ -361,36 +361,36 @@ def SaldoFrame():
     sisa_saldo.set(locale.currency(list_user[user_ke]['saldo'], grouping=True))
 
     # Title
-    saldo_title = tk.Label(saldo_frame, text="Top Up Saldo", font=("Roboto", "30", "bold"), background="#171a30", fg="#fc094c").pack(pady=15)
+    saldo_title = tk.Label(saldo_frame, text="Top Up Saldo", font=("Segoe UI", "30", "bold"), background="#171a30", fg="#fc094c").pack(pady=15)
 
     # Saldo dan Nominal User
     frame_nomimal = tk.Frame(saldo_frame, bg="#171a30", width=1000, height=600)
     frame_nomimal.pack(pady=5)
-    label_saldo = tk.Label(frame_nomimal, text="Saldo Anda: ", font=("Roboto", 20, "bold"), fg="white", bg="#171a30").pack(side="left")
-    label_sisa_saldo = tk.Label(frame_nomimal, textvariable=sisa_saldo, font=("Roboto", 20, "bold"), fg="#50c143", bg="#171a30").pack()
+    label_saldo = tk.Label(frame_nomimal, text="Saldo Anda: ", font=("Segoe UI", 20, "bold"), fg="white", bg="#171a30").pack(side="left")
+    label_sisa_saldo = tk.Label(frame_nomimal, textvariable=sisa_saldo, font=("Segoe UI", 20, "bold"), fg="#50c143", bg="#171a30").pack()
 
     # Frame Memilih Nominal Topup
     frame_pilih_nominal = tk.Frame(saldo_frame, background="#171a30")
     frame_pilih_nominal.pack(pady=15)
     selected_price = tk.IntVar(value=0)
-    label_nominal_topup = tk.Label(frame_pilih_nominal, text="Pilih Nominal", font=("Roboto", 16, "bold"), fg="#fc094c", bg="#171a30").pack(pady=5)
+    label_nominal_topup = tk.Label(frame_pilih_nominal, text="Pilih Nominal", font=("Segoe UI", 16, "bold"), fg="#fc094c", bg="#171a30").pack(pady=5)
     # 50 ribu
-    tombol_50ribu = tk.Radiobutton(frame_pilih_nominal, text="Rp50.000,00", value=50000, variable=selected_price, font=("Roboto", 14, "bold"), image=button_price_off, selectimage=button_price_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
+    tombol_50ribu = tk.Radiobutton(frame_pilih_nominal, text="Rp50.000,00", value=50000, variable=selected_price, font=("Segoe UI", 14, "bold"), image=button_price_off, selectimage=button_price_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
     tombol_50ribu.pack(side="left", padx=20)
     tombol_50ribu.bind('<Enter>', lambda event, imgs=button_price_on: onHoverImage(event, imgs))
     tombol_50ribu.bind('<Leave>', lambda event, imgs=button_price_off: onLeaveImage(event, imgs))
     # 100 Ribu
-    tombol_100ribu = tk.Radiobutton(frame_pilih_nominal, text="Rp100.000,00", value=100000, variable=selected_price, font=("Roboto", 14, "bold"), image=button_price_off, selectimage=button_price_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
+    tombol_100ribu = tk.Radiobutton(frame_pilih_nominal, text="Rp100.000,00", value=100000, variable=selected_price, font=("Segoe UI", 14, "bold"), image=button_price_off, selectimage=button_price_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
     tombol_100ribu.pack(side="left", padx=20)
     tombol_100ribu.bind('<Enter>', lambda event, imgs=button_price_on: onHoverImage(event, imgs))
     tombol_100ribu.bind('<Leave>', lambda event, imgs=button_price_off: onLeaveImage(event, imgs))
     # 150 Ribu
-    tombol_150ribu = tk.Radiobutton(frame_pilih_nominal, text="Rp150.000,00", value=150000, variable=selected_price, font=("Roboto", 14, "bold"), image=button_price_off, selectimage=button_price_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
+    tombol_150ribu = tk.Radiobutton(frame_pilih_nominal, text="Rp150.000,00", value=150000, variable=selected_price, font=("Segoe UI", 14, "bold"), image=button_price_off, selectimage=button_price_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
     tombol_150ribu.pack(side="left", padx=20)
     tombol_150ribu.bind('<Enter>', lambda event, imgs=button_price_on: onHoverImage(event, imgs))
     tombol_150ribu.bind('<Leave>', lambda event, imgs=button_price_off: onLeaveImage(event, imgs))
     # 200 Ribu
-    tombol_200ribu = tk.Radiobutton(frame_pilih_nominal, text="Rp200.000,00", value=200000, variable=selected_price, font=("Roboto", 14, "bold"), image=button_price_off, selectimage=button_price_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
+    tombol_200ribu = tk.Radiobutton(frame_pilih_nominal, text="Rp200.000,00", value=200000, variable=selected_price, font=("Segoe UI", 14, "bold"), image=button_price_off, selectimage=button_price_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
     tombol_200ribu.pack(padx=20)
     tombol_200ribu.bind('<Enter>', lambda event, imgs=button_price_on: onHoverImage(event, imgs))
     tombol_200ribu.bind('<Leave>', lambda event, imgs=button_price_off: onLeaveImage(event, imgs))    
@@ -399,34 +399,34 @@ def SaldoFrame():
     frame_pilih_pembayaran = tk.Frame(saldo_frame, background="#171a30")
     frame_pilih_pembayaran.pack(pady=15)
     selected_method = tk.StringVar(value="N/A")
-    label_metode_pembayaran = tk.Label(frame_pilih_pembayaran, text="Pilih Metode Pembayaran", font=("Roboto", 16, "bold"), fg="#fc094c", bg="#171a30").pack(pady=5)
+    label_metode_pembayaran = tk.Label(frame_pilih_pembayaran, text="Pilih Metode Pembayaran", font=("Segoe UI", 16, "bold"), fg="#fc094c", bg="#171a30").pack(pady=5)
     # Gopay
-    tombol_gopay = tk.Radiobutton(frame_pilih_pembayaran, text="GoPay", value="gopay", variable=selected_method, font=("Roboto", 14, "bold"), image=button_method_off, selectimage=button_method_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
+    tombol_gopay = tk.Radiobutton(frame_pilih_pembayaran, text="GoPay", value="gopay", variable=selected_method, font=("Segoe UI", 14, "bold"), image=button_method_off, selectimage=button_method_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
     tombol_gopay.pack(side="left", padx=15)
     tombol_gopay.bind('<Enter>', lambda event, imgs=button_method_on: onHoverImage(event, imgs))
     tombol_gopay.bind('<Leave>', lambda event, imgs=button_method_off: onLeaveImage(event, imgs))
     # Ovo
-    tombol_ovo = tk.Radiobutton(frame_pilih_pembayaran, text="OVO", value="ovo", variable=selected_method, font=("Roboto", 14, "bold"), image=button_method_off, selectimage=button_method_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
+    tombol_ovo = tk.Radiobutton(frame_pilih_pembayaran, text="OVO", value="ovo", variable=selected_method, font=("Segoe UI", 14, "bold"), image=button_method_off, selectimage=button_method_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
     tombol_ovo.pack(side="left", padx=15)
     tombol_ovo.bind('<Enter>', lambda event, imgs=button_method_on: onHoverImage(event, imgs))
     tombol_ovo.bind('<Leave>', lambda event, imgs=button_method_off: onLeaveImage(event, imgs))
     # BCA
-    tombol_bca = tk.Radiobutton(frame_pilih_pembayaran, text="BCA", value="bca", variable=selected_method, font=("Roboto", 14, "bold"), image=button_method_off, selectimage=button_method_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
+    tombol_bca = tk.Radiobutton(frame_pilih_pembayaran, text="BCA", value="bca", variable=selected_method, font=("Segoe UI", 14, "bold"), image=button_method_off, selectimage=button_method_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
     tombol_bca.pack(side="left", padx=15)
     tombol_bca.bind('<Enter>', lambda event, imgs=button_method_on: onHoverImage(event, imgs))
     tombol_bca.bind('<Leave>', lambda event, imgs=button_method_off: onLeaveImage(event, imgs))
     # Mandiri
-    tombol_mandiri = tk.Radiobutton(frame_pilih_pembayaran, text="Mandiri", value="mandiri", variable=selected_method, font=("Roboto", 14, "bold"), image=button_method_off, selectimage=button_method_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
+    tombol_mandiri = tk.Radiobutton(frame_pilih_pembayaran, text="Mandiri", value="mandiri", variable=selected_method, font=("Segoe UI", 14, "bold"), image=button_method_off, selectimage=button_method_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
     tombol_mandiri.pack(side="left", padx=15)
     tombol_mandiri.bind('<Enter>', lambda event, imgs=button_method_on: onHoverImage(event, imgs))
     tombol_mandiri.bind('<Leave>', lambda event, imgs=button_method_off: onLeaveImage(event, imgs))
     # BNI
-    tombol_bni = tk.Radiobutton(frame_pilih_pembayaran, text="BNI", value="bni", variable=selected_method, font=("Roboto", 14, "bold"), image=button_method_off, selectimage=button_method_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
+    tombol_bni = tk.Radiobutton(frame_pilih_pembayaran, text="BNI", value="bni", variable=selected_method, font=("Segoe UI", 14, "bold"), image=button_method_off, selectimage=button_method_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
     tombol_bni.pack(side="left", padx=15)
     tombol_bni.bind('<Enter>', lambda event, imgs=button_method_on: onHoverImage(event, imgs))
     tombol_bni.bind('<Leave>', lambda event, imgs=button_method_off: onLeaveImage(event, imgs))
     # BRI
-    tombol_bri = tk.Radiobutton(frame_pilih_pembayaran, text="BRI", value="bri", variable=selected_method, font=("Roboto", 14, "bold"), image=button_method_off, selectimage=button_method_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
+    tombol_bri = tk.Radiobutton(frame_pilih_pembayaran, text="BRI", value="bri", variable=selected_method, font=("Segoe UI", 14, "bold"), image=button_method_off, selectimage=button_method_on, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", selectcolor="#171a30", cursor="hand2", borderwidth=0, indicatoron=False, compound="center")
     tombol_bri.pack(padx=15)
     tombol_bri.bind('<Enter>', lambda event, imgs=button_method_on: onHoverImage(event, imgs))
     tombol_bri.bind('<Leave>', lambda event, imgs=button_method_off: onLeaveImage(event, imgs))
@@ -434,9 +434,9 @@ def SaldoFrame():
     # Masukkan Kode Validasi
     frame_validasi = tk.Frame(saldo_frame, background="#171a30")
     frame_validasi.pack(pady=15)
-    label_kode = tk.Label(frame_validasi, text="Masukkan Kode Validasi", font=("Roboto", 16, "bold"), fg="#fc094c", bg="#171a30").pack()
-    entry_kode = tk.Entry(frame_validasi, width=20, font=("Roboto", 14, "bold"), textvariable=kode_valid, show="*").pack(pady=10)
-    tombol_bayar = tk.Button(frame_validasi, text="Bayar", command=lambda: isValid(selected_price.get(), selected_method.get()), font=("Roboto", 14, "bold"), image=button_method_off, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
+    label_kode = tk.Label(frame_validasi, text="Masukkan Kode Validasi", font=("Segoe UI", 16, "bold"), fg="#fc094c", bg="#171a30").pack()
+    entry_kode = tk.Entry(frame_validasi, width=20, font=("Segoe UI", 14, "bold"), textvariable=kode_valid, show="*").pack(pady=10)
+    tombol_bayar = tk.Button(frame_validasi, text="Bayar", command=lambda: isValid(selected_price.get(), selected_method.get()), font=("Segoe UI", 14, "bold"), image=button_method_off, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
     tombol_bayar.pack()
     tombol_bayar.bind('<Enter>', lambda event, imgs=button_method_on: onHoverImage(event, imgs))
     tombol_bayar.bind('<Leave>', lambda event, imgs=button_method_off: onLeaveImage(event, imgs))
@@ -466,7 +466,7 @@ def FrameRiwayat():
     my_canvas.create_window((center_x_history, 0), window=scrollable_riwayat_frame, anchor="nw")
 
     # Judul
-    riwayat_title = tk.Label(scrollable_riwayat_frame, text="Riwayat Pembelian", font=("Roboto", "26", "bold"), background="#171a30", fg="#fc094c").pack(pady=20)
+    riwayat_title = tk.Label(scrollable_riwayat_frame, text="Riwayat Pembelian", font=("Segoe UI", "26", "bold"), background="#171a30", fg="#fc094c").pack(pady=20)
 
     # Frame Tabel
     tabel_frame = tk.Frame(scrollable_riwayat_frame, bg="#171a30")
@@ -482,10 +482,10 @@ def FrameRiwayat():
     for i in range(row_riwayat+1):
         if i == 0:
             for j in range(6):
-                label = tk.Label(tabel_frame, text=header[j], font=("Roboto", 13, "bold"), bg="#fc094c", fg="#eaebf1", width=17).grid(row=i, column=j, sticky="we", ipady=5, padx=3)
+                label = tk.Label(tabel_frame, text=header[j], font=("Segoe UI", 13, "bold"), bg="#fc094c", fg="#eaebf1", width=17).grid(row=i, column=j, sticky="we", ipady=5, padx=3)
         else:
             for j in range(6):
-                label = tk.Label(tabel_frame, text=list_user[user_ke]['riwayat'][i-1][header[j]], font=("Roboto", 13, "bold"), bg="#252c54", fg="#eaebf1", width=17).grid(row=i, column=j, sticky="we", ipady=8, padx=3) 
+                label = tk.Label(tabel_frame, text=list_user[user_ke]['riwayat'][i-1][header[j]], font=("Segoe UI", 13, "bold"), bg="#252c54", fg="#eaebf1", width=17).grid(row=i, column=j, sticky="we", ipady=8, padx=3) 
 
 
 # FRAME LIST MOVIE
@@ -535,7 +535,7 @@ def MovieListFrame(show_type):
     HeaderFrame(movielist_frame)
 
     # Title Movie List
-    movielist_title = tk.Label(movielist_frame, text=pilih_title(), font=("Roboto", "30", "bold"), background="#171a30", fg="#fc094c").pack(ipadx=10, ipady=10, pady=10)
+    movielist_title = tk.Label(movielist_frame, text=pilih_title(), font=("Segoe UI", "30", "bold"), background="#171a30", fg="#fc094c").pack(ipadx=10, ipady=10, pady=10)
 
     # Mencetak 4 Movie
     fourmovie_frame = tk.Frame(movielist_frame, bg="#171a30")
@@ -546,7 +546,7 @@ def MovieListFrame(show_type):
         movie_frame.pack(padx=20, pady=10, side="left", anchor="n")
 
         # Image, Title, and Genre
-        movie_img = tk.Button(movie_frame, text=pilih_movie(i), command=lambda i=i: klik_img(i), image=pilih_image(i, "off"), font=("Helvetica", 14, "bold"), cursor="hand2", bg="#171a30", fg="#eaebf1", activebackground="#171a30", activeforeground="#eaebf1", wraplength=220, bd=0, compound="top")  # type: ignore
+        movie_img = tk.Button(movie_frame, text=pilih_movie(i), command=lambda i=i: klik_img(i), image=pilih_image(i, "off"), font=("Segoe UI", 14, "bold"), cursor="hand2", bg="#171a30", fg="#eaebf1", activebackground="#171a30", activeforeground="#eaebf1", wraplength=220, bd=0, compound="top")  # type: ignore
         movie_img.pack(ipadx=5, ipady=5, anchor="n")
         movie_img.bind('<Enter>', lambda event, imgs=pilih_image(i, "on"): onHoverImage(event, imgs))
         movie_img.bind('<Leave>', lambda event, imgs=pilih_image(i, "off"): onLeaveImage(event, imgs))
@@ -591,9 +591,9 @@ def NowMovieInfoFrame(k):
     # Title, Genre, Duration
     titlegenre_frame = tk.Frame(moviedesc_frame, background="#171a30")
     titlegenre_frame.pack()
-    moviedesc_title = tk.Label(titlegenre_frame, font=("Helvetica 18 bold"), text=list_movie[k]["title"], background="#171a30", fg="#fc094c").pack()
-    moviedesc_genre = tk.Label(titlegenre_frame, font=("Helvetica 14 bold"), text=list_movie[k]["genre"], background="#171a30", fg="#eaebf1").pack()
-    moviedesc_duration = tk.Label(titlegenre_frame, font=("Helvetica 14 bold"), text=list_movie[k]["duration"], background="#171a30", fg="#eaebf1").pack()
+    moviedesc_title = tk.Label(titlegenre_frame, font=("Segoe UI", "18", "bold"), text=list_movie[k]["title"], background="#171a30", fg="#fc094c").pack()
+    moviedesc_genre = tk.Label(titlegenre_frame, font=("Segoe UI", "14", "bold"), text=list_movie[k]["genre"], background="#171a30", fg="#eaebf1").pack()
+    moviedesc_duration = tk.Label(titlegenre_frame, font=("Segoe UI", "14", "bold"), text=list_movie[k]["duration"], background="#171a30", fg="#eaebf1").pack()
 
     # Image
     img_and_buy_frame = tk.Frame(moviedesc_frame, background="#171a30")
@@ -608,48 +608,48 @@ def NowMovieInfoFrame(k):
 
     # Looping 3 Lokasi
     for i in range(3):
-        loc_title = tk.Label(buy_frame, text=location[i], background="#171a30", font=("Helvetica", "12", "bold"), fg="#fc094c").grid(row=0+3*i, column=0, columnspan=5, sticky="w", pady=(10, 0))
-        today_label = tk.Label(buy_frame, text=today_date, background="#171a30", font=("Helvetica", "11", "bold"), fg="#eaebf1").grid(row=1+3*i, column=0, padx=(0, 5))
+        loc_title = tk.Label(buy_frame, text=location[i], background="#171a30", font=("Segoe UI", "12", "bold"), fg="#fc094c").grid(row=0+3*i, column=0, columnspan=5, sticky="w", pady=(10, 0))
+        today_label = tk.Label(buy_frame, text=today_date, background="#171a30", font=("Segoe UI", "11", "bold"), fg="#eaebf1").grid(row=1+3*i, column=0, padx=(0, 5))
         for j in range(4):
-            today_time = tk.Button(buy_frame, text=time_str[j], image=button_time_off, state=CekDisabled(time_int[j]["hour"], time_int[j]["minute"]), command=lambda i=i, j=j: InfoToBooking(k, location[i], today_date, time_str[j]), fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", font=("Helvetica", "11", "bold"), borderwidth=0, cursor="hand2", compound="center")
+            today_time = tk.Button(buy_frame, text=time_str[j], image=button_time_off, state=CekDisabled(time_int[j]["hour"], time_int[j]["minute"]), command=lambda i=i, j=j: InfoToBooking(k, location[i], today_date, time_str[j]), fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", font=("Segoe UI", "11", "bold"), borderwidth=0, cursor="hand2", compound="center")
             today_time.bind('<Enter>', lambda event, imgs=button_time_on: onHoverImage(event, imgs))
             today_time.bind('<Leave>', lambda event, imgs=button_time_off: onLeaveImage(event, imgs))
             today_time.grid(row=1+3*i, column=j+1, padx=5, pady= 4)
 
-        tomorrow_label = tk.Label(buy_frame, text=tomorrow_date, background="#171a30", font=("Helvetica", "11", "bold"), fg="#eaebf1").grid(row=2+3*i, column=0, padx=(0, 5))
+        tomorrow_label = tk.Label(buy_frame, text=tomorrow_date, background="#171a30", font=("Segoe UI", "11", "bold"), fg="#eaebf1").grid(row=2+3*i, column=0, padx=(0, 5))
         for j in range(4):
-            tomorrow_time = tk.Button(buy_frame, text=time_str[j], image=button_time_off, command=lambda i=i, j=j: InfoToBooking(k, location[i], tomorrow_date, time_str[j]), fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", font=("Helvetica", "11", "bold"), borderwidth=0, cursor="hand2", compound="center")
+            tomorrow_time = tk.Button(buy_frame, text=time_str[j], image=button_time_off, command=lambda i=i, j=j: InfoToBooking(k, location[i], tomorrow_date, time_str[j]), fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", font=("Segoe UI", "11", "bold"), borderwidth=0, cursor="hand2", compound="center")
             tomorrow_time.bind('<Enter>', lambda event, imgs=button_time_on: onHoverImage(event, imgs))
             tomorrow_time.bind('<Leave>', lambda event, imgs=button_time_off: onLeaveImage(event, imgs))
             tomorrow_time.grid(row=2+3*i, column=j+1, padx=5, pady= 4)
 
     # Movie Plot
     movie_plot_frame = tk.Frame(moviedesc_frame, background="#171a30")
-    movie_plot_title = tk.Label(movie_plot_frame, text="Plot", font=("Helvetica 12 bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_plot = tk.Label(movie_plot_frame, wraplength=980, justify="left", text=list_movie[k]["plot"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    movie_plot_title = tk.Label(movie_plot_frame, text="Plot", font=("Segoe UI", "12", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
+    movie_plot = tk.Label(movie_plot_frame, wraplength=980, justify="left", text=list_movie[k]["plot"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_plot_frame.pack(anchor="w", padx=10, pady=10)
 
     # Movie Producer
     movie_prod_frame = tk.Frame(moviedesc_frame, background="#171a30")
-    movie_prod_title = tk.Label(movie_prod_frame, text="Producer", font=("Helvetica 12 bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_prod = tk.Label(movie_prod_frame, text=list_movie[k]["producer"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    movie_prod_title = tk.Label(movie_prod_frame, text="Producer", font=("Segoe UI", "12", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
+    movie_prod = tk.Label(movie_prod_frame, text=list_movie[k]["producer"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_prod_frame.pack(anchor="w", padx=10, pady=10)
 
     # Movie Director
     movie_director_frame = tk.Frame(moviedesc_frame, background="#171a30")
-    movie_director_title = tk.Label(movie_director_frame, text="Director", font=("Helvetica 12 bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_director = tk.Label(movie_director_frame, text=list_movie[k]["director"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    movie_director_title = tk.Label(movie_director_frame, text="Director", font=("Segoe UI", "12", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
+    movie_director = tk.Label(movie_director_frame, text=list_movie[k]["director"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_director_frame.pack(anchor="w", padx=10, pady=10)
 
     # Movie Writer
     movie_writer_frame = tk.Frame(moviedesc_frame, background="#171a30")
-    movie_writer_title = tk.Label(movie_writer_frame, text="Writer", font=("Helvetica 12 bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_writer = tk.Label(movie_writer_frame, text=list_movie[k]["writer"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    movie_writer_title = tk.Label(movie_writer_frame, text="Writer", font=("Segoe UI", "12", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
+    movie_writer = tk.Label(movie_writer_frame, text=list_movie[k]["writer"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_writer_frame.pack(anchor="w", padx=10, pady=10)
     # Movie Cast
     movie_cast_frame = tk.Frame(moviedesc_frame, background="#171a30")
-    movie_cast_title = tk.Label(movie_cast_frame, text="Cast", font=("Helvetica 13 bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_cast = tk.Label(movie_cast_frame, wraplength=980, justify="left",text=list_movie[k]["cast"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    movie_cast_title = tk.Label(movie_cast_frame, text="Cast", font=("Segoe UI", "13", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
+    movie_cast = tk.Label(movie_cast_frame, wraplength=980, justify="left",text=list_movie[k]["cast"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_cast_frame.pack(anchor="w", padx=10, pady=10)
 
 
@@ -680,9 +680,9 @@ def UpcomingMovieInfoFrame(k):
     # Title, Genre, Duration
     titlegenre_frame = tk.Frame(moviedesc_frame, background="#171a30")
     titlegenre_frame.pack()
-    moviedesc_title = tk.Label(titlegenre_frame, font=("Helvetica 18 bold"), text=upcoming_movie[k]["title"], background="#171a30", fg="#fc094c").pack()
-    moviedesc_genre = tk.Label(titlegenre_frame, font=("Helvetica 14 bold"), text=upcoming_movie[k]["genre"], background="#171a30", fg="#eaebf1").pack()
-    moviedesc_duration = tk.Label(titlegenre_frame, font=("Helvetica 14 bold"), text=upcoming_movie[k]["duration"], background="#171a30", fg="#eaebf1").pack()
+    moviedesc_title = tk.Label(titlegenre_frame, font=("Segoe UI", "18", "bold"), text=upcoming_movie[k]["title"], background="#171a30", fg="#fc094c").pack()
+    moviedesc_genre = tk.Label(titlegenre_frame, font=("Segoe UI", "14", "bold"), text=upcoming_movie[k]["genre"], background="#171a30", fg="#eaebf1").pack()
+    moviedesc_duration = tk.Label(titlegenre_frame, font=("Segoe UI", "14", "bold"), text=upcoming_movie[k]["duration"], background="#171a30", fg="#eaebf1").pack()
 
     # Image
     img_and_buy_frame = tk.Frame(moviedesc_frame, background="#171a30")
@@ -691,31 +691,31 @@ def UpcomingMovieInfoFrame(k):
 
     # Movie Plot
     movie_plot_frame = tk.Frame(moviedesc_frame, background="#171a30")
-    movie_plot_title = tk.Label(movie_plot_frame, text="Plot", font=("Helvetica 12 bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_plot = tk.Label(movie_plot_frame, wraplength=980, justify="left", text=upcoming_movie[k]["plot"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    movie_plot_title = tk.Label(movie_plot_frame, text="Plot", font=("Segoe UI", "12", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
+    movie_plot = tk.Label(movie_plot_frame, wraplength=980, justify="left", text=upcoming_movie[k]["plot"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_plot_frame.pack(anchor="w", padx=10, pady=10)
 
     # Movie Producer
     movie_prod_frame = tk.Frame(moviedesc_frame, background="#171a30")
-    movie_prod_title = tk.Label(movie_prod_frame, text="Producer", font=("Helvetica 12 bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_prod = tk.Label(movie_prod_frame, text=upcoming_movie[k]["producer"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    movie_prod_title = tk.Label(movie_prod_frame, text="Producer", font=("Segoe UI", "12", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
+    movie_prod = tk.Label(movie_prod_frame, text=upcoming_movie[k]["producer"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_prod_frame.pack(anchor="w", padx=10, pady=10)
 
     # Movie Director
     movie_director_frame = tk.Frame(moviedesc_frame, background="#171a30")
-    movie_director_title = tk.Label(movie_director_frame, text="Director", font=("Helvetica 12 bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_director = tk.Label(movie_director_frame, text=upcoming_movie[k]["director"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    movie_director_title = tk.Label(movie_director_frame, text="Director", font=("Segoe UI", "12", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
+    movie_director = tk.Label(movie_director_frame, text=upcoming_movie[k]["director"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_director_frame.pack(anchor="w", padx=10, pady=10)
 
     # Movie Writer
     movie_writer_frame = tk.Frame(moviedesc_frame, background="#171a30")
-    movie_writer_title = tk.Label(movie_writer_frame, text="Writer", font=("Helvetica 12 bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_writer = tk.Label(movie_writer_frame, text=upcoming_movie[k]["writer"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    movie_writer_title = tk.Label(movie_writer_frame, text="Writer", font=("Segoe UI", "12", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
+    movie_writer = tk.Label(movie_writer_frame, text=upcoming_movie[k]["writer"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_writer_frame.pack(anchor="w", padx=10, pady=10)
     # Movie Cast
     movie_cast_frame = tk.Frame(moviedesc_frame, background="#171a30")
-    movie_cast_title = tk.Label(movie_cast_frame, text="Cast", font=("Helvetica 13 bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_cast = tk.Label(movie_cast_frame, wraplength=980, justify="left",text=upcoming_movie[k]["cast"], background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    movie_cast_title = tk.Label(movie_cast_frame, text="Cast", font=("Segoe UI", "13", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
+    movie_cast = tk.Label(movie_cast_frame, wraplength=980, justify="left",text=upcoming_movie[k]["cast"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_cast_frame.pack(anchor="w", padx=10, pady=10)
 
 
@@ -857,11 +857,11 @@ def SeatBookingFrame(k, place, day, time):
     icon_frame = tk.Frame(information_frame, background="#171a30")
     icon_frame.pack(anchor="w")
     seat_free_img = tk.Label(icon_frame, image=seat_free, background="#171a30").pack(side="left")
-    seat_fre_label = tk.Label(icon_frame, text="Available", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(side="left", padx=(0, 15))
+    seat_fre_label = tk.Label(icon_frame, text="Available", background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(side="left", padx=(0, 15))
     seat_own_img = tk.Label(icon_frame, image=seat_own, background="#171a30").pack(side="left")
-    seat_own_label = tk.Label(icon_frame, text="Picked Seat", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(side="left", padx=(0, 15))
+    seat_own_label = tk.Label(icon_frame, text="Picked Seat", background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(side="left", padx=(0, 15))
     seat_sold_img = tk.Label(icon_frame, image=seat_sold, background="#171a30").pack(side="left")
-    seat_sold_label = tk.Label(icon_frame, text="Sold", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(padx=(0, 10))
+    seat_sold_label = tk.Label(icon_frame, text="Sold", background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(padx=(0, 10))
 
     # Seperator
     separator = ttk.Separator(information_frame, orient='horizontal').pack(fill='x', pady=10)
@@ -869,13 +869,13 @@ def SeatBookingFrame(k, place, day, time):
     # Datas Frame
     data_frame = tk.Frame(information_frame, background="#171a30")
     data_frame.pack(anchor=tk.W)
-    book_title = tk.Label(data_frame, text=list_movie[k]["title"], background="#171a30", fg="#fc094c", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
-    seat_list = tk.Label(data_frame, textvariable=text_var_seat, wraplength=510, justify="left", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
-    num_ticket = tk.Label(data_frame, textvariable=text_var_ticket, background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
-    location = tk.Label(data_frame, text=place, background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
-    studio = tk.Label(data_frame, text=f"Studio: {k+1}", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
-    date = tk.Label(data_frame, text=f"{day}, Time: {time}", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
-    total = tk.Label(data_frame, textvariable=str_total, background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    book_title = tk.Label(data_frame, text=list_movie[k]["title"], background="#171a30", fg="#fc094c", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    seat_list = tk.Label(data_frame, textvariable=text_var_seat, wraplength=510, justify="left", background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    num_ticket = tk.Label(data_frame, textvariable=text_var_ticket, background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    location = tk.Label(data_frame, text=place, background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    studio = tk.Label(data_frame, text=f"Studio: {k+1}", background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    date = tk.Label(data_frame, text=f"{day}, Time: {time}", background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    total = tk.Label(data_frame, textvariable=str_total, background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
 
     # Seperator
     separator = ttk.Separator(scrollable_frame, orient='horizontal').pack(fill='x', pady=10)
@@ -923,11 +923,11 @@ def SeatBookingFrame(k, place, day, time):
         for j in range(15):
             if i == 0: # Cetak Angka
                 if j < 7:
-                    item = tk.Label(seat_frame, text=f"{j+1}", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).grid(row=i, column=j)
+                    item = tk.Label(seat_frame, text=f"{j+1}", background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).grid(row=i, column=j)
                 elif j > 7:
-                    item = tk.Label(seat_frame, text=f"{j}", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).grid(row=i, column=j)
+                    item = tk.Label(seat_frame, text=f"{j}", background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).grid(row=i, column=j)
             elif j == 7: # Cetak Huruf
-                item = tk.Label(seat_frame, text=f"{chr(ord('A')+i-1)}", background="#171a30", fg="#eaebf1", font=("Helvetica", "13", "bold")).grid(row=i, column=j)
+                item = tk.Label(seat_frame, text=f"{chr(ord('A')+i-1)}", background="#171a30", fg="#eaebf1", font=("Segoe UI", "13", "bold")).grid(row=i, column=j)
             else: # Cetak Kursi
                 if list_movie[k]["sold_seat"][f"{place}_{k}"][day][time][i][j]: # Jika Sold
                     item = tk.Label(seat_frame, image=seat_sold, background="#171a30").grid(row=i, column=j)
@@ -956,9 +956,9 @@ def SeatBookingFrame(k, place, day, time):
     # Confirm and Cancel Button Frame
     button_frame = tk.Frame(scrollable_frame, background="#171a30")
     button_frame.pack(pady=(10, 25))
-    confirm_button = tk.Button(button_frame, text="Confirm Order", command=click_confirm, font=("Helvetica", "13", "bold"), bg="green", fg="#eaebf1", state="disabled")
+    confirm_button = tk.Button(button_frame, text="Confirm Order", command=click_confirm, font=("Segoe UI", "13", "bold"), bg="green", fg="#eaebf1", state="disabled")
     confirm_button.pack(side="left",padx=5, ipadx=28, ipady=8)
-    cancel_button = tk.Button(button_frame, text="Cancel", command= click_cancel, font=("Helvetica", "13", "bold"), bg="red", fg="#eaebf1", cursor="hand2").pack(side="right", padx=5, ipadx=55, ipady=8)
+    cancel_button = tk.Button(button_frame, text="Cancel", command= click_cancel, font=("Segoe UI", "13", "bold"), bg="red", fg="#eaebf1", cursor="hand2").pack(side="right", padx=5, ipadx=55, ipady=8)
 
 
 # Frame pertama
