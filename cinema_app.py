@@ -722,19 +722,23 @@ def UpcomingMovieInfoFrame(k):
 # FRAME SEAT BOOKING
 def SeatBookingFrame(k, place, day, time):
     # Initialization
+    # Jumlah Kursi Dipilih
     global count_seat
     count_seat = 0
     text_var_ticket = tk.StringVar()
     text_var_ticket.set("Tickets: 0")
 
+    # Total Harga
     price = list_movie[k]['price']
     str_total = tk.StringVar()
     str_total.set("Total Payment: Rp0")
 
+    # Seat yang dipilih user
     list_seat = []
     str_seat = "Seats: -"
     text_var_seat = tk.StringVar()
     text_var_seat.set(str_seat)
+    picked_seat_ij = [[0 for j in range(15)] for i in range(9)]
     
     # Bila User Click Confirm
     def click_confirm():
@@ -882,7 +886,7 @@ def SeatBookingFrame(k, place, day, time):
     seat_frame.rowconfigure((9), weight=1)
     seat_frame.columnconfigure(15, weight=1)
 
-    picked_seat_ij = [[0 for j in range(15)] for i in range(9)]
+    # Update Database Jika Data Belum Tersedia
     try:
         temp = list_movie[k]["sold_seat"][f"{place}_{k}"][day]
     except:
