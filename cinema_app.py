@@ -611,14 +611,14 @@ def NowMovieInfoFrame(k):
         loc_title = tk.Label(buy_frame, text=location[i], background="#171a30", font=("Helvetica", "12", "bold"), fg="#fc094c").grid(row=0+3*i, column=0, columnspan=5, sticky="w", pady=(10, 0))
         today_label = tk.Label(buy_frame, text=today_date, background="#171a30", font=("Helvetica", "11", "bold"), fg="#eaebf1").grid(row=1+3*i, column=0, padx=(0, 5))
         for j in range(4):
-            today_time = tk.Button(buy_frame, text=time_str[j], image=button_time_off, state=CekDisabled(time_int[j]["hour"], time_int[j]["minute"]), command=lambda i=i, j=j: InfoToBooking(k, location[i], "today", time_str[j]), fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", font=("Helvetica", "11", "bold"), borderwidth=0, cursor="hand2", compound="center")
+            today_time = tk.Button(buy_frame, text=time_str[j], image=button_time_off, state=CekDisabled(time_int[j]["hour"], time_int[j]["minute"]), command=lambda i=i, j=j: InfoToBooking(k, location[i], today_date, time_str[j]), fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", font=("Helvetica", "11", "bold"), borderwidth=0, cursor="hand2", compound="center")
             today_time.bind('<Enter>', lambda event, imgs=button_time_on: onHoverImage(event, imgs))
             today_time.bind('<Leave>', lambda event, imgs=button_time_off: onLeaveImage(event, imgs))
             today_time.grid(row=1+3*i, column=j+1, padx=5, pady= 4)
 
         tomorrow_label = tk.Label(buy_frame, text=tomorrow_date, background="#171a30", font=("Helvetica", "11", "bold"), fg="#eaebf1").grid(row=2+3*i, column=0, padx=(0, 5))
         for j in range(4):
-            tomorrow_time = tk.Button(buy_frame, text=time_str[j], image=button_time_off, command=lambda i=i, j=j: InfoToBooking(k, location[i], "tomorrow", time_str[j]), fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", font=("Helvetica", "11", "bold"), borderwidth=0, cursor="hand2", compound="center")
+            tomorrow_time = tk.Button(buy_frame, text=time_str[j], image=button_time_off, command=lambda i=i, j=j: InfoToBooking(k, location[i], tomorrow_date, time_str[j]), fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", font=("Helvetica", "11", "bold"), borderwidth=0, cursor="hand2", compound="center")
             tomorrow_time.bind('<Enter>', lambda event, imgs=button_time_on: onHoverImage(event, imgs))
             tomorrow_time.bind('<Leave>', lambda event, imgs=button_time_off: onLeaveImage(event, imgs))
             tomorrow_time.grid(row=2+3*i, column=j+1, padx=5, pady= 4)
@@ -768,8 +768,8 @@ def SeatBookingFrame(k, place, day, time):
                     for j in range(15):
                         append_file = open('database.py', 'a')
                         if picked_seat_ij[i][j] == True:
-                            list_movie[k]['sold_seat'][place][day][time][i][j] = True
-                            append_file.write(f"\nlist_movie[{k}]['sold_seat']['{place}']['{day}']['{time}'][{i}][{j}] = True")
+                            list_movie[k]['sold_seat'][f"{place}_{k}"][day][time][i][j] = True
+                            append_file.write(f"\nlist_movie[{k}]['sold_seat']['{place}_{k}']['{day}']['{time}'][{i}][{j}] = True")
                         append_file.close()
 
                 # TRANSISI DARI SEAT BOOKING KE NOW INFO MOVIE
@@ -863,10 +863,7 @@ def SeatBookingFrame(k, place, day, time):
     num_ticket = tk.Label(data_frame, textvariable=text_var_ticket, background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
     location = tk.Label(data_frame, text=place, background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
     studio = tk.Label(data_frame, text=f"Studio: {k+1}", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
-    if day == "today":
-        date = tk.Label(data_frame, text=f"{today_date}, Time: {time}", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
-    elif day == "tomorrow":
-        date = tk.Label(data_frame, text=f"{tomorrow_date}, Time: {time}", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
+    date = tk.Label(data_frame, text=f"{day}, Time: {time}", background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
     total = tk.Label(data_frame, textvariable=str_total, background="#171a30", fg="#eaebf1", font=("Helvetica", "11", "bold")).pack(anchor=tk.W)
 
     # Seperator
@@ -879,6 +876,36 @@ def SeatBookingFrame(k, place, day, time):
     seat_frame.columnconfigure(15, weight=1)
 
     picked_seat_ij = [[0 for j in range(15)] for i in range(9)]
+    try:
+        temp = list_movie[k]["sold_seat"][f"{place}_{k}"][day]
+    except:
+        read_file = open('database.py', 'r')
+        content = read_file.read()
+        old_dict_place = str(list_movie[k]["sold_seat"])
+        list_movie[k]["sold_seat"][f"{place}_{k}"].update({day: {}})
+        list_movie[k]["sold_seat"][f"{place}_{k}"][day].update({time: [[0 for i in range(15)] for j in range(9)]})
+        new_dict_place = str(list_movie[k]["sold_seat"])
+        content = content.replace(old_dict_place, new_dict_place)
+        read_file.close()
+
+        write_file = open('database.py', 'w')
+        write_file.write(content)
+        write_file.close()
+    else:
+        try:
+            temp = list_movie[k]["sold_seat"][f"{place}_{k}"][day][time]
+        except:
+            read_file = open('database.py', 'r')
+            content = read_file.read()
+            old_dict_place = str(list_movie[k]["sold_seat"])
+            list_movie[k]["sold_seat"][f"{place}_{k}"][day].update({time: [[0 for i in range(15)] for j in range(9)]})
+            new_dict_place = str(list_movie[k]["sold_seat"])
+            content = content.replace(old_dict_place, new_dict_place)
+            read_file.close()
+
+            write_file = open('database.py', 'w')
+            write_file.write(content)
+            write_file.close()
 
     # Create Seat Items
     for i in range(9):
@@ -891,7 +918,7 @@ def SeatBookingFrame(k, place, day, time):
             elif j == 7: # Cetak Huruf
                 item = tk.Label(seat_frame, text=f"{chr(ord('A')+i-1)}", background="#171a30", fg="#eaebf1", font=("Helvetica", "13", "bold")).grid(row=i, column=j)
             else: # Cetak Kursi
-                if list_movie[k]["sold_seat"][place][day][time][i][j]: # Jika Sold
+                if list_movie[k]["sold_seat"][f"{place}_{k}"][day][time][i][j]: # Jika Sold
                     item = tk.Label(seat_frame, image=seat_sold, background="#171a30").grid(row=i, column=j)
                 else: # Jika Available
                     # Penentu Kode Seat
