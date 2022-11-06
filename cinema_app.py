@@ -344,7 +344,7 @@ def HeaderFrame(frame, name):
         riwayat.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
     
     # Logout
-    logout = tk.Button(right_frame, text=f"Log Out ({list_user[user_ke]['nama']})", command=lambda frame=frame: ClickLogOut(frame), image=button_heading_off, font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
+    logout = tk.Button(right_frame, text="Log Out", command=lambda frame=frame: ClickLogOut(frame), image=button_heading_off, font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
     logout.pack(side="left", padx=10)
     logout.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
     logout.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
