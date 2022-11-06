@@ -252,7 +252,7 @@ def RegisterFrame():
 
 
 # FRAME HEADER
-def HeaderFrame(frame):
+def HeaderFrame(frame, name):
     # HEADING NOW PLAYING
     def ToNowPlaying(frame):
         frame.forget()
@@ -271,7 +271,7 @@ def HeaderFrame(frame):
     # HEADING RIWAYAT
     def ToRiwayat(frame):
         frame.forget()
-        FrameRiwayat()
+        RiwayatFrame()
 
     # HEADING LOGOUT
     def ClickLogOut(frame):
@@ -279,6 +279,30 @@ def HeaderFrame(frame):
         if confirmation:
             frame.forget()
             LoginFrame()
+    
+    def now_playing_img(name):
+        if name == "movielist_nowshowing":
+            return button_heading_on
+        else:
+            return button_heading_off
+    
+    def upcoming_img(name):
+        if name == "movielist_upcoming":
+            return button_heading_on
+        else:
+            return button_heading_off
+
+    def topup_img(name):
+        if name == "saldo":
+            return button_heading_on
+        else:
+            return button_heading_off
+    
+    def riwayat_img(name):
+        if name == "riwayat":
+            return button_heading_on
+        else:
+            return button_heading_off         
     
     # Main Frame
     header_frame = tk.Frame(frame, bg="#171a30")
@@ -289,29 +313,36 @@ def HeaderFrame(frame):
     left_frame.pack(side="left", padx=(0, 50))
     label_gambar = tk.Label(left_frame, image=img_xx5_heading, bg="#171a30").pack(side="left", padx=10)
     # Now Playing
-    now_playing = tk.Button(left_frame, text="Now Playing", command=lambda frame=frame: ToNowPlaying(frame), image=button_heading_off, font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
+    now_playing = tk.Button(left_frame, text="Now Playing", command=lambda frame=frame: ToNowPlaying(frame), image=now_playing_img(name), font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
     now_playing.pack(side="left", anchor="center", padx=10)
-    now_playing.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
-    now_playing.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
+    if name != "movielist_nowshowing":
+        now_playing.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
+        now_playing.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
+    
     # Upcoming
-    up_coming = tk.Button(left_frame, text="Upcoming", command=lambda frame=frame: ToUpcoming(frame), image=button_heading_off, font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
+    up_coming = tk.Button(left_frame, text="Upcoming", command=lambda frame=frame: ToUpcoming(frame), image=upcoming_img(name), font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
     up_coming.pack(side="left", anchor="center", padx=10)
-    up_coming.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
-    up_coming.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
+    if name != "movielist_upcoming":
+        up_coming.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
+        up_coming.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
 
-    # Right Frame (Saldo, Loglout, Name)
+    # Right Frame (Saldo, Logout, Name)
     right_frame = tk.Frame(header_frame, bg="#171a30")
     right_frame.pack(side="right", padx=(50, 0))
     # Topup
-    topup = tk.Button(right_frame, text="Top Up", command=lambda frame=frame: ToSaldo(frame), image=button_heading_off, font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
+    topup = tk.Button(right_frame, text="Top Up", command=lambda frame=frame: ToSaldo(frame), image=topup_img(name), font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
     topup.pack(side="left", padx=10)
-    topup.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
-    topup.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
+    if name != "saldo":
+        topup.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
+        topup.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
+    
     # Riwayat
-    riwayat = tk.Button(right_frame, text="History", command=lambda frame=frame: ToRiwayat(frame), image=button_heading_off, font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
+    riwayat = tk.Button(right_frame, text="History", command=lambda frame=frame: ToRiwayat(frame), image=riwayat_img(name), font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
     riwayat.pack(side="left", padx=10)
-    riwayat.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
-    riwayat.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
+    if name != "riwayat":
+        riwayat.bind('<Enter>', lambda event, imgs=button_heading_on: onHoverImage(event, imgs))
+        riwayat.bind('<Leave>', lambda event, imgs=button_heading_off: onLeaveImage(event, imgs))
+    
     # Logout
     logout = tk.Button(right_frame, text=f"Log Out ({list_user[user_ke]['nama']})", command=lambda frame=frame: ClickLogOut(frame), image=button_heading_off, font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
     logout.pack(side="left", padx=10)
@@ -353,7 +384,7 @@ def SaldoFrame():
     saldo_frame.pack()
 
     # Header
-    HeaderFrame(saldo_frame)
+    HeaderFrame(saldo_frame, "saldo")
 
     # Inisialisasi Kode Input dan Sisa Saldo User
     kode_valid = tk.StringVar()
@@ -443,14 +474,14 @@ def SaldoFrame():
 
 
 # FRAME RIWAYAT
-def FrameRiwayat():
+def RiwayatFrame():
     # Main Frame
     global riwayat_frame
     riwayat_frame = tk.Frame(root, bg="#171a30")
     riwayat_frame.pack(fill="both", expand=1)
 
     # Header
-    HeaderFrame(riwayat_frame)
+    HeaderFrame(riwayat_frame, "riwayat")
 
     # Membuat Scrollbar
     my_canvas = tk.Canvas(riwayat_frame, background="#171a30", bd=0, highlightthickness=0)
@@ -532,7 +563,7 @@ def MovieListFrame(show_type):
     movielist_frame.pack()
 
     # Header
-    HeaderFrame(movielist_frame)
+    HeaderFrame(movielist_frame, f"movielist_{show_type}")
 
     # Title Movie List
     movielist_title = tk.Label(movielist_frame, text=pilih_title(), font=("Segoe UI", "30", "bold"), background="#171a30", fg="#fc094c").pack(ipadx=10, ipady=10, pady=10)
@@ -573,7 +604,7 @@ def NowMovieInfoFrame(k):
     movieinfo_frame.pack(fill="both", expand=1)
 
     # Header
-    HeaderFrame(movieinfo_frame)
+    HeaderFrame(movieinfo_frame, "movieinfo")
 
     my_canvas = tk.Canvas(movieinfo_frame, background="#171a30", bd=0, highlightthickness=0)
     my_canvas.pack(side="left", fill="both", expand=1)
@@ -661,7 +692,7 @@ def UpcomingMovieInfoFrame(k):
     upcoming_movie_frame.pack(fill="both", expand=1)
 
     # Header
-    HeaderFrame(upcoming_movie_frame)
+    HeaderFrame(upcoming_movie_frame, "upcoming_movie")
 
     my_canvas = tk.Canvas(upcoming_movie_frame, background="#171a30", bd=0, highlightthickness=0)
     my_canvas.pack(side="left", fill="both", expand=1)
@@ -835,7 +866,7 @@ def SeatBookingFrame(k, place, day, time):
     booking_frame.pack(fill="both", expand=1)
 
     # Header
-    HeaderFrame(booking_frame)  
+    HeaderFrame(booking_frame, "booking")  
 
     my_canvas = tk.Canvas(booking_frame, background="#171a30", bd=0, highlightthickness=0)
     my_canvas.pack(side="left", fill="both", expand=1)
