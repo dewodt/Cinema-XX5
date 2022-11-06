@@ -55,7 +55,7 @@ upcoming_movie = [
         'img_on': 'images/blackpanther_on.png',
         'img_off': 'images/blackpanther_off.png',
         'title': 'Black Panther: Wakanda Forever',
-        'age': '-',
+        'age': 'SU',
         'genre': 'Action, Adventure, Drama',
         'duration': '- Minutes',
         'plot': 'Rakyat Wakanda kali ini akan berjuang untuk melindungi negerinya dari campur tangan kekuatan dunia setelah kematian sang Raja T\'Challa.',

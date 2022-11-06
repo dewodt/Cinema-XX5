@@ -306,11 +306,11 @@ def HeaderFrame(frame, name):
     
     # Main Frame
     header_frame = tk.Frame(frame, bg="#171a30")
-    header_frame.pack()
+    header_frame.pack(pady=(10, 0))
 
     # Left Frame (Logo, Now Playing, Upcoming)
     left_frame = tk.Frame(header_frame, bg="#171a30")
-    left_frame.pack(side="left", padx=(0, 50))
+    left_frame.pack(side="left", padx=(0, 45))
     label_gambar = tk.Label(left_frame, image=img_xx5_heading, bg="#171a30").pack(side="left", padx=10)
     # Now Playing
     now_playing = tk.Button(left_frame, text="Now Playing", command=lambda frame=frame: ToNowPlaying(frame), image=now_playing_img(name), font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
@@ -328,7 +328,7 @@ def HeaderFrame(frame, name):
 
     # Right Frame (Saldo, Logout, Name)
     right_frame = tk.Frame(header_frame, bg="#171a30")
-    right_frame.pack(side="right", padx=(50, 0))
+    right_frame.pack(side="right", padx=(45, 0))
     # Topup
     topup = tk.Button(right_frame, text="Top Up", command=lambda frame=frame: ToSaldo(frame), image=topup_img(name), font=("Segoe UI", 14, "bold"), bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
     topup.pack(side="left", padx=10)
