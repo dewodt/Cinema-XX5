@@ -23,11 +23,10 @@ label_2 = tk.Label(confirm_frame2,fg="white",bg="#171a30",text = "Seats         
 label_2 = tk.Label(confirm_frame2,fg="white",bg="#171a30",text = "Date                           : 03-11-2022",font = ("Roboto",14,"bold")).pack(anchor = tk.W,pady = 10)
 label_2 = tk.Label(confirm_frame2,fg="white",bg="#171a30",text = "Time                          : 16:00",font = ("Roboto",14,"bold")).pack(anchor = tk.W,pady = 10)
 label_2 = tk.Label(confirm_frame2,fg="white",bg="#171a30",text = "Total payment         : Rp90.000,00",font = ("Roboto",14,"bold")).pack(anchor = tk.W,pady = 10)
-label_2 = tk.Label(confirm_frame2,fg="white",bg="#171a30",text = "Saldo                         : Rp100.000,00",font = ("Roboto",14,"bold")).pack(anchor = tk.W,pady = 10)
 
 # button image
-button_price_on = tk.PhotoImage(file="price_on.png")
-button_price_off = tk.PhotoImage(file="price_off.png")
+button_price_on = tk.PhotoImage(file="images/price_on.png")
+button_price_off = tk.PhotoImage(file="images/price_off.png")
 
 # Fungsi Mengganti Image Saat Ditunjuk Mouse
 def onHoverImage(event, img):
@@ -37,10 +36,11 @@ def onLeaveImage(event, img):
     event.widget.config(image=img)
 
 # tombol konfirmasi
-tombol_konfirm = tk.Button(confirm_frame2, text="Pesan Tiket", image=button_price_on, font=("Roboto", 13, "bold"), activebackground="#171a30", activeforeground="#eaebf1", fg="#eaebf1", bg="#171a30", cursor="hand2", borderwidth=0, compound="center")
+tombol_konfirm = tk.Button(confirm_frame2, text="Book Tickets", image=button_price_on, font=("Roboto", 13, "bold"), activebackground="#171a30", activeforeground="#eaebf1", fg="#eaebf1", bg="#171a30", cursor="hand2", borderwidth=0, compound="center")
 tombol_konfirm.pack(pady=(0, 5))
 tombol_konfirm.bind('<Enter>', lambda event, imgs=button_price_on: onHoverImage(event, imgs))
 tombol_konfirm.bind('<Leave>', lambda event, imgs=button_price_off: onLeaveImage(event, imgs))
+
 
 
 confirm_frame2.pack()
