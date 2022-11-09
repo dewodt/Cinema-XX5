@@ -68,6 +68,10 @@ seat_own = tk.PhotoImage(file="images/seat_own.png")
 seat_sold = tk.PhotoImage(file="images/seat_sold.png")
 # Image Screen
 screen_img = tk.PhotoImage(file="images/screen.png")
+# Image confirm & cancel button
+cancelconfirm_off = tk.PhotoImage(file="images/cancelconfirm_off.png")
+confirm_on = tk.PhotoImage(file="images/confirm_on.png")
+cancel_on = tk.PhotoImage(file="images/cancel_on.png")
 
 
 # Callback function bila Entry/input box kosong
@@ -852,9 +856,13 @@ def SeatBookingFrame(k, place, day, time):
         if count_seat > 0:
             confirm_button['state'] =  "normal"
             confirm_button['cursor'] = "hand2"
+            confirm_button.bind('<Enter>', lambda event, imgs=confirm_on: onHoverImage(event, imgs))
+            confirm_button.bind('<Leave>', lambda event, imgs=cancelconfirm_off: onLeaveImage(event, imgs))
         else:
             confirm_button['state'] = "disabled"
             confirm_button['cursor'] = ""
+            confirm_button.unbind('<Enter>')
+            confirm_button.unbind('<Leave>')
             str_seat = "Seats: -"
             text_var_seat.set(str_seat)
     
@@ -954,11 +962,11 @@ def SeatBookingFrame(k, place, day, time):
         for j in range(15):
             if i == 0: # Cetak Angka
                 if j < 7:
-                    item = tk.Label(seat_frame, text=f"{j+1}", background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).grid(row=i, column=j)
+                    item = tk.Label(seat_frame, text=f"{j+1}", background="#171a30", fg="#eaebf1", font=("Segoe UI", "12", "bold")).grid(row=i, column=j)
                 elif j > 7:
-                    item = tk.Label(seat_frame, text=f"{j}", background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).grid(row=i, column=j)
+                    item = tk.Label(seat_frame, text=f"{j}", background="#171a30", fg="#eaebf1", font=("Segoe UI", "12", "bold")).grid(row=i, column=j)
             elif j == 7: # Cetak Huruf
-                item = tk.Label(seat_frame, text=f"{chr(ord('A')+i-1)}", background="#171a30", fg="#eaebf1", font=("Segoe UI", "13", "bold")).grid(row=i, column=j)
+                item = tk.Label(seat_frame, text=f"{chr(ord('A')+i-1)}", background="#171a30", fg="#eaebf1", font=("Segoe UI", "12", "bold")).grid(row=i, column=j)
             else: # Cetak Kursi
                 if list_movie[k]["sold_seat"][f"{place}_{k}"][day][time][i][j]: # Jika Sold
                     item = tk.Label(seat_frame, image=seat_sold, background="#171a30").grid(row=i, column=j)
@@ -979,7 +987,7 @@ def SeatBookingFrame(k, place, day, time):
                     item.grid(row=i, column=j, padx=3, pady=3)
 
     # Screen Image
-    screen = tk.Label(seat_frame, image=screen_img, background="#171a30").grid(row=11, column=0, columnspan=15)
+    screen = tk.Label(seat_frame, image=screen_img, background="#171a30").grid(row=11, column=0, columnspan=15, pady=(8,0))
 
     # Separator
     separator = ttk.Separator(scrollable_frame, orient='horizontal').pack(fill='x', pady=10)
@@ -987,10 +995,14 @@ def SeatBookingFrame(k, place, day, time):
     # Confirm and Cancel Button Frame
     button_frame = tk.Frame(scrollable_frame, background="#171a30")
     button_frame.pack(pady=(10, 25))
-    confirm_button = tk.Button(button_frame, text="Confirm Order", command=click_confirm, font=("Segoe UI", "13", "bold"), bg="green", fg="#eaebf1", state="disabled")
-    confirm_button.pack(side="left",padx=5, ipadx=28, ipady=8)
-    cancel_button = tk.Button(button_frame, text="Cancel", command= click_cancel, font=("Segoe UI", "13", "bold"), bg="red", fg="#eaebf1", cursor="hand2").pack(side="right", padx=5, ipadx=55, ipady=8)
-
+    # Confirm Button
+    confirm_button = tk.Button(button_frame, text="Confirm Order", command=click_confirm, font=("Segoe UI", "13", "bold"), image=cancelconfirm_off, state="disabled" , fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", borderwidth=0, compound="center")
+    confirm_button.pack(side="left",padx=10)
+    # Cancel Button
+    cancel_button = tk.Button(button_frame, text="Cancel", command= click_cancel, font=("Segoe UI", "13", "bold"), image=cancelconfirm_off, fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", borderwidth=0, cursor="hand2", compound="center")
+    cancel_button.bind('<Enter>', lambda event, imgs=cancel_on: onHoverImage(event, imgs))
+    cancel_button.bind('<Leave>', lambda event, imgs=cancelconfirm_off: onLeaveImage(event, imgs))
+    cancel_button.pack(side="right", padx=10)
 
 # Frame pertama
 LoginFrame()
