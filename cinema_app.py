@@ -763,7 +763,13 @@ def SeatBookingFrame(k, place, day, time):
     text_var_ticket = tk.StringVar()
     text_var_ticket.set("Tickets: 0")
 
+    # Nominal Saldo
+    nominal_saldo = list_user[user_ke]['saldo']
+    str_saldo = locale.currency(nominal_saldo, grouping=True)
+
     # Total Harga
+    global total_payment
+    total_payment = 0
     price = list_movie[k]['price']
     str_total = tk.StringVar()
     str_total.set("Total Payment: Rp0")
@@ -775,11 +781,52 @@ def SeatBookingFrame(k, place, day, time):
     text_var_seat.set(str_seat)
     picked_seat_ij = [[0 for j in range(15)] for i in range(9)]
     
+    # Fungsi bila seat diklik
+    def clicked_seat(par, i, j, x, y):
+        # Menambah Count Seat
+        global count_seat
+        picked_seat = x + y
+        if par.get() == 1:
+            count_seat += 1
+            list_seat.append(picked_seat)
+            picked_seat_ij[i][j] = True
+        elif par.get() == 0:
+            count_seat -= 1
+            list_seat.remove(picked_seat)
+            picked_seat_ij[i][j] = False
+        text_var_ticket.set(f"Tickets: {count_seat}")
+
+        # Menambah Total Belanja
+        global total_payment
+        total_payment = count_seat*price
+        str_total.set(f"Total Payment: {locale.currency(total_payment, grouping=True)}")
+
+        # Mengolah list_seat agar menjadi string
+        list_seat.sort()
+        str_seat = "Seats: "+str(list_seat).replace("[", "").replace("]", "").replace("'", "")
+        text_var_seat.set(str_seat)
+
+        # Mengubah State & Cursor
+        if count_seat > 0:
+            confirm_button['state'] =  "normal"
+            confirm_button['cursor'] = "hand2"
+            confirm_button.bind('<Enter>', lambda event, imgs=confirm_on: onHoverImage(event, imgs))
+            confirm_button.bind('<Leave>', lambda event, imgs=cancelconfirm_off: onLeaveImage(event, imgs))
+        else:
+            confirm_button['state'] = "disabled"
+            confirm_button['cursor'] = ""
+            confirm_button.unbind('<Enter>')
+            confirm_button.unbind('<Leave>')
+            str_seat = "Seats: -"
+            text_var_seat.set(str_seat)
+    
     # Bila User Click Confirm
     def click_confirm():
-        confirmation = askyesno(title='Confirmation', message='Are you sure of your purchase?')
-        if confirmation:
-            if list_user[user_ke]['saldo'] >= price*count_seat:
+        if nominal_saldo <  total_payment:
+            showerror(title="Saldo Tidak Cukup", message="Anda kekurangan saldo! Silahkan toup terlebih dahulu")
+        else:
+            confirmation = askyesno(title='Confirmation', message='Are you sure of your purchase?')
+            if confirmation:
                 # Edit Database User
                 read_file = open('database.py', 'r')
                 content = read_file.read()
@@ -790,10 +837,10 @@ def SeatBookingFrame(k, place, day, time):
                     'Judul': list_movie[k]['title'],
                     'Jadwal': f"{time} {day}",
                     'Ticket': text_var_seat.get().replace("Seats: ", ""),
-                    'Total': locale.currency(price*count_seat, grouping=True)
+                    'Total': locale.currency(total_payment, grouping=True)
                 }
                 list_user[user_ke]['riwayat'].append(dict_riwayat)
-                list_user[user_ke]['saldo'] -= price*count_seat
+                list_user[user_ke]['saldo'] -= total_payment
                 new_dict_user = str(list_user[user_ke])
                 content = content.replace(old_dict_user, new_dict_user)
                 read_file.close()
@@ -820,52 +867,12 @@ def SeatBookingFrame(k, place, day, time):
 
                 # TRANSISI DARI SEAT BOOKING KE NOW INFO MOVIE
                 booking_frame.forget()
-                MovieListFrame("nowshowing")
-            else:
-                showerror("Kurang Saldo", "Anda kekurangan saldo! Silahkan toup terlebih dahulu")
+                RiwayatFrame()
 
     # Bila User Click Cancel
     def click_cancel():
         booking_frame.forget()
         NowMovieInfoFrame(k)
-    
-    # Fungsi bila seat diklik
-    def clicked_seat(par, i, j, x, y):
-        # Menambah Count Seat
-        global count_seat
-        picked_seat = x + y
-        if par.get() == 1:
-            count_seat += 1
-            list_seat.append(picked_seat)
-            picked_seat_ij[i][j] = True
-        elif par.get() == 0:
-            count_seat -= 1
-            list_seat.remove(picked_seat)
-            picked_seat_ij[i][j] = False
-        text_var_ticket.set(f"Tickets: {count_seat}")
-
-        # Menambah Total Belanja
-        str_total.set(f"Total Payment: {locale.currency(price*count_seat, grouping=True)}")
-
-        # Mengolah list_seat agar menjadi string
-        list_seat.sort()
-        str_seat = "Seats: "+str(list_seat).replace("[", "").replace("]", "").replace("'", "")
-        text_var_seat.set(str_seat)
-
-        # Mengubah State & Cursor
-        if count_seat > 0:
-            confirm_button['state'] =  "normal"
-            confirm_button['cursor'] = "hand2"
-            confirm_button.bind('<Enter>', lambda event, imgs=confirm_on: onHoverImage(event, imgs))
-            confirm_button.bind('<Leave>', lambda event, imgs=cancelconfirm_off: onLeaveImage(event, imgs))
-        else:
-            confirm_button['state'] = "disabled"
-            confirm_button['cursor'] = ""
-            confirm_button.unbind('<Enter>')
-            confirm_button.unbind('<Leave>')
-            str_seat = "Seats: -"
-            text_var_seat.set(str_seat)
-    
 
     # Main Frame
     # Membuat Scrollbar
@@ -915,6 +922,7 @@ def SeatBookingFrame(k, place, day, time):
     studio = tk.Label(data_frame, text=f"Studio: {k+1}", background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     date = tk.Label(data_frame, text=f"{day}, Time: {time}", background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     total = tk.Label(data_frame, textvariable=str_total, background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    saldo = tk.Label(data_frame, text=f"Saldo Anda: {str_saldo}", background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
 
     # Seperator
     separator = ttk.Separator(scrollable_frame, orient='horizontal').pack(fill='x', pady=10)
@@ -981,7 +989,7 @@ def SeatBookingFrame(k, place, day, time):
                     seat_var = tk.IntVar()
                     
                     # Check Button Seat
-                    item = tk.Checkbutton(seat_frame, variable=seat_var, onvalue=1, offvalue=0, command=lambda num=seat_var, i=i, j=j, y=y_seat, x=x_seat: clicked_seat(num, i, j, y, x), indicatoron=False, image=seat_free, selectimage=seat_own, cursor="hand2", background="#171a30", selectcolor="#171a30", activebackground="#171a30")
+                    item = tk.Checkbutton(seat_frame, variable=seat_var, onvalue=1, offvalue=0, command=lambda num=seat_var, i=i, j=j, y=y_seat, x=x_seat: clicked_seat(num, i, j, y, x), indicatoron=False, image=seat_free, selectimage=seat_own, cursor="hand2", background="#171a30", borderwidth=0, selectcolor="#171a30", activebackground="#171a30")
                     item.bind('<Enter>', lambda event, imgs=seat_own: onHoverImage(event, imgs))
                     item.bind('<Leave>', lambda event, imgs=seat_free: onLeaveImage(event, imgs))
                     item.grid(row=i, column=j, padx=3, pady=3)
