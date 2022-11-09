@@ -36,7 +36,7 @@ root.configure(background="#171a30")
 # Mencari Posisi Center sb x
 center_x_info = (screen_width - 980) * 0.5
 center_x_seat = (screen_width - 450) * 0.5
-center_x_history = (screen_width - 1085) * 0.5
+center_x_history = (screen_width - 1147) * 0.5
 
 # Image logo XX5
 xx5_img = tk.PhotoImage(file="images/xx5.png")
@@ -517,10 +517,10 @@ def RiwayatFrame():
     for i in range(row_riwayat+1):
         if i == 0:
             for j in range(6):
-                label = tk.Label(tabel_frame, text=header[j], font=("Segoe UI", 13, "bold"), bg="#fc094c", fg="#eaebf1", width=17).grid(row=i, column=j, sticky="we", ipady=5, padx=3)
+                label = tk.Label(tabel_frame, text=header[j], font=("Segoe UI", 13, "bold"), bg="#fc094c", fg="#eaebf1", width=18).grid(row=i, column=j, sticky="we", ipady=5, padx=3, pady=3)
         else:
             for j in range(6):
-                label = tk.Label(tabel_frame, text=list_user[user_ke]['riwayat'][i-1][header[j]], font=("Segoe UI", 13, "bold"), bg="#252c54", fg="#eaebf1", width=17).grid(row=i, column=j, sticky="we", ipady=8, padx=3) 
+                label = tk.Label(tabel_frame, text=list_user[user_ke]['riwayat'][i-1][header[j]], font=("Segoe UI", 13, "bold"), bg="#252c54", fg="#eaebf1", width=18).grid(row=i, column=j, sticky="nswe", ipady=8, padx=3, pady=3) 
 
 
 # FRAME LIST MOVIE
@@ -833,7 +833,7 @@ def SeatBookingFrame(k, place, day, time):
                 old_dict_user = str(list_user[user_ke])
                 dict_riwayat = {
                     'Tanggal Beli': f"{hour_minute_now} {today_date}",
-                    'Lokasi': place,
+                    'Lokasi': f"{place}\nStudio {k+1}",
                     'Judul': list_movie[k]['title'],
                     'Jadwal': f"{time} {day}",
                     'Ticket': text_var_seat.get().replace("Seats: ", ""),
