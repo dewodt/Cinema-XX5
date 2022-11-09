@@ -76,7 +76,7 @@ cancel_on = tk.PhotoImage(file="images/cancel_on.png")
 
 # Callback function bila Entry/input box kosong
 def onclick_entry(event, word):
-    if event.widget.get() == f"{word}" and (event.widget.get() == "Password" or event.widget.get() == "Konfirmasi Password"):
+    if event.widget.get() == f"{word}" and (event.widget.get() == "Password" or event.widget.get() == "Konfirmasi Password" or event.widget.get() == "Kode Validasi"):
         event.widget.delete(0, "end")
         event.widget.config(show="*")
     elif event.widget.get() == f"{word}":
@@ -134,7 +134,7 @@ def LoginFrame():
     heading = tk.Label(login_frame, text="Login", fg="#fc094c", bg="#171a30", font=("Segoe UI", 23, "bold")).pack(pady=10)
 
     # Email
-    email = tk.Entry(login_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11))
+    email = tk.Entry(login_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11), insertbackground="#eaebf1")
     email.pack()
     email_border = tk.Frame(login_frame,width=295,height=2,bg="#eaebf1").pack(pady=(5, 20))
     email.insert(0, "Email")
@@ -142,7 +142,7 @@ def LoginFrame():
     email.bind("<FocusOut>", lambda event: onleave_entry(event, "Email"))
 
     # Password
-    pasw = tk.Entry(login_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11))
+    pasw = tk.Entry(login_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11), insertbackground="#eaebf1")
     pasw.pack()
     pasword_border = tk.Frame(login_frame, width=295, height=2, bg="#eaebf1").pack(pady=(5, 20))
     pasw.insert(0, "Password")
@@ -211,7 +211,7 @@ def RegisterFrame():
     heading = tk.Label(register_frame, text="Register", fg="#fc094c", bg="#171a30", font=("Segoe UI", 23, "bold")).pack(pady=10)
 
     # Input nama lengkap
-    nama = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11))
+    nama = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11), insertbackground="#eaebf1")
     nama.pack()
     nama.insert(0, "Nama Lengkap")
     nama.bind("<FocusIn>", lambda event: onclick_entry(event, "Nama Lengkap"))
@@ -219,7 +219,7 @@ def RegisterFrame():
     frame2 = tk.Frame(register_frame, width=295, height=2, bg="#eaebf1").pack(pady=(5, 20))
 
     # Input email
-    email = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11))
+    email = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11), insertbackground="#eaebf1")
     email.pack()
     email.insert(0, "Email")
     email.bind("<FocusIn>", lambda event: onclick_entry(event, "Email"))
@@ -227,7 +227,7 @@ def RegisterFrame():
     frame2 = tk.Frame(register_frame, width=295, height=2, bg="#eaebf1").pack(pady=(5, 20))
 
     # Input Password
-    pasw = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11))
+    pasw = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11), insertbackground="#eaebf1")
     pasw.pack()
     pasw.insert(0, "Password")
     pasw.bind("<FocusIn>", lambda event: onclick_entry(event, "Password"))
@@ -235,7 +235,7 @@ def RegisterFrame():
     frame3 = tk.Frame(register_frame, width=295, height=2, bg="#eaebf1").pack(pady=(5, 20))
 
     # Konfirmasi Password
-    conf_pasw = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11))
+    conf_pasw = tk.Entry(register_frame, width=36, fg="#eaebf1", border=0, bg="#171a30", font=("Segoe UI", 11), insertbackground="#eaebf1")
     conf_pasw.pack()
     conf_pasw.insert(0, "Konfirmasi Password")
     conf_pasw.bind("<FocusIn>", lambda event: onclick_entry(event, "Konfirmasi Password"))
@@ -376,6 +376,7 @@ def SaldoFrame():
 
                 sisa_saldo.set(locale.currency(list_user[user_ke]['saldo'], grouping=True))
                 showinfo("Top Up Berhasil!", f"Top up Anda sebesar {price} berhasil!")
+                root.focus_set()
                 kode_valid.set("")
                 selected_price.set(0)
                 selected_method.set("N/A")
@@ -470,7 +471,12 @@ def SaldoFrame():
     frame_validasi = tk.Frame(saldo_frame, background="#171a30")
     frame_validasi.pack(pady=15)
     label_kode = tk.Label(frame_validasi, text="Masukkan Kode Validasi", font=("Segoe UI", 16, "bold"), fg="#fc094c", bg="#171a30").pack()
-    entry_kode = tk.Entry(frame_validasi, width=20, font=("Segoe UI", 14, "bold"), textvariable=kode_valid, show="*").pack(pady=10)
+    entry_kode = tk.Entry(frame_validasi, width=26, font=("Segoe UI", 13), textvariable=kode_valid, fg="#eaebf1", border=0, bg="#171a30", insertbackground="#eaebf1")
+    entry_kode.pack(pady=5)
+    entry_kode.insert(0, "Kode Validasi")
+    entry_kode.bind("<FocusIn>", lambda event: onclick_entry(event, "Kode Validasi"))
+    entry_kode.bind("<FocusOut>", lambda event: onleave_entry(event, "Kode Validasi"))
+    entry_kode_border = tk.Frame(frame_validasi,width=240, height=2, bg="#eaebf1").pack(pady=(0, 15))
     tombol_bayar = tk.Button(frame_validasi, text="Bayar", command=lambda: isValid(selected_price.get(), selected_method.get()), font=("Segoe UI", 14, "bold"), image=button_method_off, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
     tombol_bayar.pack()
     tombol_bayar.bind('<Enter>', lambda event, imgs=button_method_on: onHoverImage(event, imgs))
