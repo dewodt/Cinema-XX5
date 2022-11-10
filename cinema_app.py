@@ -521,16 +521,16 @@ def RiwayatFrame():
     row_riwayat = len(list_user[index_user]['riwayat'])
     tabel_frame.columnconfigure(6)
     tabel_frame.rowconfigure(row_riwayat+1)
-    header = ["Tanggal Beli", "Lokasi", "Judul", "Jadwal", "Ticket", "Total"]
+    header = ["Waktu Beli", "Lokasi", "Judul", "Jadwal Tayang", "Ticket", "Total"]
 
     # Pencetakan
     for i in range(row_riwayat+1):
         if i == 0:
             for j in range(6):
-                label = tk.Label(tabel_frame, text=header[j], font=("Segoe UI", 13, "bold"), bg="#fc094c", fg="#eaebf1", width=18).grid(row=i, column=j, sticky="we", ipady=5, padx=3, pady=3)
+                label = tk.Label(tabel_frame, text=header[j], font=("Segoe UI", 13, "bold"), bg="#fc094c", fg="#eaebf1", width=17).grid(row=i, column=j, sticky="we", ipady=7, padx=3, pady=3)
         else:
             for j in range(6):
-                label = tk.Label(tabel_frame, text=list_user[index_user]['riwayat'][i-1][header[j]], font=("Segoe UI", 13, "bold"), bg="#252c54", fg="#eaebf1", width=18).grid(row=i, column=j, sticky="nswe", ipady=8, padx=3, pady=3) 
+                label = tk.Label(tabel_frame, text=list_user[index_user]['riwayat'][i-1][header[j]], font=("Segoe UI", 13, "bold"), bg="#252c54", fg="#eaebf1", width=17, wraplength=170).grid(row=i, column=j, sticky="nswe", ipady=7, ipadx=5, padx=3, pady=3) 
 
 
 # FRAME LIST MOVIE
@@ -848,10 +848,10 @@ def SeatBookingFrame(index_movie, place, day, time):
                 content = read_file.read()
                 old_dict_user = str(list_user[index_user])
                 dict_riwayat = {
-                    'Tanggal Beli': f"{hour_minute_now} {today_date}",
+                    'Waktu Beli': f"{hour_minute_now} {today_date}",
                     'Lokasi': f"{place}\nStudio {index_movie+1}",
                     'Judul': list_movie[index_movie]['title'],
-                    'Jadwal': f"{time} {day}",
+                    'Jadwal Tayang': f"{time} {day}",
                     'Ticket': text_var_seat.get().replace("Seats: ", ""),
                     'Total': locale.currency(total_payment, grouping=True)
                 }
