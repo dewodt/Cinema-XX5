@@ -361,8 +361,10 @@ def HeaderFrame(frame, name):
 # FRAME SALDO
 def SaldoFrame():   
     # Fungsi Pengecek Validasi Pembayaran
-    def isValid(price, method):
-        if selected_method.get() == "N/A" or selected_price.get() == 0:
+    def isValid():
+        method = selected_method.get()
+        price = selected_price.get()
+        if method == "N/A" or price == 0:
             showerror("Pilih Saldo/Metode!", f"Pilih saldo atau metode pembayaran yang benar!")
         else:
             if kode_valid.get() == list_validasi[price][method]:
@@ -379,7 +381,7 @@ def SaldoFrame():
                 write_file.close()
 
                 sisa_saldo.set(locale.currency(list_user[index_user]['saldo'], grouping=True))
-                showinfo("Top Up Berhasil!", f"Top up Anda sebesar {price} berhasil!")
+                showinfo("Top Up Berhasil!", f"Top up Anda sebesar {locale.currency(price, grouping=True)} berhasil!")
                 root.focus_set()
                 kode_valid.set("")
                 selected_price.set(0)
@@ -481,7 +483,7 @@ def SaldoFrame():
     entry_kode.bind("<FocusIn>", lambda event: onclick_entry(event, "Kode Validasi"))
     entry_kode.bind("<FocusOut>", lambda event: onleave_entry(event, "Kode Validasi"))
     entry_kode_border = tk.Frame(frame_validasi,width=240, height=2, bg="#eaebf1").pack(pady=(0, 15))
-    tombol_bayar = tk.Button(frame_validasi, text="Bayar", command=lambda: isValid(selected_price.get(), selected_method.get()), font=("Segoe UI", 14, "bold"), image=button_method_off, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
+    tombol_bayar = tk.Button(frame_validasi, text="Bayar", command=isValid, font=("Segoe UI", 14, "bold"), image=button_method_off, bg="#171a30", fg="#eaebf1", activeforeground="#eaebf1", activebackground="#171a30", cursor="hand2", borderwidth=0, compound="center")
     tombol_bayar.pack()
     tombol_bayar.bind('<Enter>', lambda event, imgs=button_method_on: onhover_image(event, imgs))
     tombol_bayar.bind('<Leave>', lambda event, imgs=button_method_off: onleave_image(event, imgs))
