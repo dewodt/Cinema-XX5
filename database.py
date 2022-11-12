@@ -50,7 +50,7 @@ list_validasi = {
 }
 
 # Data Upcoming Movie
-upcoming_movie = [
+movie_upcoming = [
     {
         'img_on': 'images/blackpanther_on.png',
         'img_off': 'images/blackpanther_off.png',
@@ -106,7 +106,7 @@ upcoming_movie = [
 ]
 
 # Data Daftar Film
-list_movie = [
+movie_now = [
     {
         'img_on': 'images/blackadam_on.png',
         'img_off': 'images/blackadam_off.png',

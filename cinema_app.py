@@ -40,11 +40,11 @@ center_x_history = (screen_width - 1147) * 0.5
 xx5_img = tk.PhotoImage(file="images/xx5.png")
 img_xx5_heading = tk.PhotoImage(file="images/xx5heading.png")
 # Imagemovie now
-now_img_on = [tk.PhotoImage(file=list_movie[i]["img_on"]) for i in range(4)]
-now_img_off = [tk.PhotoImage(file=list_movie[i]['img_off']) for i in range(4)]
+now_img_on = [tk.PhotoImage(file=movie_now[i]["img_on"]) for i in range(4)]
+now_img_off = [tk.PhotoImage(file=movie_now[i]['img_off']) for i in range(4)]
 # Image movie upcoming 
-upcoming_img_on = [tk.PhotoImage(file=upcoming_movie[i]['img_on']) for i in range(4)]
-upcoming_img_off = [tk.PhotoImage(file=upcoming_movie[i]['img_off']) for i in range(4)]
+upcoming_img_on = [tk.PhotoImage(file=movie_upcoming[i]['img_on']) for i in range(4)]
+upcoming_img_off = [tk.PhotoImage(file=movie_upcoming[i]['img_off']) for i in range(4)]
 # Image button login/register
 button_logreg_on = tk.PhotoImage(file="images/logreg_on.png")
 button_logreg_off = tk.PhotoImage(file="images/logreg_off.png")
@@ -567,9 +567,9 @@ def MovieListFrame(show_type):
     # Fungsi Memilih Title Movie
     def pilih_movie(i):
         if show_type == "nowshowing":
-            return f"\n{list_movie[i]['title']}\n{list_movie[i]['age']}"
+            return f"\n{movie_now[i]['title']}\n{movie_now[i]['age']}"
         else:
-            return f"\n{upcoming_movie[i]['title']}\n{upcoming_movie[i]['age']}"
+            return f"\n{movie_upcoming[i]['title']}\n{movie_upcoming[i]['age']}"
     
     # Frame Utama
     global movielist_frame
@@ -639,9 +639,9 @@ def NowMovieInfoFrame(index_movie):
     # Title, Genre, Duration
     titlegenre_frame = tk.Frame(moviedesc_frame, background="#171a30")
     titlegenre_frame.pack()
-    moviedesc_title = tk.Label(titlegenre_frame, font=("Segoe UI", "18", "bold"), text=list_movie[index_movie]["title"], background="#171a30", fg="#fc094c").pack()
-    moviedesc_genre = tk.Label(titlegenre_frame, font=("Segoe UI", "14", "bold"), text=list_movie[index_movie]["genre"], background="#171a30", fg="#eaebf1").pack()
-    moviedesc_duration = tk.Label(titlegenre_frame, font=("Segoe UI", "14", "bold"), text=list_movie[index_movie]["duration"], background="#171a30", fg="#eaebf1").pack()
+    moviedesc_title = tk.Label(titlegenre_frame, font=("Segoe UI", "18", "bold"), text=movie_now[index_movie]["title"], background="#171a30", fg="#fc094c").pack()
+    moviedesc_genre = tk.Label(titlegenre_frame, font=("Segoe UI", "14", "bold"), text=movie_now[index_movie]["genre"], background="#171a30", fg="#eaebf1").pack()
+    moviedesc_duration = tk.Label(titlegenre_frame, font=("Segoe UI", "14", "bold"), text=movie_now[index_movie]["duration"], background="#171a30", fg="#eaebf1").pack()
 
     # Image
     img_and_buy_frame = tk.Frame(moviedesc_frame, background="#171a30")
@@ -674,47 +674,47 @@ def NowMovieInfoFrame(index_movie):
     # Movie Plot
     movie_plot_frame = tk.Frame(moviedesc_frame, background="#171a30")
     movie_plot_title = tk.Label(movie_plot_frame, text="Plot", font=("Segoe UI", "12", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_plot = tk.Label(movie_plot_frame, wraplength=980, justify="left", text=list_movie[index_movie]["plot"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    movie_plot = tk.Label(movie_plot_frame, wraplength=980, justify="left", text=movie_now[index_movie]["plot"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_plot_frame.pack(anchor="w", padx=10, pady=10)
 
     # Movie Producer
     movie_prod_frame = tk.Frame(moviedesc_frame, background="#171a30")
     movie_prod_title = tk.Label(movie_prod_frame, text="Producer", font=("Segoe UI", "12", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_prod = tk.Label(movie_prod_frame, text=list_movie[index_movie]["producer"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    movie_prod = tk.Label(movie_prod_frame, text=movie_now[index_movie]["producer"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_prod_frame.pack(anchor="w", padx=10, pady=10)
 
     # Movie Director
     movie_director_frame = tk.Frame(moviedesc_frame, background="#171a30")
     movie_director_title = tk.Label(movie_director_frame, text="Director", font=("Segoe UI", "12", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_director = tk.Label(movie_director_frame, text=list_movie[index_movie]["director"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    movie_director = tk.Label(movie_director_frame, text=movie_now[index_movie]["director"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_director_frame.pack(anchor="w", padx=10, pady=10)
 
     # Movie Writer
     movie_writer_frame = tk.Frame(moviedesc_frame, background="#171a30")
     movie_writer_title = tk.Label(movie_writer_frame, text="Writer", font=("Segoe UI", "12", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_writer = tk.Label(movie_writer_frame, text=list_movie[index_movie]["writer"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    movie_writer = tk.Label(movie_writer_frame, text=movie_now[index_movie]["writer"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_writer_frame.pack(anchor="w", padx=10, pady=10)
     # Movie Cast
     movie_cast_frame = tk.Frame(moviedesc_frame, background="#171a30")
     movie_cast_title = tk.Label(movie_cast_frame, text="Cast", font=("Segoe UI", "13", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_cast = tk.Label(movie_cast_frame, wraplength=980, justify="left",text=list_movie[index_movie]["cast"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    movie_cast = tk.Label(movie_cast_frame, wraplength=980, justify="left",text=movie_now[index_movie]["cast"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_cast_frame.pack(anchor="w", padx=10, pady=10)
 
 
 # FRAME UPCOMING MOVIE
 def UpcomingMovieInfoFrame(index_movie):
     # Membuat Scrollbar
-    global upcoming_movie_frame
-    upcoming_movie_frame = tk.Frame(root, background="#171a30")
-    upcoming_movie_frame.pack(fill="both", expand=1)
+    global movie_upcoming_frame
+    movie_upcoming_frame = tk.Frame(root, background="#171a30")
+    movie_upcoming_frame.pack(fill="both", expand=1)
 
     # Header
-    HeaderFrame(upcoming_movie_frame, "upcoming_movie")
+    HeaderFrame(movie_upcoming_frame, "movie_upcoming")
 
-    my_canvas = tk.Canvas(upcoming_movie_frame, background="#171a30", bd=0, highlightthickness=0)
+    my_canvas = tk.Canvas(movie_upcoming_frame, background="#171a30", bd=0, highlightthickness=0)
     my_canvas.pack(side="left", fill="both", expand=1)
 
-    scroll_bar = ttk.Scrollbar(upcoming_movie_frame, orient="vertical", command=my_canvas.yview)
+    scroll_bar = ttk.Scrollbar(movie_upcoming_frame, orient="vertical", command=my_canvas.yview)
     scroll_bar.pack(side="right", fill="y")
 
     my_canvas.configure(yscrollcommand=scroll_bar.set)
@@ -728,9 +728,9 @@ def UpcomingMovieInfoFrame(index_movie):
     # Title, Genre, Duration
     titlegenre_frame = tk.Frame(moviedesc_frame, background="#171a30")
     titlegenre_frame.pack()
-    moviedesc_title = tk.Label(titlegenre_frame, font=("Segoe UI", "18", "bold"), text=upcoming_movie[index_movie]["title"], background="#171a30", fg="#fc094c").pack()
-    moviedesc_genre = tk.Label(titlegenre_frame, font=("Segoe UI", "14", "bold"), text=upcoming_movie[index_movie]["genre"], background="#171a30", fg="#eaebf1").pack()
-    moviedesc_duration = tk.Label(titlegenre_frame, font=("Segoe UI", "14", "bold"), text=upcoming_movie[index_movie]["duration"], background="#171a30", fg="#eaebf1").pack()
+    moviedesc_title = tk.Label(titlegenre_frame, font=("Segoe UI", "18", "bold"), text=movie_upcoming[index_movie]["title"], background="#171a30", fg="#fc094c").pack()
+    moviedesc_genre = tk.Label(titlegenre_frame, font=("Segoe UI", "14", "bold"), text=movie_upcoming[index_movie]["genre"], background="#171a30", fg="#eaebf1").pack()
+    moviedesc_duration = tk.Label(titlegenre_frame, font=("Segoe UI", "14", "bold"), text=movie_upcoming[index_movie]["duration"], background="#171a30", fg="#eaebf1").pack()
 
     # Image
     img_and_buy_frame = tk.Frame(moviedesc_frame, background="#171a30")
@@ -740,30 +740,30 @@ def UpcomingMovieInfoFrame(index_movie):
     # Movie Plot
     movie_plot_frame = tk.Frame(moviedesc_frame, background="#171a30")
     movie_plot_title = tk.Label(movie_plot_frame, text="Plot", font=("Segoe UI", "12", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_plot = tk.Label(movie_plot_frame, wraplength=980, justify="left", text=upcoming_movie[index_movie]["plot"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    movie_plot = tk.Label(movie_plot_frame, wraplength=980, justify="left", text=movie_upcoming[index_movie]["plot"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_plot_frame.pack(anchor="w", padx=10, pady=10)
 
     # Movie Producer
     movie_prod_frame = tk.Frame(moviedesc_frame, background="#171a30")
     movie_prod_title = tk.Label(movie_prod_frame, text="Producer", font=("Segoe UI", "12", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_prod = tk.Label(movie_prod_frame, text=upcoming_movie[index_movie]["producer"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    movie_prod = tk.Label(movie_prod_frame, text=movie_upcoming[index_movie]["producer"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_prod_frame.pack(anchor="w", padx=10, pady=10)
 
     # Movie Director
     movie_director_frame = tk.Frame(moviedesc_frame, background="#171a30")
     movie_director_title = tk.Label(movie_director_frame, text="Director", font=("Segoe UI", "12", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_director = tk.Label(movie_director_frame, text=upcoming_movie[index_movie]["director"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    movie_director = tk.Label(movie_director_frame, text=movie_upcoming[index_movie]["director"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_director_frame.pack(anchor="w", padx=10, pady=10)
 
     # Movie Writer
     movie_writer_frame = tk.Frame(moviedesc_frame, background="#171a30")
     movie_writer_title = tk.Label(movie_writer_frame, text="Writer", font=("Segoe UI", "12", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_writer = tk.Label(movie_writer_frame, text=upcoming_movie[index_movie]["writer"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    movie_writer = tk.Label(movie_writer_frame, text=movie_upcoming[index_movie]["writer"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_writer_frame.pack(anchor="w", padx=10, pady=10)
     # Movie Cast
     movie_cast_frame = tk.Frame(moviedesc_frame, background="#171a30")
     movie_cast_title = tk.Label(movie_cast_frame, text="Cast", font=("Segoe UI", "13", "bold"), background="#171a30", fg="#fc094c").pack(anchor=tk.W)
-    movie_cast = tk.Label(movie_cast_frame, wraplength=980, justify="left",text=upcoming_movie[index_movie]["cast"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    movie_cast = tk.Label(movie_cast_frame, wraplength=980, justify="left",text=movie_upcoming[index_movie]["cast"], background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     movie_cast_frame.pack(anchor="w", padx=10, pady=10)
 
 
@@ -783,7 +783,7 @@ def SeatBookingFrame(index_movie, place, day, time):
     # Total Harga
     global total_payment
     total_payment = 0
-    price = list_movie[index_movie]['price']
+    price = movie_now[index_movie]['price']
     str_total = tk.StringVar()
     str_total.set("Total Payment: Rp0")
 
@@ -850,7 +850,7 @@ def SeatBookingFrame(index_movie, place, day, time):
                 dict_riwayat = {
                     'Waktu Beli': f"{hour_minute_now} {today_date}",
                     'Lokasi': f"{place}\nStudio {index_movie+1}",
-                    'Judul': list_movie[index_movie]['title'],
+                    'Judul': movie_now[index_movie]['title'],
                     'Jadwal Tayang': f"{time} {day}",
                     'Ticket': text_var_seat.get().replace("Seats: ", ""),
                     'Total': locale.currency(total_payment, grouping=True)
@@ -868,12 +868,12 @@ def SeatBookingFrame(index_movie, place, day, time):
                 # Edit Database Seat
                 read_file = open('database.py', 'r')
                 content = read_file.read()
-                old_dict_seat = str(list_movie[index_movie]["sold_seat"])
+                old_dict_seat = str(movie_now[index_movie]["sold_seat"])
                 for i in range(9):
                     for j in range(15):
                         if picked_seat_ij[i][j] == True:
-                            list_movie[index_movie]['sold_seat'][f"{place}_{index_movie}"][day][time][i][j] = True
-                new_dict_seat = str(list_movie[index_movie]["sold_seat"])
+                            movie_now[index_movie]['sold_seat'][f"{place}_{index_movie}"][day][time][i][j] = True
+                new_dict_seat = str(movie_now[index_movie]["sold_seat"])
                 content = content.replace(old_dict_seat, new_dict_seat)
                 read_file.close()
 
@@ -887,8 +887,10 @@ def SeatBookingFrame(index_movie, place, day, time):
 
     # Bila User Click Cancel
     def click_cancel():
-        booking_frame.forget()
-        NowMovieInfoFrame(index_movie)
+        confirmation = askyesno(title='Confirmation', message='Are you sure to cancel booking?')
+        if confirmation:
+            booking_frame.forget()
+            NowMovieInfoFrame(index_movie)
 
     # Main Frame
     # Membuat Scrollbar
@@ -931,7 +933,7 @@ def SeatBookingFrame(index_movie, place, day, time):
     # Datas Frame
     data_frame = tk.Frame(information_frame, background="#171a30")
     data_frame.pack(anchor=tk.W)
-    book_title = tk.Label(data_frame, text=list_movie[index_movie]["title"], background="#171a30", fg="#fc094c", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
+    book_title = tk.Label(data_frame, text=movie_now[index_movie]["title"], background="#171a30", fg="#fc094c", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     seat_list = tk.Label(data_frame, textvariable=text_var_seat, wraplength=510, justify="left", background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     num_ticket = tk.Label(data_frame, textvariable=text_var_ticket, background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
     location = tk.Label(data_frame, text=place, background="#171a30", fg="#eaebf1", font=("Segoe UI", "11", "bold")).pack(anchor=tk.W)
@@ -951,14 +953,14 @@ def SeatBookingFrame(index_movie, place, day, time):
 
     # Update Database Jika Data Belum Tersedia
     try:
-        temp = list_movie[index_movie]["sold_seat"][f"{place}_{index_movie}"][day]
+        temp = movie_now[index_movie]["sold_seat"][f"{place}_{index_movie}"][day]
     except:
         read_file = open('database.py', 'r')
         content = read_file.read()
-        old_dict_place = str(list_movie[index_movie]["sold_seat"])
-        list_movie[index_movie]["sold_seat"][f"{place}_{index_movie}"].update({day: {}})
-        list_movie[index_movie]["sold_seat"][f"{place}_{index_movie}"][day].update({time: [[0 for i in range(15)] for j in range(9)]})
-        new_dict_place = str(list_movie[index_movie]["sold_seat"])
+        old_dict_place = str(movie_now[index_movie]["sold_seat"])
+        movie_now[index_movie]["sold_seat"][f"{place}_{index_movie}"].update({day: {}})
+        movie_now[index_movie]["sold_seat"][f"{place}_{index_movie}"][day].update({time: [[0 for i in range(15)] for j in range(9)]})
+        new_dict_place = str(movie_now[index_movie]["sold_seat"])
         content = content.replace(old_dict_place, new_dict_place)
         read_file.close()
 
@@ -967,13 +969,13 @@ def SeatBookingFrame(index_movie, place, day, time):
         write_file.close()
     else:
         try:
-            temp = list_movie[index_movie]["sold_seat"][f"{place}_{index_movie}"][day][time]
+            temp = movie_now[index_movie]["sold_seat"][f"{place}_{index_movie}"][day][time]
         except:
             read_file = open('database.py', 'r')
             content = read_file.read()
-            old_dict_place = str(list_movie[index_movie]["sold_seat"])
-            list_movie[index_movie]["sold_seat"][f"{place}_{index_movie}"][day].update({time: [[0 for i in range(15)] for j in range(9)]})
-            new_dict_place = str(list_movie[index_movie]["sold_seat"])
+            old_dict_place = str(movie_now[index_movie]["sold_seat"])
+            movie_now[index_movie]["sold_seat"][f"{place}_{index_movie}"][day].update({time: [[0 for i in range(15)] for j in range(9)]})
+            new_dict_place = str(movie_now[index_movie]["sold_seat"])
             content = content.replace(old_dict_place, new_dict_place)
             read_file.close()
 
@@ -992,7 +994,7 @@ def SeatBookingFrame(index_movie, place, day, time):
             elif j == 7: # Cetak Huruf
                 item = tk.Label(seat_frame, text=f"{chr(ord('A')+i-1)}", background="#171a30", fg="#eaebf1", font=("Segoe UI", "12", "bold")).grid(row=i, column=j)
             else: # Cetak Kursi
-                if list_movie[index_movie]["sold_seat"][f"{place}_{index_movie}"][day][time][i][j]: # Jika Sold
+                if movie_now[index_movie]["sold_seat"][f"{place}_{index_movie}"][day][time][i][j]: # Jika Sold
                     item = tk.Label(seat_frame, image=seat_sold, background="#171a30").grid(row=i, column=j)
                 else: # Jika Available
                     # Penentu Kode Seat
