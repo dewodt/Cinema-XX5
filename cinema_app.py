@@ -20,7 +20,7 @@ time_now = datetime.datetime.now()
 hour_minute_now = time_now.strftime("%H:%M")
 
 # Set Locale (For Currency)
-locale.setlocale( locale.LC_ALL, 'id-ID')
+locale.setlocale(locale.LC_ALL, 'id-ID')
 
 # Root Window
 root = tk.Tk()
@@ -92,12 +92,14 @@ def onhover_image(event, img):
 def onleave_image(event, img):
     event.widget.config(image=img)
 
+# Fungsi Mengupdate Waktu Sekarang
 def update_time():
     global today_date, tomorrow_date, time_now, hour_minute_now
     today_date = datetime.date.today().strftime("%d-%m-%Y")
     tomorrow_date = (datetime.date.today() + datetime.timedelta(days=1)).strftime("%d-%m-%Y")
     time_now = datetime.datetime.now()
     hour_minute_now = time_now.strftime("%H:%M")
+
 
 # FRAME LOGIN
 def LoginFrame():
@@ -953,8 +955,8 @@ def SeatBookingFrame(index_movie, place, day, time):
     seat_frame.rowconfigure((9), weight=1)
     seat_frame.columnconfigure(15, weight=1)
 
-    # Update Database Jika Data Belum Tersedia
-    try:
+    # Menambahkan Database Sold Seat Jika Data Belum Tersedia
+    try: # Jika belum tersedia pada tanggal tertentu
         temp = movie_now[index_movie]["sold_seat"][f"{place}_{index_movie}"][day]
     except:
         read_file = open('database.py', 'r')
@@ -970,7 +972,7 @@ def SeatBookingFrame(index_movie, place, day, time):
         write_file.write(content)
         write_file.close()
     else:
-        try:
+        try: # Jika sudah tersedia pada tanggal tertenu, namun belum tersedia pada jam tertentu
             temp = movie_now[index_movie]["sold_seat"][f"{place}_{index_movie}"][day][time]
         except:
             read_file = open('database.py', 'r')
