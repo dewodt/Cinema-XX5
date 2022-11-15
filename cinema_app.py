@@ -606,10 +606,11 @@ def NowMovieInfoFrame(index_movie):
     # Cek jika pemesanan tiket melebihi waktu tayang
     def cek_disabled(hour, minute):
         time = time_now.replace(hour=hour, minute=minute, second=0, microsecond=0)
-        if time_now >= time:       
-            return "disabled"
-        else:
-            return "normal"
+        if time_now >= time:
+            today_time.unbind('<Enter>')
+            today_time.unbind('<Leave>')
+            today_time["cursor"] = ""
+            today_time["state"] = "disabled"
 
     # TRANSISI DARI INFORMASI MOVIE KE BOOKING MOVIE
     def InfoToBooking(index_movie, place, day, time):
@@ -663,9 +664,10 @@ def NowMovieInfoFrame(index_movie):
         loc_title = tk.Label(buy_frame, text=location[i], background="#171a30", font=("Segoe UI", "12", "bold"), fg="#fc094c").grid(row=0+3*i, column=0, columnspan=5, sticky="w", pady=(10, 0))
         today_label = tk.Label(buy_frame, text=today_date, background="#171a30", font=("Segoe UI", "11", "bold"), fg="#eaebf1").grid(row=1+3*i, column=0, padx=(0, 5))
         for j in range(4):
-            today_time = tk.Button(buy_frame, text=time_str[j], image=button_time_off, state=cek_disabled(time_int[j]["hour"], time_int[j]["minute"]), command=lambda i=i, j=j: InfoToBooking(index_movie, location[i], today_date, time_str[j]), fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", font=("Segoe UI", "11", "bold"), borderwidth=0, cursor="hand2", compound="center")
+            today_time = tk.Button(buy_frame, text=time_str[j], image=button_time_off, command=lambda i=i, j=j: InfoToBooking(index_movie, location[i], today_date, time_str[j]), fg="#eaebf1", background="#171a30", activebackground="#171a30", activeforeground="#eaebf1", font=("Segoe UI", "11", "bold"), borderwidth=0, cursor="hand2", compound="center")
             today_time.bind('<Enter>', lambda event, imgs=button_time_on: onhover_image(event, imgs))
             today_time.bind('<Leave>', lambda event, imgs=button_time_off: onleave_image(event, imgs))
+            cek_disabled(time_int[j]["hour"], time_int[j]["minute"])
             today_time.grid(row=1+3*i, column=j+1, padx=5, pady= 4)
 
         tomorrow_label = tk.Label(buy_frame, text=tomorrow_date, background="#171a30", font=("Segoe UI", "11", "bold"), fg="#eaebf1").grid(row=2+3*i, column=0, padx=(0, 5))
