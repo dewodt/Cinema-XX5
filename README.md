@@ -1,5 +1,7 @@
 # **Cinema XX5**
-<center><img width=50% src="images/xx5.png"> </center>
+<p align="center">
+    <img width=50% src="images/xx5.png"> 
+</p>
 
 ## **Deskripsi:**
 Repositori ini berisi program berupa aplikasi untuk memesan tiket bioskop Cinema XX5. Program ini dibuat dalam rangka tugas Besar 1 Pengenalan Komputasi ITB 2022.
