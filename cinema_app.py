@@ -136,7 +136,7 @@ def LoginFrame():
     login_frame.pack()
 
     # Logo & Title
-    label_gambar = tk.Label(login_frame, image=xx5_img, border=0).pack()
+    label_gambar = tk.Label(login_frame, image=xx5_img, border=0, bg="#171a30").pack()
     heading = tk.Label(login_frame, text="Login", fg="#fc094c", bg="#171a30", font=("Segoe UI", 23, "bold")).pack(pady=10)
 
     # Email
