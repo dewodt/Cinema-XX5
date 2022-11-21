@@ -109,7 +109,7 @@ def Login():
         akun_password = pasw.get()
         user_found = False
         for i in range(len(list_user)):
-            if akun_email == list_user[i]['nama'] and akun_password == list_user[i]['password']:
+            if akun_email == list_user[i]['email'] and akun_password == list_user[i]['password']:
                 user_found = True
                 global index_user
                 index_user = i
@@ -213,7 +213,7 @@ def Register():
     register_frame.pack()
 
     # Logo & Title
-    label_gambar = tk.Label(register_frame, image=xx5_img, border=0).pack()
+    label_gambar = tk.Label(register_frame, image=xx5_img, border=0, bg="#171a30").pack()
     heading = tk.Label(register_frame, text="Register", fg="#fc094c", bg="#171a30", font=("Segoe UI", 23, "bold")).pack(pady=10)
 
     # Input nama lengkap
