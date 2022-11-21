@@ -102,7 +102,7 @@ def update_time():
 
 
 # FRAME LOGIN
-def LoginFrame():
+def Login():
     # Call Back FUnction Bila Klik Login
     def login():
         akun_email = email.get()
@@ -123,12 +123,12 @@ def LoginFrame():
     # Transisi dari Login ke Register
     def LoginToRegister():
         login_frame.forget()
-        RegisterFrame()
+        Register()
     
     # TRANSISI LOGIN KE LIST MOVIE
     def LoginToList():
         login_frame.forget()
-        MovieListFrame("nowshowing")
+        ListMovie("nowshowing")
     
     # Main Frame
     global login_frame
@@ -169,11 +169,11 @@ def LoginFrame():
 
 
 # REGISTER FRAME
-def RegisterFrame():
+def Register():
     # TRANSISI REGISTER KE LOGIN
     def RegisterToLogin():
         register_frame.forget()
-        LoginFrame()
+        Login()
     
     # Callback Function Klik Register
     def klik_register():
@@ -262,33 +262,33 @@ def RegisterFrame():
 
 
 # FRAME HEADER
-def HeaderFrame(frame, name):
+def MenuHeader(frame, name):
     # HEADING NOW PLAYING
     def ToNowPlaying(frame):
         frame.forget()
-        MovieListFrame("nowshowing")
+        ListMovie("nowshowing")
 
     # HEADING UPCOMING
     def ToUpcoming(frame):
         frame.forget()
-        MovieListFrame("upcoming")
+        ListMovie("upcoming")
 
     # HEADING SALDO
     def ToSaldo(frame):
         frame.forget()
-        SaldoFrame()
+        TopUp()
 
     # HEADING RIWAYAT
     def ToRiwayat(frame):
         frame.forget()
-        RiwayatFrame()
+        Riwayat()
 
     # HEADING LOGOUT
     def ClickLogOut(frame):
         confirmation = askyesno(title='Confirmation', message='Are you sure that you want to logout?')
         if confirmation:
             frame.forget()
-            LoginFrame()
+            Login()
     
     def now_playing_img(name):
         if name == "movielist_nowshowing":
@@ -360,8 +360,8 @@ def HeaderFrame(frame, name):
     logout.bind('<Leave>', lambda event, imgs=button_heading_off: onleave_image(event, imgs))
 
 
-# FRAME SALDO
-def SaldoFrame():   
+# FRAME Top Up
+def TopUp():   
     # Fungsi Pengecek Validasi Pembayaran
     def isValid():
         method = selected_method.get()
@@ -397,7 +397,7 @@ def SaldoFrame():
     saldo_frame.pack()
 
     # Header
-    HeaderFrame(saldo_frame, "saldo")
+    MenuHeader(saldo_frame, "saldo")
 
     # Inisialisasi Kode Input dan Sisa Saldo User
     kode_valid = tk.StringVar()
@@ -492,14 +492,14 @@ def SaldoFrame():
 
 
 # FRAME RIWAYAT
-def RiwayatFrame():
+def Riwayat():
     # Main Frame
     global riwayat_frame
     riwayat_frame = tk.Frame(root, bg="#171a30")
     riwayat_frame.pack(fill="both", expand=1)
 
     # Header
-    HeaderFrame(riwayat_frame, "riwayat")
+    MenuHeader(riwayat_frame, "riwayat")
 
     # Membuat Scrollbar
     my_canvas = tk.Canvas(riwayat_frame, background="#171a30", bd=0, highlightthickness=0)
@@ -538,15 +538,15 @@ def RiwayatFrame():
 
 
 # FRAME LIST MOVIE
-def MovieListFrame(show_type):
+def ListMovie(show_type):
     # TRANSISI Jika Click Image
     def klik_img(index_movie):
         if show_type == "nowshowing":
             movielist_frame.forget()
-            NowMovieInfoFrame(index_movie)
+            MovieInfoNow(index_movie)
         elif show_type == "upcoming":
             movielist_frame.forget()
-            UpcomingMovieInfoFrame(index_movie)
+            MovieInfoUpcoming(index_movie)
     
     # Fungsi Memilih Image
     def pilih_image(i, state):
@@ -581,7 +581,7 @@ def MovieListFrame(show_type):
     movielist_frame.pack()
 
     # Header
-    HeaderFrame(movielist_frame, f"movielist_{show_type}")
+    MenuHeader(movielist_frame, f"movielist_{show_type}")
 
     # Title Movie List
     movielist_title = tk.Label(movielist_frame, text=pilih_title(), font=("Segoe UI", "30", "bold"), background="#171a30", fg="#fc094c").pack(ipadx=10, ipady=10, pady=10)
@@ -602,7 +602,7 @@ def MovieListFrame(show_type):
 
 
 # FRAME INFORMASI MOVIE
-def NowMovieInfoFrame(index_movie):
+def MovieInfoNow(index_movie):
     # Cek jika pemesanan tiket melebihi waktu tayang
     def cek_disabled(hour, minute):
         time = time_now.replace(hour=hour, minute=minute, second=0, microsecond=0)
@@ -615,7 +615,7 @@ def NowMovieInfoFrame(index_movie):
     # TRANSISI DARI INFORMASI MOVIE KE BOOKING MOVIE
     def InfoToBooking(index_movie, place, day, time):
         movieinfo_frame.forget()
-        SeatBookingFrame(index_movie, place, day, time)
+        SeatBooking(index_movie, place, day, time)
     
     # Update waktu
     update_time()
@@ -626,7 +626,7 @@ def NowMovieInfoFrame(index_movie):
     movieinfo_frame.pack(fill="both", expand=1)
 
     # Header
-    HeaderFrame(movieinfo_frame, "movieinfo")
+    MenuHeader(movieinfo_frame, "movieinfo")
 
     my_canvas = tk.Canvas(movieinfo_frame, background="#171a30", bd=0, highlightthickness=0)
     my_canvas.pack(side="left", fill="both", expand=1)
@@ -708,14 +708,14 @@ def NowMovieInfoFrame(index_movie):
 
 
 # FRAME UPCOMING MOVIE
-def UpcomingMovieInfoFrame(index_movie):
+def MovieInfoUpcoming(index_movie):
     # Membuat Scrollbar
     global movie_upcoming_frame
     movie_upcoming_frame = tk.Frame(root, background="#171a30")
     movie_upcoming_frame.pack(fill="both", expand=1)
 
     # Header
-    HeaderFrame(movie_upcoming_frame, "movie_upcoming")
+    MenuHeader(movie_upcoming_frame, "movie_upcoming")
 
     my_canvas = tk.Canvas(movie_upcoming_frame, background="#171a30", bd=0, highlightthickness=0)
     my_canvas.pack(side="left", fill="both", expand=1)
@@ -774,7 +774,7 @@ def UpcomingMovieInfoFrame(index_movie):
 
 
 # FRAME SEAT BOOKING
-def SeatBookingFrame(index_movie, place, day, time):
+def SeatBooking(index_movie, place, day, time):
     # Initialization
     # Jumlah Kursi Dipilih
     global count_seat
@@ -889,14 +889,14 @@ def SeatBookingFrame(index_movie, place, day, time):
 
                 # TRANSISI DARI SEAT BOOKING KE NOW INFO MOVIE
                 booking_frame.forget()
-                RiwayatFrame()
+                Riwayat()
 
     # Bila User Click Cancel
     def click_cancel():
         confirmation = askyesno(title='Confirmation', message='Are you sure to cancel booking?')
         if confirmation:
             booking_frame.forget()
-            NowMovieInfoFrame(index_movie)
+            MovieInfoNow(index_movie)
 
     # Main Frame
     # Membuat Scrollbar
@@ -905,7 +905,7 @@ def SeatBookingFrame(index_movie, place, day, time):
     booking_frame.pack(fill="both", expand=1)
 
     # Header
-    HeaderFrame(booking_frame, "booking")  
+    MenuHeader(booking_frame, "booking")  
 
     my_canvas = tk.Canvas(booking_frame, background="#171a30", bd=0, highlightthickness=0)
     my_canvas.pack(side="left", fill="both", expand=1)
@@ -1037,6 +1037,6 @@ def SeatBookingFrame(index_movie, place, day, time):
     cancel_button.pack(side="right", padx=10)
 
 # Frame pertama
-LoginFrame()
+Login()
 
 root.mainloop()
