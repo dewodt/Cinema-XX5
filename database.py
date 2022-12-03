@@ -1,5 +1,5 @@
 # Data User
-list_user = [{'nama': 'moi735', 'email': 'moi735@gmail.coom', 'password': '735', 'saldo': 500000, 'riwayat': []}, {'nama': 's', 'email': 's', 'password': 's', 'saldo': 190000, 'riwayat': []}, {'nama': 'ucup', 'email': 'ucup@gmail.com', 'password': 'ucup10', 'saldo': 270000, 'riwayat': [{'Waktu Beli': '16:52 21-11-2022', 'Lokasi': 'XX5 Aeon Mall BSD\nStudio 2', 'Judul': 'AMSTERDAM', 'Jadwal Tayang': '18:30 21-11-2022', 'Ticket': 'A1, A4', 'Total': 'Rp80.000,00'}]}]
+list_user = []
 
 # Data Lokasi
 location =  ['XX5 Aeon Mall BSD', 'XX5 Ciwalk Bandung', 'XX5 Plaza Indonesia']
@@ -135,7 +135,7 @@ movie_now = [
         'writer': 'David O. Russell',
         'cast': 'Christian Bale, Margot Robbie, John David Washington, Rami Malek, Mike Myers, Taylor Swift, Zoe Saldana, Robert De Niro, Anya Taylor-joy, Chris Rock, Michael Shannon.',
         'price': 40000,
-        'sold_seat': {'XX5 Aeon Mall BSD_1': {'21-11-2022': {'18:30': [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [True, 0, 0, True, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]}}, 'XX5 Ciwalk Bandung_1': {}, 'XX5 Plaza Indonesia_1': {}}        
+        'sold_seat': {'XX5 Aeon Mall BSD_1': {}, 'XX5 Ciwalk Bandung_1': {}, 'XX5 Plaza Indonesia_1': {}}        
     },
     {
         'img_on': 'images/doctorg_on.png',
